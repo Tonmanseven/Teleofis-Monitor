@@ -4,9 +4,9 @@ import datetime, time, json
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, StreamingHttpResponse
 # Импортируем библиотеку, соответствующую типу нашей базы данных
-import sqlite3
+import sqlite3, base64, zlib
 from .forms import UserForm, SensForm
-
+from blog.models import Teleofis_state
 now = datetime.datetime.now()
 
 # Объядиняем столбцы времени и дат в один список
@@ -508,6 +508,7 @@ def fins(request):
                                                            'state12': state_spb3, })
 
 def sibur(request):
+
     
     data_fins = spb_state()
 
@@ -532,3 +533,50 @@ def sibur(request):
                                                            'state10': state_spb4, 'times11': my_sbp5,
                                                            'state11': state_spb5, 'times12': my_sbp6,
                                                            'state12': state_spb6, })
+
+def tele_robot(request):
+    
+    teleofis_new = Teleofis_state()
+
+    if request.method == "GET":
+        
+        tel_data = request.GET.get("data")
+        data = decript(tel_data)
+        statusList = data["statusList"]
+        hostname = data["hostname"]
+        dannie = GetAverage(statusList)
+
+        new_time = time.strftime("%d-%m-%Y %H:%M", time.localtime(dannie["timestamp"]))
+        status = int(dannie["status"])
+        dannie = {"time_ping": new_time, "status": status}
+        print(hostname, ": ", dannie)
+     
+        #datetime = time.strftime("%d-%m-%Y %H:%M", time.localtime(timestamp))
+        
+    return render(request, 'blog/teleofis_state.html')                                                                      
+
+
+def decript(t_data):
+    
+    tel_data = t_data.replace(' ', '+')
+    data = tel_data.encode("utf-8")
+    b64 = base64.b64decode(data)
+    decompress = zlib.decompress(b64)
+    original = decompress.decode("utf-8")
+    data = json.loads(original)
+
+    return data
+
+def GetAverage(statusList):
+    i = 0
+    timestamp = 0
+    statusListBuffer = list()
+    status = False
+    for item in statusList:
+        timestamp = item["timestamp"]
+        statusListBuffer.append(item["status"])
+        i += 1
+    if (sum(statusListBuffer)>i/2):
+        status = True
+    data = {"timestamp":timestamp, "status":status}
+    return data
