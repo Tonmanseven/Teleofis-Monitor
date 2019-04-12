@@ -546,11 +546,16 @@ def tele_robot(request):
         hostname = data["hostname"]
         dannie = GetAverage(statusList)
 
-        new_time = time.strftime("%d-%m-%Y %H:%M", time.localtime(dannie["timestamp"]))
+        new_time = time.strftime("%Y-%m-%d %H:%M", time.localtime(dannie["timestamp"]))
         status = int(dannie["status"])
         dannie = {"time_ping": new_time, "status": status}
         print(hostname, ": ", dannie)
-     
+
+        teleofis_new.db = hostname
+        teleofis_new.status = status
+        teleofis_new.timestamp = new_time
+
+        teleofis_new.save()
         #datetime = time.strftime("%d-%m-%Y %H:%M", time.localtime(timestamp))
         
     return render(request, 'blog/teleofis_state.html')                                                                      
