@@ -1,0 +1,120 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+    <header>
+        <h1> Билайн(Москва) </h1>
+    </header>
+
+    <div class="container">
+        <div class="back-to-main">
+            <a href="index.html">Назад</a>
+        </div>
+        <div class="sypp-logs-wrap">
+            <div class="row">
+                
+                <div class="col-2">
+                    <nav class="logs-list">
+                        <a href="#5"><strong>1</strong> - Mark14</a>
+                    </nav>
+                </div>
+                <div class="col-6">
+                    <div class="supp-log" id="5">
+                        <div class="supports">
+                            <div class="title">OpenVPN CLIENT LIST</div>
+                            <div class="supports-body">
+                                <table id="1">
+                                    <thead>
+                                    <tr>
+                                        <th>Virtual Address</th>
+                                        <th>Common Name</th>
+                                        <th>Active/Inactive(1/0)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>10.8.0.126</td>
+                                        <td>mark_014</td>
+                                        <td>
+                                            {{ mark014 }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" style="padding-top: 30px;">
+                    <div class="chart">
+                        <!-- график №5 -->
+                        <div class="chart-title"><h3> Mark14 - Вкл/Выкл(1/0) </h3></div>
+                        <div class="ct-chart">
+                            <canvas id="speedChart" width="1050px" height="250px"> </canvas>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+   
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'libs/chartist.min.js' %}"></script>
+<script src="{% static 'libs/Chart.js' %}"></script>
+
+<script>
+        var speedCanvas = document.getElementById("speedChart").getContext("2d");
+        
+      
+        Chart.defaults.global.defaultFontSize = 18;
+      
+        var faza_1 = {
+          
+          label: "Роутер - Mark_014",
+          data: {{ state14 }},
+          lineTension: 0.7,
+          borderColor: 'red',
+          steppedLine: 'before'
+          };
+      
+            
+        var Data_faza = {
+          labels: {{ times14|safe }},
+          datasets: [faza_1],
+          };  
+      
+        var chartOptions = {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            boxWidth: 80,
+            fontColor: 'black'
+          }  
+        },
+        scales: { 
+            yAxes: [{ 
+                ticks: { 
+                    max: 1,
+                    min: 0,
+                    stepSize: 1
+                    } 
+                }] 
+            },
+            responsive: false 
+        
+        };
+      
+        var lineChart = new Chart(speedCanvas, {
+        type: 'line',
+        data: Data_faza,
+        options: chartOptions
+        });
+        </script>
+
+{% endblock %}

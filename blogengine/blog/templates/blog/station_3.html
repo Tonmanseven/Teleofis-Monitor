@@ -1,0 +1,222 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+    <header>
+        <h1> Пост№3. Опора 3 КРУЭ </h1>
+    </header>
+
+    <div class="container">
+        <div class="back-to-main">
+            <a href="iesk.html">Вернуться к списку опор</a>
+        </div>
+        <div class="sypp-logs-wrap">
+            <div class="row">
+                <div class="col-4">
+                    <div class="supp-img">
+                        <img src="{% static 'img/LYAP.png' %}" alt="" >
+                    </div>
+                </div>
+                <div class="col-2">
+                    <nav class="logs-list">
+                        <a href="#1"><strong>1</strong> (Фаза А) - Mark1</a>
+                        <a href="#2"><strong>2</strong> (Фаза С) - Mark2</a>
+                        <a href="#3"><strong>3</strong> (Фаза В) - Mark9</a>
+                    </nav>
+                </div>
+                <div class="col-6">
+                    <div class="supp-log" id="1">
+                        <div class="supports">
+                            <div class="title">OpenVPN CLIENT LIST</div>
+                            <div class="supports-body">
+                                <table id="1">
+                                    <thead>
+                                    <tr>
+                                        <th>Virtual Address</th>
+                                        <th>Common Name</th>
+                                        <th>Active/Inactive</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>10.8.0.50</td>
+                                        <td>mark_001</td>
+                                        <td>
+                                            {{ mark001 }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="supp-log" id="2">
+                        <div class="supports">
+                            <div class="title">OpenVPN CLIENT LIST</div>
+                            <div class="supports-body">
+                                <table id="1">
+                                    <thead>
+                                    <tr>
+                                        <th>Virtual Address</th>
+                                        <th>Common Name</th>
+                                        <th>Active/Inactive</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>10.8.0.42</td>
+                                        <td>mark_002</td>
+                                        <td>
+                                            {{ mark002 }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="supp-log" id="3">
+                        <div class="supports">
+                            <div class="title">OpenVPN CLIENT LIST</div>
+                            <div class="supports-body">
+                                <table id="1">
+                                    <thead>
+                                    <tr>
+                                        <th>Virtual Address</th>
+                                        <th>Common Name</th>
+                                        <th>Active/Inactive</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>10.8.0.62</td>
+                                        <td>mark_009</td>
+                                        <td>
+                                            {{ mark009 }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" style="padding-top: 30px;">
+                    <div class="chart">
+                        <!-- график №1 -->
+                        <div class="chart-title"><h3>Mark1 - Вкл/Выкл(1/0)</h3></div>
+                        <div class="ct-chart">
+                            <canvas id="mk1" width="1050px" height="250px"></canvas>
+                        </div>
+                        <!-- график №2 -->
+                        <div class="chart-title"><h3>Mark2 - Вкл/Выкл(1/0)</h3></div>
+                        <div class="ct-chart">
+                            <canvas id="mk2" width="1050px" height="250px"></canvas>
+                        </div>
+                        <!-- график №3 -->
+                        <div class="chart-title"><h3>Mark9 - Вкл/Выкл(1/0)</h3></div>
+                        <div class="ct-chart">
+                            <canvas id="mk9" width="1050px" height="250px"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    {% endblock %}
+
+    {% block script %}
+    <script src="{% static 'js/scripts_min.js' %}"></script>
+    <script src="{% static 'libs/Chart.js' %}"></script>
+
+    <script>
+        var mk1 = document.getElementById("mk1").getContext("2d");
+        var mk2 = document.getElementById("mk2").getContext("2d");
+        var mk9 = document.getElementById("mk9").getContext("2d");
+        
+    
+        Chart.defaults.global.defaultFontSize = 18;
+    
+        var faza_1 = {
+        
+        label: "Роутер - Mark_001",
+        data: {{ state1 }},
+        lineTension: 0.7,
+        borderColor: 'red',
+        steppedLine: 'before'
+        };
+        
+        var faza_2 = {
+        
+        label: "Роутер - Mark_002",
+        data: {{ state2 }},
+        lineTension: 0.7,
+        borderColor: 'red',
+        steppedLine: 'before'
+        };  
+    
+        var faza_9 = {
+        
+        label: "Роутер - Mark_009",
+        data: {{ state9 }},
+        lineTension: 0.7,
+        borderColor: 'red',
+        steppedLine: 'before'
+        };
+            
+        var data_mark1 = {
+        labels: {{ times1|safe }},
+        datasets: [faza_1],
+        };  
+        
+        var data_mark2 = {
+        labels: {{ times2|safe }},
+        datasets: [faza_2],
+        };  
+        var data_mark9 = {
+        labels: {{ times9|safe }},
+        datasets: [faza_9],
+        };    
+
+        var chartOptions = {
+        legend: {
+        display: true,
+        position: 'top',
+        labels: {
+            boxWidth: 80,
+            fontColor: 'black'
+        }  
+        },
+        scales: { 
+            yAxes: [{ 
+                ticks: { 
+                    max: 1,
+                    min: 0,
+                    stepSize: 1
+                    } 
+                }] 
+            }, 
+            responsive: false
+        };
+    
+        var lineChart = new Chart(mk1, {
+        type: 'line',
+        data: data_mark1,
+        options: chartOptions
+        });
+
+        var lineChart = new Chart(mk2, {
+        type: 'line',
+        data: data_mark2,
+        options: chartOptions
+        });
+        var lineChart = new Chart(mk9, {
+        type: 'line',
+        data: data_mark9,
+        options: chartOptions
+        });
+
+    </script>
+{% endblock %}

@@ -1,0 +1,222 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+    <header>
+        <h1> МРСК СЗ </h1>
+    </header>
+
+    <div class="container">
+        <div class="back-to-main">
+            <a href="index.html">Назад к проектам</a>
+        </div>
+        <div class="sypp-logs-wrap">
+            <div class="row">
+                
+                <div class="col-2">
+                    <nav class="logs-list">
+                        <a href="#1"><strong>1</strong> - SPB_001 - Пост №1 Опора №108 Линия №129</a>
+                        <a href="#2"><strong>2</strong> - SPB_002 - Пост №3 Опора №247</a>
+                        <a href="#3"><strong>3</strong> - SPB_003 - Пост №2 Опора №31 Линия №129</a>
+                    </nav>
+                </div>
+                <div class="col-6">
+                    <div class="supp-log" id="1">
+                        <div class="supports">
+                            <div class="title">OpenVPN CLIENT LIST</div>
+                            <div class="supports-body">
+                                <table id="1">
+                                    <thead>
+                                    <tr>
+                                        <th>Virtual Address</th>
+                                        <th>Common Name</th>
+                                        <th>Active/Inactive (1/0)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>10.8.0.46</td>
+                                        <td>spb_001</td>
+                                        <td>
+                                            {{ spb1 }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="supp-log" id="2">
+                        <div class="supports">
+                            <div class="title">OpenVPN CLIENT LIST</div>
+                            <div class="supports-body">
+                                <table id="1">
+                                    <thead>
+                                    <tr>
+                                        <th>Virtual Address</th>
+                                        <th>Common Name</th>
+                                        <th>Active/Inactive (1/0)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>10.8.0.50</td>
+                                        <td>spb_002</td>
+                                        <td>
+                                            {{ spb2 }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="supp-log" id="3">
+                        <div class="supports">
+                            <div class="title">OpenVPN CLIENT LIST</div>
+                            <div class="supports-body">
+                                <table id="1">
+                                    <thead>
+                                    <tr>
+                                        <th>Virtual Address</th>
+                                        <th>Common Name</th>
+                                        <th>Active/Inactive (1/0)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>10.8.0.54</td>
+                                        <td>spb_003</td>
+                                        <td>
+                                            {{ spb3 }}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-12" style="padding-top: 30px;">
+                    <div class="chart">
+                        <!-- график №1 -->
+                        <div class="chart-title"><h3>SPB_001 - Пост №1 Вкл/Выкл(1/0)</h3></div>
+                        <div class="ct-chart">
+                            <canvas id="mk10" width="1050px" height="250px"></canvas>
+                        </div>
+                        <!-- график №2 -->
+                        <div class="chart-title"><h3>SPB_002 - Пост №3 Вкл/Выкл(1/0)</h3></div>
+                        <div class="ct-chart">
+                            <canvas id="mk11" width="1050px" height="250px"></canvas>
+                        </div>
+                        <!-- график №3 -->
+                        <div class="chart-title"><h3>SPB_003 - Пост №2 Вкл/Выкл(1/0)</h3></div>
+                        <div class="ct-chart">
+                            <canvas id="mk12" width="1050px" height="250px"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block script %}
+    <script src="{% static 'js/scripts_min.js' %}"></script>
+    <script src="{% static 'libs/Chart.js' %}"></script>
+
+    <script>
+        var mk10 = document.getElementById("mk10").getContext("2d");
+        var mk11 = document.getElementById("mk11").getContext("2d");
+        var mk12 = document.getElementById("mk12").getContext("2d");
+        
+    
+        Chart.defaults.global.defaultFontSize = 18;
+    
+        var faza_10 = {
+        
+        label: "Роутер - spb_001",
+        data: {{ state10 }},
+        lineTension: 0.7,
+        borderColor: 'red',
+        steppedLine: 'before'
+        };
+        
+        var faza_11 = {
+        
+        label: "Роутер - spb_002",
+        data: {{ state11 }},
+        lineTension: 0.7,
+        borderColor: 'red',
+        steppedLine: 'before'
+
+        };  
+    
+        var faza_12 = {
+        
+        label: "Роутер - spb_003",
+        data: {{ state12 }},
+        lineTension: 0.7,
+        borderColor: 'red',
+        steppedLine: 'before'
+    
+        };
+            
+        var data_mark10 = {
+        labels: {{ times10|safe }},
+        datasets: [faza_10],
+        };  
+        
+        var data_mark11 = {
+        labels: {{ times11|safe }},
+        datasets: [faza_11],
+        };  
+        var data_mark12 = {
+        labels: {{ times12|safe }},
+        datasets: [faza_12],
+        };    
+
+        var chartOptions = {
+        legend: {
+        display: true,
+        position: 'top',
+        labels: {
+            boxWidth: 80,
+            fontColor: 'black'
+        }  
+        },
+        scales: { 
+            yAxes: [{ 
+                ticks: { 
+                    max: 1,
+                    min: 0,
+                    stepSize: 1
+                    } 
+                }] 
+            }, 
+            responsive: false,
+        
+        };
+    
+        var lineChart = new Chart(mk10, {
+        type: 'line',
+        data: data_mark10,
+        options: chartOptions,
+        
+        });
+
+        var lineChart = new Chart(mk11, {
+        type: 'line',
+        data: data_mark11,
+        options: chartOptions
+        });
+        var lineChart = new Chart(mk12, {
+        type: 'line',
+        data: data_mark12,
+        options: chartOptions
+        });
+
+    </script>
+{% endblock %}
