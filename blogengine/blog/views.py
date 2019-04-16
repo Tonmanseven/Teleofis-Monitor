@@ -5,8 +5,9 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, StreamingHttpResponse
 # Импортируем библиотеку, соответствующую типу нашей базы данных
 import sqlite3, base64, zlib
+from blog.models import Teleofis
 from .forms import UserForm, SensForm
-from blog.models import Teleofis_state
+
 now = datetime.datetime.now()
 
 # Объядиняем столбцы времени и дат в один список
@@ -470,7 +471,7 @@ def test(request):
 
     if request.method == "POST":
         start = request.POST.get("startDate")
-        end = request.POST.get("endDate")
+        #end = request.POST.get("endDate")
         print(start)
         
         return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': state14[0],
@@ -536,30 +537,43 @@ def sibur(request):
 
 def tele_robot(request):
     
-    teleofis_new = Teleofis_state()
-
+    teleofis_new = Teleofis()
+    
     if request.method == "GET":
         
         tel_data = request.GET.get("data")
         data = decript(tel_data)
-        statusList = data["statusList"]
         hostname = data["hostname"]
-        dannie = GetAverage(statusList)
+        statusList = data["statusList"]
+        logList = data["logList"]
 
-        new_time = time.strftime("%Y-%m-%d %H:%M", time.localtime(dannie["timestamp"]))
-        status = int(dannie["status"])
-        dannie = {"time_ping": new_time, "status": status}
-        print(hostname, ": ", dannie)
+        for item in logList:
+            
+            text = item["text"] ## - текст события 
+            timestamp_i = item["timestamp"] # - время события
+            print(text, ": ", timestamp_i)
 
-        teleofis_new.db = hostname
-        teleofis_new.status = status
-        teleofis_new.timestamp = new_time
+        buffer = GetAverage(statusList)
+        timestamp = buffer["timestamp"] # - время пингования 
+        internetStatus = buffer["internetStatus"] # 
+        vpnStatus = buffer["vpnStatus"]
+        datetime = time.strftime("%d-%m-%Y %H:%M:%S", time.localtime(timestamp))
 
-        teleofis_new.save()
-        #datetime = time.strftime("%d-%m-%Y %H:%M", time.localtime(timestamp))
+        
+
+        print(hostname, ": ", datetime, ": ", internetStatus, ": ", vpnStatus)
+
+        #teleofis_new.app = hostname
+        # teleofis_new.status = status
+        # teleofis_new.timestamp = new_time
+        # teleofis_new.save()
+               
+        
         
     return render(request, 'blog/teleofis_state.html')                                                                      
 
+def todo(namespace):
+    return namespace
 
 def decript(t_data):
     
@@ -575,13 +589,19 @@ def decript(t_data):
 def GetAverage(statusList):
     i = 0
     timestamp = 0
-    statusListBuffer = list()
-    status = False
+    internetStatusListBuffer = list()
+    vpnStatusListBuffer = list()
+    internetStatus = False
+    vpnStatus = False
     for item in statusList:
         timestamp = item["timestamp"]
-        statusListBuffer.append(item["status"])
+        internetStatusListBuffer.append(item["internetStatus"])
+        vpnStatusListBuffer.append(item["vpnStatus"])
         i += 1
-    if (sum(statusListBuffer)>i/2):
-        status = True
-    data = {"timestamp":timestamp, "status":status}
+    if (sum(internetStatusListBuffer)>i/2):
+        internetStatus = True
+    if (sum(vpnStatusListBuffer)>i/2):
+        vpnStatus = True
+    data = {"timestamp":timestamp, "internetStatus":internetStatus, "vpnStatus":vpnStatus}
     return data
+#end define
