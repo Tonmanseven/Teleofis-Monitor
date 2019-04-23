@@ -116,7 +116,7 @@ def station_3(request):
 
 def test(request):
     useform = UserForm()
-    data_opora = all_routers_ping('pluto')
+    data_opora = all_routers_ping('mark_014')
 
     state14 = data_opora['state_router']
     date14 = data_opora['date_router']
