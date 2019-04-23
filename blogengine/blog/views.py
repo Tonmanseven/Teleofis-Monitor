@@ -86,8 +86,8 @@ def station_2(request):
     state5 = mk5['state_router']
     date5 = mk5['date_router']
     
-    return render(request, 'blog/station_2.html', context={'mark003': state3[0], 'mark004': state4[0],
-                                                           'mark005': state5[0], 'times3': date3,
+    return render(request, 'blog/station_2.html', context={'mark003': state3, 'mark004': state4,
+                                                           'mark005': state5, 'times3': date3,
                                                            'state3': state3, 'times4': date4,
                                                            'state4': state4, 'times5': date5,
                                                            'state5': state5})
@@ -108,8 +108,8 @@ def station_3(request):
     state8 = mk8['state_router']
     date8 = mk8['date_router']
 
-    return render(request, 'blog/station_1.html', context={'mark006': state6[0], 'mark007': state7[0],
-                                                           'mark008': state8[0], 'times6': date6,
+    return render(request, 'blog/station_1.html', context={'mark006': state6, 'mark007': state7,
+                                                           'mark008': state8, 'times6': date6,
                                                            'state6': state6, 'times7': date7,
                                                            'state7': state7, 'times8': date8,
                                                            'state8': state8})
@@ -126,11 +126,11 @@ def test(request):
         #end = request.POST.get("endDate")
         print(start)
         
-        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': state14[0],
+        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': state14,
                                                            'times14': date14,
                                                            'state14': state14})
     else:
-        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': state14[0],
+        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': state14,
                                                            'times14': date14,
                                                            'state14': state14})
 
@@ -150,7 +150,7 @@ def fins(request):
     date_spb3 = spb3['date_router']
 
 
-    return render(request, 'blog/fins.html', context={     'spb1': state_spb1[0], 'spb2': state_spb2[0], 'spb3': state_spb3[0],
+    return render(request, 'blog/fins.html', context={     'spb1': state_spb1, 'spb2': state_spb2, 'spb3': state_spb3,
                                                            'times10': date_spb1,
                                                            'state10': state_spb1, 'times11': date_spb2,
                                                            'state11': state_spb2, 'times12': date_spb3,
@@ -171,7 +171,7 @@ def sibur(request):
     state_spb6 = spb6['state_router']
     date_spb6 = spb6['date_router']
 
-    return render(request, 'blog/sibur.html', context={     'spb4': state_spb4[0], 'spb5': state_spb5[0], 'spb6': state_spb6[0],
+    return render(request, 'blog/sibur.html', context={     'spb4': state_spb4, 'spb5': state_spb5, 'spb6': state_spb6,
                                                            'times10': date_spb4,
                                                            'state10': state_spb4, 'times11': date_spb5,
                                                            'state11': state_spb5, 'times12': date_spb6,
