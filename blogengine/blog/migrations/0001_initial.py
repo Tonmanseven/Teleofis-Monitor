@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('log_text', models.TextField(db_index=True)),
                 ('log_time', models.DateTimeField(default=django.utils.timezone.now)),
+                ('log_name', models.CharField(db_index=True, default=None, max_length=150)),
             ],
         ),
         migrations.CreateModel(
