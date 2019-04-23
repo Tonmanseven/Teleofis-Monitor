@@ -33,7 +33,8 @@ def all_routers_ping(hname):
     opora_all = {
         
         'host_router': host,
-        'state_router': vpn,
+        'vpn_router': vpn,
+        'internet_router': inet,
         'date_router': dt_pub,
             
     }                
@@ -54,18 +55,19 @@ def station_1(request):
     mk2 = all_routers_ping('pluto')
     mk9 = all_routers_ping('luna')
 
-    state1 = mk1['state_router']
+    vpn1 = mk1['vpn_router']
+    inet1 = mk1['internet_router']
     date1 = mk1['date_router']
 
-    state2 = mk2['state_router']
+    state2 = mk2['vpn_router']
     date2 = mk2['date_router']
 
-    state9 = mk9['state_router']
+    state9 = mk9['vpn_router']
     date9 = mk9['date_router']
 
     return render(request, 'blog/station_3.html', context={'mark009': state9[0], 'mark002': state2[0],
-                                                           'mark001': state1[0], 'times1': date1,                                                  
-                                                            'state1': state1, 'times2': date2,
+                                                           'mark001': vpn1[0], 'times1': date1,                                                  
+                                                            'state1': vpn1, 'times2': date2,
                                                             'state2': state2, 'times9': date9,
                                                             'state9': state9,
                                                            })
@@ -77,13 +79,13 @@ def station_2(request):
     mk4 = all_routers_ping('pluto')
     mk5 = all_routers_ping('luna')
 
-    state3 = mk3['state_router']
+    state3 = mk3['vpn_router']
     date3 = mk3['date_router']
 
-    state4 = mk4['state_router']
+    state4 = mk4['vpn_router']
     date4 = mk4['date_router']
 
-    state5 = mk5['state_router']
+    state5 = mk5['vpn_router']
     date5 = mk5['date_router']
     
     return render(request, 'blog/station_2.html', context={'mark003': state3, 'mark004': state4,
@@ -99,13 +101,13 @@ def station_3(request):
     mk7 = all_routers_ping('pluto')
     mk8 = all_routers_ping('luna')
 
-    state6 = mk6['state_router']
+    state6 = mk6['vpn_router']
     date6 = mk6['date_router']
 
-    state7 = mk7['state_router']
+    state7 = mk7['vpn_router']
     date7 = mk7['date_router']
 
-    state8 = mk8['state_router']
+    state8 = mk8['vpn_router']
     date8 = mk8['date_router']
 
     return render(request, 'blog/station_1.html', context={'mark006': state6, 'mark007': state7,
@@ -118,7 +120,7 @@ def test(request):
     useform = UserForm()
     data_opora = all_routers_ping('pluto')
 
-    state14 = data_opora['state_router']
+    state14 = data_opora['vpn_router']
     date14 = data_opora['date_router']
 
     if request.method == "POST":
@@ -140,13 +142,13 @@ def fins(request):
     spb2 = all_routers_ping('pluto')
     spb3 = all_routers_ping('luna')
 
-    state_spb1 = spb1['state_router']
+    state_spb1 = spb1['vpn_router']
     date_spb1 = spb1['date_router']
 
-    state_spb2 = spb2['state_router']
+    state_spb2 = spb2['vpn_router']
     date_spb2 = spb2['date_router']
 
-    state_spb3 = spb3['state_router']
+    state_spb3 = spb3['vpn_router']
     date_spb3 = spb3['date_router']
 
 
@@ -162,13 +164,13 @@ def sibur(request):
     spb5 = all_routers_ping('pluto')
     spb6 = all_routers_ping('luna')
 
-    state_spb4 = spb4['state_router']
+    state_spb4 = spb4['vpn_router']
     date_spb4 = spb4['date_router']
 
-    state_spb5 = spb5['state_router']
+    state_spb5 = spb5['vpn_router']
     date_spb5 = spb5['date_router']
 
-    state_spb6 = spb6['state_router']
+    state_spb6 = spb6['vpn_router']
     date_spb6 = spb6['date_router']
 
     return render(request, 'blog/sibur.html', context={     'spb4': state_spb4, 'spb5': state_spb5, 'spb6': state_spb6,
@@ -180,6 +182,7 @@ def sibur(request):
 def tele_robot(request):
     
     teleofis_new = teleping()
+    tele_log = telelog()
     
     if request.method == "GET":
         
@@ -190,10 +193,15 @@ def tele_robot(request):
         logList = data["logList"]
 
         for item in logList:
-            
             text = item["text"] ## - текст события 
             timestamp_i = item["timestamp"] # - время события
             print(text, ": ", timestamp_i)
+            logtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp_i))
+
+        tele_log.log_text = text
+        tele_log.log_time = logtime
+
+        tele_log.save()    
 
         buffer = GetAverage(statusList)
         timestamp = buffer["timestamp"] # - время пингования 

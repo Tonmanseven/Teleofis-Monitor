@@ -244,7 +244,7 @@ def DataSend():
         logList = getItemsFromList(localdb["logList"])
         buffer = {"hostname":hostname, "statusList": statusList, "logList":logList}
         data = ItemToBase64WithCompress(buffer)
-        url = "http://127.0.0.1:8000/blog/teleofis_state.html"
+        url = "http://localhost:8000/blog/teleofis_state.html"
         url += "?data=" + data
         print("DataSend: " + url)
         try:
