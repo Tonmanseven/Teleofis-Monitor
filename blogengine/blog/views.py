@@ -151,10 +151,18 @@ def station_3(request):
 
 def test(request):
     useform = UserForm()
+
     log_mark = all_routers_log('mark_014', datetime.strftime(datetime.today(), "%Y-%m-%d"), datetime.strftime(datetime.today(), "%Y-%m-%d"))
     logtime = log_mark['date_log']
     loghost = log_mark['host_log']
     logtext = log_mark['text_log']
+
+    data_opora = all_routers_ping('mark_014')
+
+    log_mark = all_routers_log('mark_014')
+
+    logtime = log_mark['date_log']
+    loghost = log_mark['host_log']
 
     data_opora = all_routers_ping('mark_014', datetime.strftime(datetime.today(), "%Y-%m-%d"), datetime.strftime(datetime.today(), "%Y-%m-%d"))
     vpn_mk14 = data_opora['vpn_router']
