@@ -144,13 +144,11 @@ def station_3(request):
 def test(request):
     useform = UserForm()
     data_opora = all_routers_ping('mark_014')
-<<<<<<< HEAD
-=======
+
     log_mark = all_routers_log('mark_014')
 
     logtime = log_mark['date_log']
     loghost = log_mark['host_log']
->>>>>>> eb9f351834427c11f1c46e1e375f3533280c7c37
 
     vpn_mk14 = data_opora['vpn_router']
     inet_mk14 = data_opora['internet_router']
