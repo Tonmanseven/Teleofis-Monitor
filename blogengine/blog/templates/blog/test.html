@@ -39,8 +39,17 @@
                                             {{ mark014 }}
                                         </td>
                                     </tr>
+
+                                    <thead>
+                                        <tr>
+                                            <th>Log_hostname</th>
+                                            <th>Log_data</th>
+                                            <th>Log_time</th>
+                                        </tr>
+                                        </thead>
                                     <tr>
                                         <td>{{ loghost }}</td>
+                                        <td>{{ logtext }}</td>
                                         <td>{{ logtime }}</td>
                                     </tr>
                                     </tbody>
@@ -69,7 +78,7 @@
                 <div class="col-12" style="padding-top: 30px;">
                     <div class="chart">
                         <!-- график №5 -->
-                        <div class="chart-title"><h3> Mark14 - Вкл/Выкл(1/0) </h3></div>
+                        <div class="chart-title"><h3> Mark14 - Вкл/Выкл(1/0). Данные за период {{ period }} </h3></div>
                         <div class="ct-chart">
                             <canvas id="speedChart" width="1050px" height="250px"> </canvas>
                         </div>

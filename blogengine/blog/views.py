@@ -1,6 +1,7 @@
 import subprocess
 import os
 import datetime, time, json
+from datetime import datetime, date, time
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, StreamingHttpResponse
 # Импортируем библиотеку, соответствующую типу нашей базы данных
@@ -8,13 +9,14 @@ import sqlite3, base64, zlib
 from blog.models import telelog, teleping
 from .forms import UserForm, SensForm
 
-now = datetime.datetime.now()
-
 
 ######## data from server ########
-def all_routers_ping(hname):
+def all_routers_ping(hname, startD, endD):
+
+    start_date = datetime.strptime(startD, "%Y-%m-%d")
+    end_date = datetime.strptime(endD, "%Y-%m-%d")
     
-    tele_data = teleping.objects.filter(host = '{}'.format(hname)).order_by('timestamp')
+    tele_data = teleping.objects.filter(host = '{}'.format(hname), timestamp__range=(start_date, end_date)).order_by('timestamp')
 
     j = 0
     auff = []
@@ -43,17 +45,22 @@ def all_routers_ping(hname):
     return opora_all 
 
 
-def all_routers_log(hname):
+def all_routers_log(hname, startD, endD):
+
+    start_date = datetime.strptime(startD, "%Y-%m-%d")
+    end_date = datetime.strptime(endD, "%Y-%m-%d")
     
-    tele_data = telelog.objects.all()
+    tele_data = telelog.objects.filter(log_name = '{}'.format(hname), log_time__range =(start_date, end_date)).order_by('id') 
 
     j = 0
     auff = []
     host = []
+    text_log = []
     dt_pub = []
     for i in tele_data:
         auff.append(i)
-        host.append(auff[j].log_text)
+        host.append(auff[j].log_name)
+        text_log.append(auff[j].log_text)
         dt_pub.append(auff[j].log_time.strftime('%d-%m-%Y %H:%M'))  
         j += 1 
 
@@ -61,6 +68,7 @@ def all_routers_log(hname):
         
         'host_log': host,
         'date_log': dt_pub,
+        'text_log': text_log,
             
     }                
 
@@ -143,28 +151,49 @@ def station_3(request):
 
 def test(request):
     useform = UserForm()
+<<<<<<< HEAD
     data_opora = all_routers_ping('mark_014')
 
     log_mark = all_routers_log('mark_014')
+=======
+>>>>>>> bfcca5261cccab40d8c19d1f42e573fab558b72a
 
+    log_mark = all_routers_log('mark_014', datetime.strftime(datetime.today(), "%Y-%m-%d"), datetime.strftime(datetime.today(), "%Y-%m-%d"))
     logtime = log_mark['date_log']
     loghost = log_mark['host_log']
+<<<<<<< HEAD
+=======
+    logtext = log_mark['text_log']
+>>>>>>> bfcca5261cccab40d8c19d1f42e573fab558b72a
 
+    data_opora = all_routers_ping('mark_014', datetime.strftime(datetime.today(), "%Y-%m-%d"), datetime.strftime(datetime.today(), "%Y-%m-%d"))
     vpn_mk14 = data_opora['vpn_router']
     inet_mk14 = data_opora['internet_router']
     date14 = data_opora['date_router']
 
+   
+
     if request.method == "POST":
         start = request.POST.get("startDate")
-        #end = request.POST.get("endDate")
-        print(start)
+        end = request.POST.get("endDate")
+        period = "{} / {}".format(start, end)
+
+        data_opora = all_routers_ping('mark_014', start, end)
+        vpn_mk14 = data_opora['vpn_router']
+        inet_mk14 = data_opora['internet_router']
+        date14 = data_opora['date_router']
+
+        log_mark = all_routers_log('mark_014', start, end)
+        logtime = log_mark['date_log']
+        loghost = log_mark['host_log']
+        logtext = log_mark['text_log']
         
-        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': vpn_mk14[0],
-                                                           'times14': date14, 'loghost': loghost, 'logtime': logtime,
+        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': vpn_mk14[0], "period": period,
+                                                           'times14': date14, 'loghost': loghost, 'logtime': logtime, 'logtext': logtext,
                                                            'state14': vpn_mk14})
     else:
-        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': vpn_mk14[0],
-                                                           'times14': date14, 'loghost': loghost, 'logtime': logtime,
+        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': vpn_mk14[0], "period": period,
+                                                           'times14': date14, 'loghost': loghost, 'logtime': logtime, 'logtext': logtext,
                                                            'state14': vpn_mk14})
 
 def fins(request):
