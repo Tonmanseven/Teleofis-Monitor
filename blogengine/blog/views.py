@@ -14,7 +14,7 @@ now = datetime.datetime.now()
 ######## data from server ########
 def all_routers_ping(hname):
     
-    tele_data = teleping.objects.filter(host = '{}'.format(hname))
+    tele_data = teleping.objects.filter(host = '{}'.format(hname)).order_by('timestamp')
 
     j = 0
     auff = []
@@ -41,6 +41,31 @@ def all_routers_ping(hname):
 
     # частота выполнений 3600
     return opora_all 
+
+
+def all_routers_log(hname):
+    
+    tele_data = telelog.objects.all()
+
+    j = 0
+    auff = []
+    host = []
+    dt_pub = []
+    for i in tele_data:
+        auff.append(i)
+        host.append(auff[j].log_text)
+        dt_pub.append(auff[j].log_time.strftime('%d-%m-%Y %H:%M'))  
+        j += 1 
+
+    opora_all = {
+        
+        'host_log': host,
+        'date_log': dt_pub,
+            
+    }                
+
+    # частота выполнений 3600
+    return opora_all     
 ######################################################################################################
 
 def posts(request):
@@ -119,8 +144,16 @@ def station_3(request):
 def test(request):
     useform = UserForm()
     data_opora = all_routers_ping('mark_014')
+<<<<<<< HEAD
+=======
+    log_mark = all_routers_log('mark_014')
 
-    state14 = data_opora['vpn_router']
+    logtime = log_mark['date_log']
+    loghost = log_mark['host_log']
+>>>>>>> eb9f351834427c11f1c46e1e375f3533280c7c37
+
+    vpn_mk14 = data_opora['vpn_router']
+    inet_mk14 = data_opora['internet_router']
     date14 = data_opora['date_router']
 
     if request.method == "POST":
@@ -128,13 +161,13 @@ def test(request):
         #end = request.POST.get("endDate")
         print(start)
         
-        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': state14,
-                                                           'times14': date14,
-                                                           'state14': state14})
+        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': vpn_mk14[0],
+                                                           'times14': date14, 'loghost': loghost, 'logtime': logtime,
+                                                           'state14': vpn_mk14})
     else:
-        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': state14,
-                                                           'times14': date14,
-                                                           'state14': state14})
+        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': vpn_mk14[0],
+                                                           'times14': date14, 'loghost': loghost, 'logtime': logtime,
+                                                           'state14': vpn_mk14})
 
 def fins(request):
     
@@ -198,6 +231,7 @@ def tele_robot(request):
             print(text, ": ", timestamp_i)
             logtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp_i))
 
+        tele_log.log_name = hostname
         tele_log.log_text = text
         tele_log.log_time = logtime
 

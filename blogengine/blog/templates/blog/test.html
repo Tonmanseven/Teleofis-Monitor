@@ -39,17 +39,22 @@
                                             {{ mark014 }}
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>{{ loghost }}</td>
+                                        <td>{{ logtime }}</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                   
                 </div>
 
                 <div class="col-auto">
                     <div class="supp-img">
                         <div class="supports">
-                                <div class="title"> Установите период показаний</div>
+                                <div class="title"> Установите период времени</div>
                                     <div id="date_range" style="margin-left: 0px;" ></div>
                                     <form method="POST">
                                             {% csrf_token %}

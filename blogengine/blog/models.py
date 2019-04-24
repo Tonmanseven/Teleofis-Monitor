@@ -15,6 +15,7 @@ class teleping(models.Model):
 
 class telelog(models.Model):
    
+    log_name = models.CharField(max_length= 150, db_index= True)
     log_text = models.TextField(db_index= True)
     log_time = models.DateTimeField(default = timezone.now, auto_now_add=False)
    
