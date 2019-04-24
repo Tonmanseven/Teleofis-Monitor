@@ -99,7 +99,7 @@ def station_1(request):
     date9 = mk9['date_router']
 
     return render(request, 'blog/station_3.html', context={'mark009': state9[0], 'mark002': state2[0],
-                                                           'mark001': vpn1[0], 'times1': date1,                                                  
+                                                           'mark001': vpn1, 'times1': date1,                                                  
                                                             'state1': vpn1, 'times2': date2,
                                                             'state2': state2, 'times9': date9,
                                                             'state9': state9,
@@ -151,27 +151,17 @@ def station_3(request):
 
 def test(request):
     useform = UserForm()
-<<<<<<< HEAD
-    data_opora = all_routers_ping('mark_014')
-
-    log_mark = all_routers_log('mark_014')
-=======
->>>>>>> bfcca5261cccab40d8c19d1f42e573fab558b72a
 
     log_mark = all_routers_log('mark_014', datetime.strftime(datetime.today(), "%Y-%m-%d"), datetime.strftime(datetime.today(), "%Y-%m-%d"))
     logtime = log_mark['date_log']
     loghost = log_mark['host_log']
-<<<<<<< HEAD
-=======
     logtext = log_mark['text_log']
->>>>>>> bfcca5261cccab40d8c19d1f42e573fab558b72a
 
     data_opora = all_routers_ping('mark_014', datetime.strftime(datetime.today(), "%Y-%m-%d"), datetime.strftime(datetime.today(), "%Y-%m-%d"))
     vpn_mk14 = data_opora['vpn_router']
     inet_mk14 = data_opora['internet_router']
     date14 = data_opora['date_router']
-
-   
+ 
 
     if request.method == "POST":
         start = request.POST.get("startDate")
@@ -192,7 +182,7 @@ def test(request):
                                                            'times14': date14, 'loghost': loghost, 'logtime': logtime, 'logtext': logtext,
                                                            'state14': vpn_mk14})
     else:
-        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': vpn_mk14[0], "period": period,
+        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': vpn_mk14,
                                                            'times14': date14, 'loghost': loghost, 'logtime': logtime, 'logtext': logtext,
                                                            'state14': vpn_mk14})
 
