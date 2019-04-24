@@ -9,10 +9,14 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 deactivate nondestructive
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 setenv VIRTUAL_ENV "/home/bulat/Рабочий стол/app/blogengine/myprojectenv"
 =======
 setenv VIRTUAL_ENV "/home/teleofis/Git/teleofismonitor/blogengine/myprojectenv"
 >>>>>>> 510b592faf53536c1ceef20536b6b14e5c92b80f
+=======
+setenv VIRTUAL_ENV "/home/teleofis/Git/teleofismonitor/blogengine/myprojectenv"
+>>>>>>> origin
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"

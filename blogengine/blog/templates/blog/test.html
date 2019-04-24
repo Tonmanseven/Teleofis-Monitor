@@ -9,6 +9,7 @@
         <div class="back-to-main">
             <a href="index.html">Назад</a>
         </div>
+
         <div class="sypp-logs-wrap">
             <div class="row">
                 
@@ -17,7 +18,7 @@
                         <a href="#5"><strong>1</strong> - Mark14</a>
                     </nav>
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                     <div class="supp-log" id="5">
                         <div class="supports">
                             <div class="title">OpenVPN CLIENT LIST</div>
@@ -38,16 +39,46 @@
                                             {{ mark014 }}
                                         </td>
                                     </tr>
+
+                                    <thead>
+                                        <tr>
+                                            <th>Log_hostname</th>
+                                            <th>Log_data</th>
+                                            <th>Log_time</th>
+                                        </tr>
+                                        </thead>
+                                    <tr>
+                                        <td>{{ loghost }}</td>
+                                        <td>{{ logtext }}</td>
+                                        <td>{{ logtime }}</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                   
                 </div>
+
+                <div class="col-auto">
+                    <div class="supp-img">
+                        <div class="supports">
+                                <div class="title"> Установите период времени</div>
+                                    <div id="date_range" style="margin-left: 0px;" ></div>
+                                    <form method="POST">
+                                            {% csrf_token %}
+                                            {{ form }}
+                                        <input type="submit" value="Показать" >
+                                    </form>
+                            </div>	
+                    </div>	
+                </div>
+
+
                 <div class="col-12" style="padding-top: 30px;">
                     <div class="chart">
                         <!-- график №5 -->
-                        <div class="chart-title"><h3> Mark14 - Вкл/Выкл(1/0) </h3></div>
+                        <div class="chart-title"><h3> Mark14 - Вкл/Выкл(1/0). Данные за период {{ period }} </h3></div>
                         <div class="ct-chart">
                             <canvas id="speedChart" width="1050px" height="250px"> </canvas>
                         </div>
@@ -64,28 +95,65 @@
 {% endblock %}
 
 {% block script %}
-<script src="{% static 'libs/chartist.min.js' %}"></script>
+
+<!-- 1. Подключим библиотеку jQuery (без нее jQuery UI не будет работать) -->
+<script src="{% static 'libs/myJquery/external/jquery/jquery.js' %}"></script>
+<!-- 2. Подключим jQuery UI -->
+<script src="{% static 'libs/myJquery/jquery-ui.min.js' %}"></script>
+<script src="{% static 'libs/jquery.datepicker.extension.range.min.js' %}"></script>
 <script src="{% static 'libs/Chart.js' %}"></script>
+
+<!-- Datepicker -->
+<script type="text/javascript">
+    $(function() {
+        $('#date_range').datepicker({
+            range: 'period',
+            numberOfMonths: 1,
+            monthNames:["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+            dayNamesMin:["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+            firstDay:1,
+            dateFormat:"yy-mm-dd", 
+            onSelect: function(dateText, inst, extensionRange) {
+            $('[name=startDate]').val(extensionRange.startDateText);
+            $('[name=endDate]').val(extensionRange.endDateText);
+        }
+        });
+        
+        
+        var extensionRange = $('#date_range').datepicker('widget').data('datepickerExtensionRange');
+        if(extensionRange.startDateText) $('[name=startDate]').val(extensionRange.startDateText);
+        if(extensionRange.endDateText) $('[name=endDate]').val(extensionRange.endDateText);
+
+    });
+</script>
+
 
 <script>
         var speedCanvas = document.getElementById("speedChart").getContext("2d");
         
-      
         Chart.defaults.global.defaultFontSize = 18;
       
         var faza_1 = {
           
-          label: "Роутер - Mark_014",
+          label: "VPN - Mark_014",
           data: {{ state14 }},
           lineTension: 0.7,
           borderColor: 'red',
           steppedLine: 'before'
           };
-      
-            
+          
+        var faza_2 = {
+            label: "internet - Mark_014",
+            data: {{ state14 }},
+            lineTension: 0.7,
+            fill: false,
+            borderColor: 'blue',
+		
+		};
+        
         var Data_faza = {
           labels: {{ times14|safe }},
-          datasets: [faza_1],
+          datasets: [faza_1, faza_2],
           };  
       
         var chartOptions = {

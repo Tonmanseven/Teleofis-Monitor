@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
+#import psycopg2
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +25,7 @@ SECRET_KEY = '5hniw)wq)3f2(4n#9jy)*8%ov2^=j594ror=3%0x*ew5bpzhbh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['91.227.154.66']
+ALLOWED_HOSTS = ['invent-monitor.scorpclub.ru', '91.227.154.50', 'localhost',]
 
 
 # Application definition
@@ -75,9 +75,13 @@ WSGI_APPLICATION = 'blogengine.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+     'default': {
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+       'NAME': 'telemonitor',
+       'USER': 'pluto',
+       'PASSWORD': 'plutonman',
+       'HOST': 'localhost',
+       'PORT': '',
     }
 }
 
@@ -106,16 +110,17 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = None
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')

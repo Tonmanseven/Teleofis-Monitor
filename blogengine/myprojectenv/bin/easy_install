@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #!/bin/sh
 '''exec' "/home/bulat/Рабочий стол/app/blogengine/myprojectenv/bin/python3" "$0" "$@"
 ' '''
@@ -6,6 +7,10 @@
 #!/home/teleofis/Git/teleofismonitor/blogengine/myprojectenv/bin/python3
 
 >>>>>>> 510b592faf53536c1ceef20536b6b14e5c92b80f
+=======
+#!/home/teleofis/Git/teleofismonitor/blogengine/myprojectenv/bin/python3
+
+>>>>>>> origin
 # -*- coding: utf-8 -*-
 import re
 import sys

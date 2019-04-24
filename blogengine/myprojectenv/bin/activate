@@ -38,10 +38,14 @@ deactivate () {
 deactivate nondestructive
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 VIRTUAL_ENV="/home/bulat/Рабочий стол/app/blogengine/myprojectenv"
 =======
 VIRTUAL_ENV="/home/teleofis/Git/teleofismonitor/blogengine/myprojectenv"
 >>>>>>> 510b592faf53536c1ceef20536b6b14e5c92b80f
+=======
+VIRTUAL_ENV="/home/teleofis/Git/teleofismonitor/blogengine/myprojectenv"
+>>>>>>> origin
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
