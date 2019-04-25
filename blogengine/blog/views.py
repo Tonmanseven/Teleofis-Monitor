@@ -269,17 +269,19 @@ def tele_robot(request):
         statusList = data["statusList"]
         logList = data["logList"]
 
-        for item in logList:
-            text = item["text"] ## - текст события 
-            timestamp_i = item["timestamp"] # - время события
-            print(text, ": ", timestamp_i)
-            logtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp_i))
+        
+        if(len(logList)>0):
+            for item in logList:
+                text = item["text"] ## - текст события 
+                timestamp_i = item["timestamp"] # - время события
+                print(text, ": ", timestamp_i)
+                logtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp_i))
 
-        tele_log.log_name = hostname
-        tele_log.log_text = text
-        tele_log.log_time = logtime
+            tele_log.log_name = hostname
+            tele_log.log_text = text
+            tele_log.log_time = logtime
 
-        tele_log.save()    
+            tele_log.save()    
 
         buffer = GetAverage(statusList)
         timestamp = buffer["timestamp"] # - время пингования 
