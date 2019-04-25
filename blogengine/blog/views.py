@@ -50,7 +50,7 @@ def all_routers_log(hname, startD, endD):
     start_date = datetime.strptime(startD, "%Y-%m-%d")
     end_date = datetime.strptime(endD, "%Y-%m-%d")
     
-    tele_data = telelog.objects.filter(log_name = '{}'.format(hname), log_time__range =(start_date, end_date)).order_by('id') 
+    tele_data = telelog.objects.filter(log_name = '{}'.format(hname), log_time__range =(start_date, end_date)).order_by('log_time') 
 
     j = 0
     auff = []
@@ -219,40 +219,40 @@ def sibur(request):
         end = request.POST.get("endDate")
         period = "{} / {}".format(start, end)
 
-        log_spb4 = all_routers_log('mark_014', start, end)
+        log_spb4 = all_routers_log('sbp_004', start, end)
         logtime_spb4 = log_spb4['date_log']
         loghost_spb4 = log_spb4['host_log']
         logtext_spb4 = log_spb4['text_log']
 
-        ping_spb4 = all_routers_ping('mark_014', start, end)
+        ping_spb4 = all_routers_ping('spb_004', start, end)
         vpn_spb4 = ping_spb4['vpn_router']
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
-        log_spb5 = all_routers_log('mark_014', start, end)
+        log_spb5 = all_routers_log('spb_005', start, end)
         logtime_spb5 = log_spb5['date_log']
         loghost_spb5 = log_spb5['host_log']
         logtext_spb5 = log_spb5['text_log']
 
-        ping_spb5 = all_routers_ping('mark_014', start, end)
+        ping_spb5 = all_routers_ping('spb_005', start, end)
         vpn_spb5 = ping_spb5['vpn_router']
         inet_spb5 = ping_spb5['internet_router']
         date_spb5 = ping_spb5['date_router']
 
-        log_spb6 = all_routers_log('mark_014', start, end)
+        log_spb6 = all_routers_log('spb_006', start, end)
         logtime_spb6 = log_spb6['date_log']
         loghost_spb6 = log_spb6['host_log']
         logtext_spb6 = log_spb6['text_log']
 
-        ping_spb6 = all_routers_ping('mark_014', start, end)
+        ping_spb6 = all_routers_ping('spb_006', start, end)
         vpn_spb6 = ping_spb6['vpn_router']
         inet_spb6 = ping_spb6['internet_router']
         date_spb6 = ping_spb6['date_router']
 
         return render(request, 'blog/sibur.html', context={  'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6,
-                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtext_spb4, 'logtext_spb4': logtext_spb4,
-                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtext_spb5, 'logtext_spb5': logtext_spb5,
-                    'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtext_spb6, 'logtext_spb6': logtext_spb6,})
+                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4,
+                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5,
+                    'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtime_spb6, 'logtext_spb6': logtext_spb6,})
     else:
         return render(request, 'blog/sibur.html', context={'form': useform})                                                            
 
