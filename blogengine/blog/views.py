@@ -219,7 +219,11 @@ def sibur(request):
         end = request.POST.get("endDate")
         period = "{} / {}".format(start, end)
 
+<<<<<<< HEAD
         log_spb4 = all_routers_log('sbp_004', start, end)
+=======
+        log_spb4 = all_routers_log('spb_004', start, end)
+>>>>>>> 817d9577c3e32dc4120a5778e1f365e55257d1ba
         logtime_spb4 = log_spb4['date_log']
         loghost_spb4 = log_spb4['host_log']
         logtext_spb4 = log_spb4['text_log']
@@ -249,9 +253,15 @@ def sibur(request):
         inet_spb6 = ping_spb6['internet_router']
         date_spb6 = ping_spb6['date_router']
 
+<<<<<<< HEAD
         return render(request, 'blog/sibur.html', context={  'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6,
                     'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4,
                     'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5,
+=======
+        return render(request, 'blog/sibur.html', context={  'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 'range4': len(date_spb4),
+                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4, 'range5': len(date_spb5),
+                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5, 'range6': len(date_spb6),
+>>>>>>> 817d9577c3e32dc4120a5778e1f365e55257d1ba
                     'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtime_spb6, 'logtext_spb6': logtext_spb6,})
     else:
         return render(request, 'blog/sibur.html', context={'form': useform})                                                            
@@ -282,7 +292,7 @@ def tele_robot(request):
             tele_log.log_time = logtime
 
             tele_log.save()    
-            
+
         buffer = GetAverage(statusList)
         timestamp = buffer["timestamp"] # - время пингования 
         internetStatus = buffer["internetStatus"] # 
