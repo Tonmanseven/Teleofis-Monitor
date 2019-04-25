@@ -269,12 +269,8 @@ def tele_robot(request):
         statusList = data["statusList"]
         logList = data["logList"]
 
-<<<<<<< HEAD
-        
-        if(len(logList)>0):
-=======
+
         if (len(logList) > 0):
->>>>>>> cd8444d02131f06bc54bd1a954ce30962eacfce8
             for item in logList:
                 text = item["text"] ## - текст события 
                 timestamp_i = item["timestamp"] # - время события
@@ -285,13 +281,8 @@ def tele_robot(request):
             tele_log.log_text = text
             tele_log.log_time = logtime
 
-<<<<<<< HEAD
             tele_log.save()    
-=======
-            tele_log.save()
-        #end if
->>>>>>> cd8444d02131f06bc54bd1a954ce30962eacfce8
-
+            
         buffer = GetAverage(statusList)
         timestamp = buffer["timestamp"] # - время пингования 
         internetStatus = buffer["internetStatus"] # 
