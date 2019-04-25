@@ -1,7 +1,7 @@
 import subprocess
 import os
 import datetime, time, json
-from datetime import datetime, date, time
+from datetime import datetime, date
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, StreamingHttpResponse
 # Импортируем библиотеку, соответствующую типу нашей базы данных
@@ -269,8 +269,12 @@ def tele_robot(request):
         statusList = data["statusList"]
         logList = data["logList"]
 
+<<<<<<< HEAD
         
         if(len(logList)>0):
+=======
+        if (len(logList) > 0):
+>>>>>>> cd8444d02131f06bc54bd1a954ce30962eacfce8
             for item in logList:
                 text = item["text"] ## - текст события 
                 timestamp_i = item["timestamp"] # - время события
@@ -281,7 +285,12 @@ def tele_robot(request):
             tele_log.log_text = text
             tele_log.log_time = logtime
 
+<<<<<<< HEAD
             tele_log.save()    
+=======
+            tele_log.save()
+        #end if
+>>>>>>> cd8444d02131f06bc54bd1a954ce30962eacfce8
 
         buffer = GetAverage(statusList)
         timestamp = buffer["timestamp"] # - время пингования 
