@@ -15,17 +15,17 @@
                 <div class="row-10"> 
                     <div class="chart">
                         <!-- график №1 -->
-                        <div class="chart-title"><h3>SPB_004: Панель 0.4 кВ ТП-55  - Вкл/Выкл(1/0)</h3></div>
+                        <div class="chart-title"><h3>SPB_004 10.8.0.58: Панель 0.4 кВ ТП-55  - Вкл/Выкл(1/0)</h3></div>
                         <div class="ct-chart">
                             <canvas id="spb4" style="width: 850px; height: 250px; "></canvas>
                         </div>
                         <!-- график №2 -->
-                        <div class="chart-title"><h3>SPB_005: Трафнсформатор ТМЗ - Вкл/Выкл(1/0)</h3></div>
+                        <div class="chart-title"><h3>SPB_005 10.8.0.62: Трафнсформатор ТМЗ - Вкл/Выкл(1/0)</h3></div>
                         <div class="ct-chart">
                             <canvas id="spb5"style="width: 850px; height: 250px; "></canvas>
                         </div>
                         <!-- график №3 -->
-                        <div class="chart-title"><h3>SPB_006: Ячейка КСО - Вкл/Выкл(1/0)</h3></div>
+                        <div class="chart-title"><h3>SPB_006 10.8.0.66: Ячейка КСО - Вкл/Выкл(1/0)</h3></div>
                         <div class="ct-chart">
                             <canvas id="spb6" style="width: 850px; height: 250px; "></canvas>
                         </div>
@@ -47,45 +47,68 @@
                         </div> 
             </div>
 
-            <div class="back-to-main"> 
-                        
-                    <a href="#" onclick="openbox('box'); return false">  Log routers </a>
-        
-                    <div id="box" style="display: none;">
-                            <div class="col-5">
+                <div class="routerslog">  
+                    <div class="row">   
+                        <div class="row-10">
+                                <a href="#" onclick="openbox('box'); return false">  Log spb_004 </a>
+                                <div id="box" style="display: none;">
                                     <div class="supports">
-                                        
-                                        <div class="supports-body">
-                                            <table id="1">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Log_hostname - vpn_ip</th>
-                                                        <th>Log_time</th>
-                                                        <th>Log_data</th>
-                                                    </tr>
+                                        <div class="supports-body">   
+                                            <table id="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Log_time</th>
+                                                            <th>Log_hostname - vpn_ip</th>	
+                                                            <th>Log_data</th>
+                                                        </tr>    
                                                     </thead>
-                                                <tr>
-                                                    <td>{{ loghost_spb4 }}- 10.8.0.58</td>
-                                                    <td>{{ logtime_spb4 }}</td>
-                                                    <td>{{ logtext_spb4 }}</td>   
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ loghost_spb5 }} - 10.8.0.62</td>
-                                                    <td>{{ logtime_spb5 }}</td>
-                                                    <td>{{ logtext_spb5 }}</td>   
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ loghost_spb6 }} - 10.8.0.66</td>
-                                                    <td>{{ logtime_spb6 }}</td>
-                                                    <td>{{ logtext_spb6 }}</td>   
-                                                </tr>
-                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
-                            </div>
+                                </div> 
                         </div>
-                    </div>
+                        <div class="row-10">
+                                <a href="#" onclick="openbox('boxy'); return false">  Log spb_005 </a>
+                                <div id="boxy" style="display: none;">
+                                        <div class="supports">
+                                            <div class="supports-body">   
+                                                <table id="table5">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Log_time</th>
+                                                                <th>Log_hostname - vpn_ip</th>	
+                                                                <th>Log_data</th>
+                                                            </tr>    
+                                                        </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div> 
+                        </div>
+                        <div class="row-10">
+                                <a href="#" onclick="openbox('boxs'); return false">  Log spb_006 </a>
+                                <div id="boxs" style="display: none;">
+                                        <div class="supports">
+                                            <div class="supports-body">   
+                                                <table id="table6">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Log_time</th>
+                                                                <th>Log_hostname - vpn_ip</th>	
+                                                                <th>Log_data</th>
+                                                            </tr>    
+                                                        </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div> 
+                        </div>
+
+                    </div>       
+                                     
+            </div>
+
+           
 
     </div>
     {% endblock %}
@@ -122,7 +145,7 @@
 
         });
     </script>
-
+     <!-- Plot -->
     <script>
         var spb4 = document.getElementById("spb4").getContext("2d");
         var spb5 = document.getElementById("spb5").getContext("2d");
@@ -178,7 +201,7 @@
         };
         var inet_12 = {
         label: "internet - spb_006",
-        data: {{ inet_spb5 }},
+        data: {{ inet_spb6 }},
         lineTension: 0.7,
         borderColor: 'blue',
         steppedLine: 'before'
@@ -251,5 +274,133 @@
             document.getElementById(id).style.display='none';
             }
         }
+    </script>
+
+
+	<!-- Таблица spb004 -->
+	<script type="text/javascript">
+
+		function generateTable(row, column){
+			var tbody = '<tbody>';
+			var mycolumn = '{{range4}}';
+			
+			var temp1 = {{ loghost_spb4|safe }};
+			var temp2 = {{ logtext_spb4|safe }};
+   
+			var timeNow = {{ logtime_spb4|safe }};
+
+			for( var i = 0; i <= column-1; i++ ){
+				
+				var t = timeNow[i];
+				
+                var t1 = temp1[i];
+				var t2 = temp2[i];
+				
+				tbody += '<tr>';
+				
+				for( var j = 1; j <= column; j++ ){
+					
+					if ( j == 1){
+						tbody += '<td> ' + t + '</td>';
+					} else if ( j == 2){
+						tbody += '<td> ' + t1 + '</td>';
+					} else if ( j == 3){
+						tbody += '<td> ' + t2 + '</td>';
+					} 
+				}
+				
+				tbody += '</tr>';
+
+			}
+			tbody += '</tbody>';
+			document.getElementById('table').innerHTML += tbody;
+			
+		}
+		generateTable(4, {{range4}});	
+    </script>
+    
+    	<!-- Таблица spb005 -->
+	<script type="text/javascript">
+
+		function generateTable(row, column){
+			var tbody = '<tbody>';
+			var mycolumn = '{{range5}}';
+
+            var temp3 = {{ loghost_spb5|safe }};
+			var temp4 = {{ logtext_spb5|safe }};
+
+            var timeNow5 = {{ logtime_spb5|safe }};
+
+			for( var i = 0; i <= column-1; i++ ){
+				
+                var tt = timeNow5[i];
+        
+                var t3 = temp3[i];
+                var t4 = temp4[i];
+          
+				tbody += '<tr>';
+				
+				for( var j = 1; j <= column; j++ ){
+					
+					if ( j == 1){
+						tbody += '<td> ' + tt + '</td>';
+					} else if ( j == 2){
+						tbody += '<td> ' + t3 + '</td>';
+					} else if ( j == 3){
+						tbody += '<td> ' + t4 + '</td>';
+					} 
+				}
+				
+				tbody += '</tr>';
+
+			}
+			tbody += '</tbody>';
+			document.getElementById('table5').innerHTML += tbody;
+			
+		}
+		generateTable(4, {{range5}});	
+    </script>
+    
+    <!-- Таблица spb006 -->
+	<script type="text/javascript">
+
+		function generateTable(row, column){
+			var tbody = '<tbody>';
+			var mycolumn = '{{range4}}';
+
+            var temp5 = {{ loghost_spb6|safe }};
+			var temp6 = {{ logtext_spb6|safe }};
+
+            var timeNow6 = {{ logtime_spb6|safe }};
+
+			for( var i = 0; i <= column-1; i++ ){
+
+                var tr = timeNow6[i];
+				
+                var t1 = temp5[i];
+				var t2 = temp6[i];
+
+				
+				tbody += '<tr>';
+				
+				for( var j = 1; j <= column; j++ ){
+					
+					if ( j == 1){
+						tbody += '<td> ' + tr + '</td>';
+					} else if ( j == 2){
+						tbody += '<td> ' + t1 + '</td>';
+					} else if ( j == 3){
+						tbody += '<td> ' + t2 + '</td>';
+					} 
+				}
+				
+				tbody += '</tr>';
+
+			}
+			tbody += '</tbody>';
+			document.getElementById('table6').innerHTML += tbody;
+			
+		}
+		generateTable(4, {{range6}});	
     </script>
 {% endblock %}
