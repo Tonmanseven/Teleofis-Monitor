@@ -9,86 +9,65 @@
         <div class="back-to-main">
             <a href="index.html">Назад</a>
         </div>
-
-        <div class="sypp-logs-wrap">
+        
+        <div class="sypp-logs-wrap"></div>
             <div class="row">
                 
-                <div class="col-2">
-                    <nav class="logs-list">
-                        <a href="#5"><strong>1</strong> - Mark14</a>
-                    </nav>
-                </div>
-                <div class="col-5">
-                    <div class="supp-log" id="5">
-                        <div class="supports">
-                            <div class="title">OpenVPN CLIENT LIST</div>
-                            <div class="supports-body">
-                                <table id="1">
-                                    <thead>
-                                    <tr>
-                                        <th>Virtual Address</th>
-                                        <th>Common Name</th>
-                                        <th>Active/Inactive(1/0)</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>10.8.0.126</td>
-                                        <td>mark_014</td>
-                                        <td>
-                                            {{ mark014 }}
-                                        </td>
-                                    </tr>
-
-                                    <thead>
-                                        <tr>
-                                            <th>Log_hostname</th>
-                                            <th>Log_data</th>
-                                            <th>Log_time</th>
-                                        </tr>
-                                        </thead>
-                                    <tr>
-                                        <td>{{ loghost }}</td>
-                                        <td>{{ logtext }}</td>
-                                        <td>{{ logtime }}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                   
-                </div>
-
-                <div class="col-auto">
-                    <div class="supp-img">
-                        <div class="supports">
-                                <div class="title"> Установите период времени</div>
-                                    <div id="date_range" style="margin-left: 0px;" ></div>
-                                    <form method="POST">
-                                            {% csrf_token %}
-                                            {{ form }}
-                                        <input type="submit" value="Показать" >
-                                    </form>
-                            </div>	
-                    </div>	
-                </div>
-
-
-                <div class="col-12" style="padding-top: 30px;">
+                <div class="row-10"> 
                     <div class="chart">
-                        <!-- график №5 -->
-                        <div class="chart-title"><h3> Mark14 - Вкл/Выкл(1/0). Данные за период {{ period }} </h3></div>
-                        <div class="ct-chart">
-                            <canvas id="speedChart" width="1050px" height="250px"> </canvas>
-                        </div>
-
-                    </div>
+                            <!-- график №5 -->
+                            <div class="chart-title"><h3> Mark14 - Вкл/Выкл(1/0). Данные за период {{ period }} </h3></div>
+                            <div class="ct-chart">
+                                <canvas id="speedChart" style="width: 850px; height: 250px; "> </canvas>
+                            </div>
+                    </div>      
                 </div>
+
+                <div class="row-7">
+                    <div class="supp-img">
+                            <div class="supports">
+                                    <div class="title"> Установите период времени</div>
+                                        <div id="date_range" style="margin-left: 0px;" ></div>
+                                        <form method="POST">
+                                                {% csrf_token %}
+                                                {{ form }}
+                                            <input type="submit" value="Показать" >
+                                        </form>
+                            </div>	
+                    </div>
+                </div>    
             </div>
 
+            <div class="back-to-main"> 
+                        
+                <a href="#" onclick="openbox('box'); return false">  Log router </a>
+    
+                <div id="box" style="display: none;">
+                        <div class="col-5">
+                                <div class="supports">
+                                    
+                                    <div class="supports-body">
+                                        <table id="1">
+                                            <thead>
+                                                <tr>
+                                                    <th>Log_hostname - vpn_ip</th>
+                                                    <th>Log_time</th>
+                                                    <th>Log_data</th>
+                                                </tr>
+                                                </thead>
+                                            <tr>
+                                                <td>{{ loghost }} - 10.8.0.126</td>
+                                                <td>{{ logtime }}</td>
+                                                <td>{{ logtext }}</td>   
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+            </div>
         </div>
-
     </div>
 
    
@@ -127,7 +106,6 @@
     });
 </script>
 
-
 <script>
         var speedCanvas = document.getElementById("speedChart").getContext("2d");
         
@@ -136,7 +114,7 @@
         var faza_1 = {
           
           label: "VPN - Mark_014",
-          data: {{ state14 }},
+          data: {{ vpn_mark_014 }},
           lineTension: 0.7,
           borderColor: 'red',
           steppedLine: 'before'
@@ -144,7 +122,7 @@
           
         var faza_2 = {
             label: "internet - Mark_014",
-            data: {{ state14 }},
+            data: {{ inet_mark_014 }},
             lineTension: 0.7,
             fill: false,
             borderColor: 'blue',
@@ -185,4 +163,16 @@
         });
         </script>
 
+    <script type="text/javascript">
+
+        function openbox(id){
+            display = document.getElementById(id).style.display;
+        
+            if(display=='none'){
+            document.getElementById(id).style.display='block';
+            }else{
+            document.getElementById(id).style.display='none';
+            }
+        }
+    </script>
 {% endblock %}

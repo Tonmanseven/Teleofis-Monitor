@@ -27,7 +27,7 @@ def all_routers_ping(hname, startD, endD):
     for i in tele_data:
         auff.append(i)
         host.append(auff[j].host)
-        inet.append(auff[j].inet)
+        inet.append(int(auff[j].inet))
         vpn.append(int(auff[j].vpn))
         dt_pub.append(auff[j].timestamp.strftime('%d-%m-%Y %H:%M'))  
         j += 1 
@@ -74,6 +74,9 @@ def all_routers_log(hname, startD, endD):
 
     # частота выполнений 3600
     return opora_all     
+
+
+    
 ######################################################################################################
 
 def posts(request):
@@ -178,13 +181,14 @@ def test(request):
         loghost = log_mark['host_log']
         logtext = log_mark['text_log']
         
-        return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': vpn_mk14[0], "period": period,
-                                                           'times14': date14, 'loghost': loghost, 'logtime': logtime, 'logtext': logtext,
-                                                           'state14': vpn_mk14})
+        return render(request, 'blog/test.html', context={ 'form': useform, "period": period, 
+                                                            'mark014': vpn_mk14, 'times14': date14, 'loghost': loghost,
+                                                            'logtime': logtime, 'logtext': logtext, 'vpn_mark_014': vpn_mk14, 'inet_mark_014': inet_mk14}
+                                                           )
     else:
         return render(request, 'blog/test.html', context={ 'form': useform, 'mark014': vpn_mk14,
                                                            'times14': date14, 'loghost': loghost, 'logtime': logtime, 'logtext': logtext,
-                                                           'state14': vpn_mk14})
+                                                           'vpn_mark_014': vpn_mk14, 'inet_mark_014': inet_mk14})
 
 def fins(request):
     
@@ -209,25 +213,48 @@ def fins(request):
                                                            'state12': state_spb3, })
 
 def sibur(request):
+    useform = UserForm()
+    if request.method == "POST":
+        start = request.POST.get("startDate")
+        end = request.POST.get("endDate")
+        period = "{} / {}".format(start, end)
 
-    spb4 = all_routers_ping('pluto')
-    spb5 = all_routers_ping('pluto')
-    spb6 = all_routers_ping('luna')
+        log_spb4 = all_routers_log('mark_014', start, end)
+        logtime_spb4 = log_spb4['date_log']
+        loghost_spb4 = log_spb4['host_log']
+        logtext_spb4 = log_spb4['text_log']
 
-    state_spb4 = spb4['vpn_router']
-    date_spb4 = spb4['date_router']
+        ping_spb4 = all_routers_ping('mark_014', start, end)
+        vpn_spb4 = ping_spb4['vpn_router']
+        inet_spb4 = ping_spb4['internet_router']
+        date_spb4 = ping_spb4['date_router']
 
-    state_spb5 = spb5['vpn_router']
-    date_spb5 = spb5['date_router']
+        log_spb5 = all_routers_log('mark_014', start, end)
+        logtime_spb5 = log_spb5['date_log']
+        loghost_spb5 = log_spb5['host_log']
+        logtext_spb5 = log_spb5['text_log']
 
-    state_spb6 = spb6['vpn_router']
-    date_spb6 = spb6['date_router']
+        ping_spb5 = all_routers_ping('mark_014', start, end)
+        vpn_spb5 = ping_spb5['vpn_router']
+        inet_spb5 = ping_spb5['internet_router']
+        date_spb5 = ping_spb5['date_router']
 
-    return render(request, 'blog/sibur.html', context={     'spb4': state_spb4, 'spb5': state_spb5, 'spb6': state_spb6,
-                                                           'times10': date_spb4,
-                                                           'state10': state_spb4, 'times11': date_spb5,
-                                                           'state11': state_spb5, 'times12': date_spb6,
-                                                           'state12': state_spb6, })
+        log_spb6 = all_routers_log('mark_014', start, end)
+        logtime_spb6 = log_spb6['date_log']
+        loghost_spb6 = log_spb6['host_log']
+        logtext_spb6 = log_spb6['text_log']
+
+        ping_spb6 = all_routers_ping('mark_014', start, end)
+        vpn_spb6 = ping_spb6['vpn_router']
+        inet_spb6 = ping_spb6['internet_router']
+        date_spb6 = ping_spb6['date_router']
+
+        return render(request, 'blog/sibur.html', context={  'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6,
+                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtext_spb4, 'logtext_spb4': logtext_spb4,
+                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtext_spb5, 'logtext_spb5': logtext_spb5,
+                    'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtext_spb6, 'logtext_spb6': logtext_spb6,})
+    else:
+        return render(request, 'blog/sibur.html', context={'form': useform})                                                            
 
 def tele_robot(request):
     
