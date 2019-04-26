@@ -191,26 +191,51 @@ def test(request):
                                                            'vpn_mark_014': vpn_mk14, 'inet_mark_014': inet_mk14})
 
 def fins(request):
-    
-    spb1 = all_routers_ping('pluto')
-    spb2 = all_routers_ping('pluto')
-    spb3 = all_routers_ping('luna')
-
-    state_spb1 = spb1['vpn_router']
-    date_spb1 = spb1['date_router']
-
-    state_spb2 = spb2['vpn_router']
-    date_spb2 = spb2['date_router']
-
-    state_spb3 = spb3['vpn_router']
-    date_spb3 = spb3['date_router']
+    useform = UserForm()
 
 
-    return render(request, 'blog/fins.html', context={     'spb1': state_spb1, 'spb2': state_spb2, 'spb3': state_spb3,
-                                                           'times10': date_spb1,
-                                                           'state10': state_spb1, 'times11': date_spb2,
-                                                           'state11': state_spb2, 'times12': date_spb3,
-                                                           'state12': state_spb3, })
+    if request.method == "POST":
+        start = request.POST.get("startDate")
+        end = request.POST.get("endDate")
+        period = "{} / {}".format(start, end)
+
+        log_spb1 = all_routers_log('spb_001', start, end)
+
+        logtime_spb1 = log_spb1['date_log']
+        loghost_spb1 = log_spb1['host_log']
+        logtext_spb1 = log_spb1['text_log']
+
+        ping_spb1 = all_routers_ping('spb_001', start, end)
+        vpn_spb1 = ping_spb1['vpn_router']
+        inet_spb1 = ping_spb1['internet_router']
+        date_spb1 = ping_spb1['date_router']
+
+        log_spb2 = all_routers_log('spb_002', start, end)
+        logtime_spb2 = log_spb2['date_log']
+        loghost_spb2 = log_spb2['host_log']
+        logtext_spb2 = log_spb2['text_log']
+
+        ping_spb2 = all_routers_ping('spb_002', start, end)
+        vpn_spb2 = ping_spb2['vpn_router']
+        inet_spb2 = ping_spb2['internet_router']
+        date_spb2 = ping_spb2['date_router']
+
+        ping_spb3 = all_routers_ping('spb_003', start, end)
+        vpn_spb3 = ping_spb3['vpn_router']
+        inet_spb3 = ping_spb3['internet_router']
+        date_spb3 = ping_spb3['date_router']
+
+        log_spb3 = all_routers_log('spb_003', start, end)
+        logtime_spb3 = log_spb3['date_log']
+        loghost_spb3 = log_spb3['host_log']
+        logtext_spb3 = log_spb3['text_log']
+
+        return render(request, 'blog/fins.html', context= { 'form': useform, 'inet_spb4': inet_spb1, 'inet_spb5': inet_spb2, 'inet_spb6': inet_spb3, 'range1': len(inet_spb1),
+                    'times_spb1': date_spb1, 'vpn_spb1': vpn_spb1, 'loghost_spb1': loghost_spb1, 'logtime_spb1': logtime_spb1, 'logtext_spb1': logtext_spb1, 'range2': len(inet_spb2),
+                    'times_spb2': date_spb2,'vpn_spb2': vpn_spb2,  'loghost_spb2': loghost_spb2, 'logtime_spb2': logtime_spb2, 'logtext_spb2': logtext_spb2, 'range3': len(inet_spb3),
+                    'times_spb3': date_spb3,'vpn_spb3': vpn_spb3, 'loghost_spb3': loghost_spb3, 'logtime_spb3': logtime_spb3, 'logtext_spb3': logtext_spb3,})
+    else:
+        return render(request, 'blog/fins.html', context={'form': useform})
 
 def sibur(request):
     useform = UserForm()
@@ -250,9 +275,9 @@ def sibur(request):
         inet_spb6 = ping_spb6['internet_router']
         date_spb6 = ping_spb6['date_router']
 
-        return render(request, 'blog/sibur.html', context={  'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 'range4': len(date_spb4),
-                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4, 'range5': len(date_spb5),
-                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5, 'range6': len(date_spb6),
+        return render(request, 'blog/sibur.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 'range4': len(inet_spb4),
+                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4, 'range5': len(inet_spb5),
+                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5, 'range6': len(inet_spb6),
                     'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtime_spb6, 'logtext_spb6': logtext_spb6,})
     else:
         return render(request, 'blog/sibur.html', context={'form': useform})                                                            

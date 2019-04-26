@@ -10,172 +10,209 @@
         <div class="back-to-main">
             <a href="index.html">Назад к проектам</a>
         </div>
-        <div class="sypp-logs-wrap">
+
             <div class="row">
-                
-                <div class="col-2">
-                    <nav class="logs-list">
-                        <a href="#1"><strong>1</strong> - SPB_001 - Пост №1 Опора №108 Линия №129</a>
-                        <a href="#2"><strong>2</strong> - SPB_002 - Пост №3 Опора №247</a>
-                        <a href="#3"><strong>3</strong> - SPB_003 - Пост №2 Опора №31 Линия №129</a>
-                    </nav>
-                </div>
-                <div class="col-6">
-                    <div class="supp-log" id="1">
-                        <div class="supports">
-                            <div class="title">OpenVPN CLIENT LIST</div>
-                            <div class="supports-body">
-                                <table id="1">
-                                    <thead>
-                                    <tr>
-                                        <th>Virtual Address</th>
-                                        <th>Common Name</th>
-                                        <th>Active/Inactive (1/0)</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>10.8.0.46</td>
-                                        <td>spb_001</td>
-                                        <td>
-                                            {{ spb1 }}
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="supp-log" id="2">
-                        <div class="supports">
-                            <div class="title">OpenVPN CLIENT LIST</div>
-                            <div class="supports-body">
-                                <table id="1">
-                                    <thead>
-                                    <tr>
-                                        <th>Virtual Address</th>
-                                        <th>Common Name</th>
-                                        <th>Active/Inactive (1/0)</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>10.8.0.50</td>
-                                        <td>spb_002</td>
-                                        <td>
-                                            {{ spb2 }}
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="supp-log" id="3">
-                        <div class="supports">
-                            <div class="title">OpenVPN CLIENT LIST</div>
-                            <div class="supports-body">
-                                <table id="1">
-                                    <thead>
-                                    <tr>
-                                        <th>Virtual Address</th>
-                                        <th>Common Name</th>
-                                        <th>Active/Inactive (1/0)</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>10.8.0.54</td>
-                                        <td>spb_003</td>
-                                        <td>
-                                            {{ spb3 }}
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="col-12" style="padding-top: 30px;">
+                <div class="row-10">
                     <div class="chart">
                         <!-- график №1 -->
-                        <div class="chart-title"><h3>SPB_001 - Пост №1 Вкл/Выкл(1/0)</h3></div>
+                        <div class="chart-title"><h3>SPB_001 10.8.0.46 - Пост №1 Опора №108 Линия №129 Вкл/Выкл(1/0)</h3></div>
                         <div class="ct-chart">
-                            <canvas id="mk10" width="1050px" height="250px"></canvas>
+                            <canvas id="spb1" width="850px" height="250px"></canvas>
                         </div>
                         <!-- график №2 -->
-                        <div class="chart-title"><h3>SPB_002 - Пост №3 Вкл/Выкл(1/0)</h3></div>
+                        <div class="chart-title"><h3>SPB_002 10.8.0.50 - Пост №3 Опора №247 Вкл/Выкл(1/0)</h3></div>
                         <div class="ct-chart">
-                            <canvas id="mk11" width="1050px" height="250px"></canvas>
+                            <canvas id="spb2" width="850px" height="250px"></canvas>
                         </div>
                         <!-- график №3 -->
-                        <div class="chart-title"><h3>SPB_003 - Пост №2 Вкл/Выкл(1/0)</h3></div>
+                        <div class="chart-title"><h3>SPB_003 10.8.0.54 - Пост №2 Опора №31 Линия №129 Вкл/Выкл(1/0)</h3></div>
                         <div class="ct-chart">
-                            <canvas id="mk12" width="1050px" height="250px"></canvas>
+                            <canvas id="spb3" width="850px" height="250px"></canvas>
                         </div>
                     </div>
                 </div>
+                <div class="row-7">
+                    <div class="supp-img">
+                            <div class="supports">
+                                    <div class="title"> Установите период времени</div>
+                                        <div id="date_range" style="margin-left: 0px;" ></div>
+                                        <form method="POST">
+                                                {% csrf_token %}
+                                                {{ form }}
+                                            <input type="submit" value="Показать" >
+                                        </form>
+                            </div>	
+                    </div>
+                </div> 
             </div>
-
+            <div class="routerslog">  
+                <div class="row">   
+                    <div class="row-10">
+                            <a href="#" onclick="openbox('box'); return false">  Log spb_001 </a>
+                            <div id="box" style="display: none;">
+                                <div class="supports">
+                                    <div class="supports-body">   
+                                        <table id="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Log_time</th>
+                                                        <th>Log_hostname - vpn_ip</th>	
+                                                        <th>Log_data</th>
+                                                    </tr>    
+                                                </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> 
+                    </div>
+                    <div class="row-10">
+                            <a href="#" onclick="openbox('boxy'); return false">  Log spb_002 </a>
+                            <div id="boxy" style="display: none;">
+                                    <div class="supports">
+                                        <div class="supports-body">   
+                                            <table id="table2">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Log_time</th>
+                                                            <th>Log_hostname - vpn_ip</th>	
+                                                            <th>Log_data</th>
+                                                        </tr>    
+                                                    </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div> 
+                    </div>
+                    <div class="row-10">
+                        <a href="#" onclick="openbox('boxs'); return false">  Log spb_003 </a>
+                            <div id="boxs" style="display: none;">
+                                <div class="supports">
+                                    <div class="supports-body">   
+                                        <table id="table3">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Log_time</th>
+                                                        <th>Log_hostname - vpn_ip</th>	
+                                                        <th>Log_data</th>
+                                                    </tr>    
+                                                </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> 
+                    </div>
+                </div>                               
         </div>
     </div>
     {% endblock %}
 
     {% block script %}
     <script src="{% static 'js/scripts_min.js' %}"></script>
+    <!-- 1. Подключим библиотеку jQuery (без нее jQuery UI не будет работать) -->
+    <script src="{% static 'libs/myJquery/external/jquery/jquery.js' %}"></script>
+    <!-- 2. Подключим jQuery UI -->
+    <script src="{% static 'libs/myJquery/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'libs/jquery.datepicker.extension.range.min.js' %}"></script>
     <script src="{% static 'libs/Chart.js' %}"></script>
 
-    <script>
-        var mk10 = document.getElementById("mk10").getContext("2d");
-        var mk11 = document.getElementById("mk11").getContext("2d");
-        var mk12 = document.getElementById("mk12").getContext("2d");
+    <!-- Datepicker -->
+    <script type="text/javascript">
+        $(function() {
+            $('#date_range').datepicker({
+                range: 'period',
+                numberOfMonths: 1,
+                monthNames:["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+                dayNamesMin:["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+                firstDay:1,
+                dateFormat:"yy-mm-dd", 
+                onSelect: function(dateText, inst, extensionRange) {
+                $('[name=startDate]').val(extensionRange.startDateText);
+                $('[name=endDate]').val(extensionRange.endDateText);
+            }
+            });
+            
+            
+            var extensionRange = $('#date_range').datepicker('widget').data('datepickerExtensionRange');
+            if(extensionRange.startDateText) $('[name=startDate]').val(extensionRange.startDateText);
+            if(extensionRange.endDateText) $('[name=endDate]').val(extensionRange.endDateText);
+
+        });
+    </script>
+
+     <!-- Plot -->
+     <script>
+        var spb1 = document.getElementById("spb1").getContext("2d");
+        var spb2 = document.getElementById("spb2").getContext("2d");
+        var spb3 = document.getElementById("spb3").getContext("2d");
         
     
         Chart.defaults.global.defaultFontSize = 18;
     
         var faza_10 = {
         
-        label: "Роутер - spb_001",
-        data: {{ state10 }},
+        label: "VPN - spb_001",
+        data: {{ vpn_spb1 }},
         lineTension: 0.7,
         borderColor: 'red',
         steppedLine: 'before'
         };
+
+        var inet_10 = {
+        
+        label: "internet - spb_001",
+        data: {{ inet_spb1 }},
+        lineTension: 0.7,
+        borderColor: 'blue',
+        steppedLine: 'before'
+        };
+
+        
         
         var faza_11 = {
         
-        label: "Роутер - spb_002",
-        data: {{ state11 }},
+        label: "VPN - spb_002",
+        data: {{ vpn_spb2 }},
         lineTension: 0.7,
         borderColor: 'red',
         steppedLine: 'before'
 
         };  
-    
-        var faza_12 = {
         
-        label: "Роутер - spb_003",
-        data: {{ state12 }},
+        var inet_11 = {
+        label: "internet - spb_002",
+        data: {{ inet_spb2 }},
+        lineTension: 0.7,
+        borderColor: 'blue',
+        steppedLine: 'before'
+        };
+
+        var faza_12 = {
+        label: "VPN - spb_003",
+        data: {{ vpn_spb3 }},
         lineTension: 0.7,
         borderColor: 'red',
         steppedLine: 'before'
-    
+        };
+        var inet_12 = {
+        label: "internet - spb_003",
+        data: {{ inet_spb3 }},
+        lineTension: 0.7,
+        borderColor: 'blue',
+        steppedLine: 'before'
         };
             
         var data_mark10 = {
-        labels: {{ times10|safe }},
-        datasets: [faza_10],
+        labels: {{ times_spb1|safe }},
+        datasets: [faza_10, inet_10],
         };  
         
         var data_mark11 = {
-        labels: {{ times11|safe }},
-        datasets: [faza_11],
+        labels: {{ times_spb2|safe }},
+        datasets: [faza_11, inet_11],
         };  
         var data_mark12 = {
-        labels: {{ times12|safe }},
-        datasets: [faza_12],
+        labels: {{ times_spb3|safe }},
+        datasets: [faza_12, inet_12],
         };    
 
         var chartOptions = {
@@ -200,23 +237,163 @@
         
         };
     
-        var lineChart = new Chart(mk10, {
+        var lineChart = new Chart(spb1, {
         type: 'line',
         data: data_mark10,
         options: chartOptions,
         
         });
 
-        var lineChart = new Chart(mk11, {
+        var lineChart = new Chart(spb2, {
         type: 'line',
         data: data_mark11,
         options: chartOptions
         });
-        var lineChart = new Chart(mk12, {
+        var lineChart = new Chart(spb3, {
         type: 'line',
         data: data_mark12,
         options: chartOptions
         });
 
     </script>
+
+<script type="text/javascript">
+
+    function openbox(id){
+        display = document.getElementById(id).style.display;
+    
+        if(display=='none'){
+        document.getElementById(id).style.display='block';
+        }else{
+        document.getElementById(id).style.display='none';
+        }
+    }
+</script>
+
+<!-- Таблица spb001 -->
+<script type="text/javascript">
+
+    function generateTable(row, column){
+        var tbody = '<tbody>';
+        var mycolumn = '{{range1}}';
+        
+        var temp1 = {{ loghost_spb1|safe }};
+        var temp2 = {{ logtext_spb1|safe }};
+
+        var timeNow = {{ logtime_spb1|safe }};
+
+        for( var i = 0; i <= column-1; i++ ){
+            
+            var t = timeNow[i];
+            
+            var t1 = temp1[i];
+            var t2 = temp2[i];
+            
+            tbody += '<tr>';
+            
+            for( var j = 1; j <= column; j++ ){
+                
+                if ( j == 1){
+                    tbody += '<td> ' + t + '</td>';
+                } else if ( j == 2){
+                    tbody += '<td> ' + t1 + '</td>';
+                } else if ( j == 3){
+                    tbody += '<td> ' + t2 + '</td>';
+                } 
+            }
+            
+            tbody += '</tr>';
+
+        }
+        tbody += '</tbody>';
+        document.getElementById('table').innerHTML += tbody;
+        
+    }
+    generateTable(4, {{range1}});	
+</script>
+
+    <!-- Таблица spb005 -->
+<script type="text/javascript">
+
+    function generateTable(row, column){
+        var tbody = '<tbody>';
+        var mycolumn = '{{range2}}';
+
+        var temp3 = {{ loghost_spb2|safe }};
+        var temp4 = {{ logtext_spb2|safe }};
+
+        var timeNow5 = {{ logtime_spb2|safe }};
+
+        for( var i = 0; i <= column-1; i++ ){
+            
+            var tt = timeNow5[i];
+    
+            var t3 = temp3[i];
+            var t4 = temp4[i];
+      
+            tbody += '<tr>';
+            
+            for( var j = 1; j <= column; j++ ){
+                
+                if ( j == 1){
+                    tbody += '<td> ' + tt + '</td>';
+                } else if ( j == 2){
+                    tbody += '<td> ' + t3 + '</td>';
+                } else if ( j == 3){
+                    tbody += '<td> ' + t4 + '</td>';
+                } 
+            }
+            
+            tbody += '</tr>';
+
+        }
+        tbody += '</tbody>';
+        document.getElementById('table2').innerHTML += tbody;
+        
+    }
+    generateTable(4, {{range2}});	
+</script>
+
+<!-- Таблица spb006 -->
+<script type="text/javascript">
+
+    function generateTable(row, column){
+        var tbody = '<tbody>';
+        var mycolumn = '{{range3}}';
+
+        var temp5 = {{ loghost_spb3|safe }};
+        var temp6 = {{ logtext_spb3|safe }};
+
+        var timeNow6 = {{ logtime_spb3|safe }};
+
+        for( var i = 0; i <= column-1; i++ ){
+
+            var tr = timeNow6[i];
+            
+            var t1 = temp5[i];
+            var t2 = temp6[i];
+
+            
+            tbody += '<tr>';
+            
+            for( var j = 1; j <= column; j++ ){
+                
+                if ( j == 1){
+                    tbody += '<td> ' + tr + '</td>';
+                } else if ( j == 2){
+                    tbody += '<td> ' + t1 + '</td>';
+                } else if ( j == 3){
+                    tbody += '<td> ' + t2 + '</td>';
+                } 
+            }
+            
+            tbody += '</tr>';
+
+        }
+        tbody += '</tbody>';
+        document.getElementById('table3').innerHTML += tbody;
+        
+    }
+    generateTable(4, {{range3}});	
+</script>
 {% endblock %}
