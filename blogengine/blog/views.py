@@ -230,7 +230,7 @@ def fins(request):
         loghost_spb3 = log_spb3['host_log']
         logtext_spb3 = log_spb3['text_log']
 
-        return render(request, 'blog/fins.html', context= { 'form': useform, 'inet_spb4': inet_spb1, 'inet_spb5': inet_spb2, 'inet_spb6': inet_spb3, 'range1': len(inet_spb1),
+        return render(request, 'blog/fins.html', context= { 'form': useform, 'inet_spb1': inet_spb1, 'inet_spb2': inet_spb2, 'inet_spb3': inet_spb3, 'range1': len(inet_spb1),
                     'times_spb1': date_spb1, 'vpn_spb1': vpn_spb1, 'loghost_spb1': loghost_spb1, 'logtime_spb1': logtime_spb1, 'logtext_spb1': logtext_spb1, 'range2': len(inet_spb2),
                     'times_spb2': date_spb2,'vpn_spb2': vpn_spb2,  'loghost_spb2': loghost_spb2, 'logtime_spb2': logtime_spb2, 'logtext_spb2': logtext_spb2, 'range3': len(inet_spb3),
                     'times_spb3': date_spb3,'vpn_spb3': vpn_spb3, 'loghost_spb3': loghost_spb3, 'logtime_spb3': logtime_spb3, 'logtext_spb3': logtext_spb3,})
