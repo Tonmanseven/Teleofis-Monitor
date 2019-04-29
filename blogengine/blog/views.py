@@ -87,70 +87,143 @@ def posts_list(request):
 
 def station_1(request):
 
-    mk1 = all_routers_ping('pluto')
-    mk2 = all_routers_ping('pluto')
-    mk9 = all_routers_ping('luna')
+    useform = UserForm()
+    if request.method == "POST":
+        start = request.POST.get("startDate")
+        end = request.POST.get("endDate")
+        period = "{} / {}".format(start, end)
 
-    vpn1 = mk1['vpn_router']
-    inet1 = mk1['internet_router']
-    date1 = mk1['date_router']
+        log_spb4 = all_routers_log('mark_001', start, end)
 
-    state2 = mk2['vpn_router']
-    date2 = mk2['date_router']
+        logtime_spb4 = log_spb4['date_log']
+        loghost_spb4 = log_spb4['host_log']
+        logtext_spb4 = log_spb4['text_log']
 
-    state9 = mk9['vpn_router']
-    date9 = mk9['date_router']
+        ping_spb4 = all_routers_ping('mark_001', start, end)
+        vpn_spb4 = ping_spb4['vpn_router']
+        inet_spb4 = ping_spb4['internet_router']
+        date_spb4 = ping_spb4['date_router']
 
-    return render(request, 'blog/station_3.html', context={'mark009': state9[0], 'mark002': state2[0],
-                                                           'mark001': vpn1, 'times1': date1,                                                  
-                                                            'state1': vpn1, 'times2': date2,
-                                                            'state2': state2, 'times9': date9,
-                                                            'state9': state9,
-                                                           })
+        log_spb5 = all_routers_log('mark_002', start, end)
+        logtime_spb5 = log_spb5['date_log']
+        loghost_spb5 = log_spb5['host_log']
+        logtext_spb5 = log_spb5['text_log']
+
+        ping_spb5 = all_routers_ping('mark_002', start, end)
+        vpn_spb5 = ping_spb5['vpn_router']
+        inet_spb5 = ping_spb5['internet_router']
+        date_spb5 = ping_spb5['date_router']
+
+        log_spb6 = all_routers_log('mark_009', start, end)
+        logtime_spb6 = log_spb6['date_log']
+        loghost_spb6 = log_spb6['host_log']
+        logtext_spb6 = log_spb6['text_log']
+
+        ping_spb6 = all_routers_ping('mark_009', start, end)
+        vpn_spb6 = ping_spb6['vpn_router']
+        inet_spb6 = ping_spb6['internet_router']
+        date_spb6 = ping_spb6['date_router']
+
+        return render(request, 'blog/station_3.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 'range4': len(inet_spb4),
+                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4, 'range5': len(inet_spb5),
+                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5, 'range6': len(inet_spb6),
+                    'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtime_spb6, 'logtext_spb6': logtext_spb6,})
+    else:
+        return render(request, 'blog/station_3.html', context={'form': useform})
+
 
 
 def station_2(request):
 
-    mk3 = all_routers_ping('pluto')
-    mk4 = all_routers_ping('pluto')
-    mk5 = all_routers_ping('luna')
+    useform = UserForm()
+    if request.method == "POST":
+        start = request.POST.get("startDate")
+        end = request.POST.get("endDate")
+        period = "{} / {}".format(start, end)
 
-    state3 = mk3['vpn_router']
-    date3 = mk3['date_router']
+        log_spb4 = all_routers_log('mark_003', start, end)
 
-    state4 = mk4['vpn_router']
-    date4 = mk4['date_router']
+        logtime_spb4 = log_spb4['date_log']
+        loghost_spb4 = log_spb4['host_log']
+        logtext_spb4 = log_spb4['text_log']
 
-    state5 = mk5['vpn_router']
-    date5 = mk5['date_router']
-    
-    return render(request, 'blog/station_2.html', context={'mark003': state3, 'mark004': state4,
-                                                           'mark005': state5, 'times3': date3,
-                                                           'state3': state3, 'times4': date4,
-                                                           'state4': state4, 'times5': date5,
-                                                           'state5': state5})
+        ping_spb4 = all_routers_ping('mark_003', start, end)
+        vpn_spb4 = ping_spb4['vpn_router']
+        inet_spb4 = ping_spb4['internet_router']
+        date_spb4 = ping_spb4['date_router']
 
+        log_spb5 = all_routers_log('mark_004', start, end)
+        logtime_spb5 = log_spb5['date_log']
+        loghost_spb5 = log_spb5['host_log']
+        logtext_spb5 = log_spb5['text_log']
+
+        ping_spb5 = all_routers_ping('mark_004', start, end)
+        vpn_spb5 = ping_spb5['vpn_router']
+        inet_spb5 = ping_spb5['internet_router']
+        date_spb5 = ping_spb5['date_router']
+
+        log_spb6 = all_routers_log('mark_005', start, end)
+        logtime_spb6 = log_spb6['date_log']
+        loghost_spb6 = log_spb6['host_log']
+        logtext_spb6 = log_spb6['text_log']
+
+        ping_spb6 = all_routers_ping('mark_005', start, end)
+        vpn_spb6 = ping_spb6['vpn_router']
+        inet_spb6 = ping_spb6['internet_router']
+        date_spb6 = ping_spb6['date_router']
+
+        return render(request, 'blog/station_2.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 'range4': len(inet_spb4),
+                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4, 'range5': len(inet_spb5),
+                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5, 'range6': len(inet_spb6),
+                    'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtime_spb6, 'logtext_spb6': logtext_spb6,})
+    else:
+        return render(request, 'blog/station_2.html', context={'form': useform})
 
 def station_3(request):
-   
-    mk6 = all_routers_ping('pluto')
-    mk7 = all_routers_ping('pluto')
-    mk8 = all_routers_ping('luna')
+    useform = UserForm()
+    if request.method == "POST":
+        start = request.POST.get("startDate")
+        end = request.POST.get("endDate")
+        period = "{} / {}".format(start, end)
 
-    state6 = mk6['vpn_router']
-    date6 = mk6['date_router']
+        log_spb4 = all_routers_log('mark_006', start, end)
 
-    state7 = mk7['vpn_router']
-    date7 = mk7['date_router']
+        logtime_spb4 = log_spb4['date_log']
+        loghost_spb4 = log_spb4['host_log']
+        logtext_spb4 = log_spb4['text_log']
 
-    state8 = mk8['vpn_router']
-    date8 = mk8['date_router']
+        ping_spb4 = all_routers_ping('mark_006', start, end)
+        vpn_spb4 = ping_spb4['vpn_router']
+        inet_spb4 = ping_spb4['internet_router']
+        date_spb4 = ping_spb4['date_router']
 
-    return render(request, 'blog/station_1.html', context={'mark006': state6, 'mark007': state7,
-                                                           'mark008': state8, 'times6': date6,
-                                                           'state6': state6, 'times7': date7,
-                                                           'state7': state7, 'times8': date8,
-                                                           'state8': state8})
+        log_spb5 = all_routers_log('mark_007', start, end)
+        logtime_spb5 = log_spb5['date_log']
+        loghost_spb5 = log_spb5['host_log']
+        logtext_spb5 = log_spb5['text_log']
+
+        ping_spb5 = all_routers_ping('mark_007', start, end)
+        vpn_spb5 = ping_spb5['vpn_router']
+        inet_spb5 = ping_spb5['internet_router']
+        date_spb5 = ping_spb5['date_router']
+
+        log_spb6 = all_routers_log('mark_008', start, end)
+        logtime_spb6 = log_spb6['date_log']
+        loghost_spb6 = log_spb6['host_log']
+        logtext_spb6 = log_spb6['text_log']
+
+        ping_spb6 = all_routers_ping('mark_008', start, end)
+        vpn_spb6 = ping_spb6['vpn_router']
+        inet_spb6 = ping_spb6['internet_router']
+        date_spb6 = ping_spb6['date_router']
+
+        return render(request, 'blog/station_1.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 'range4': len(inet_spb4),
+                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4, 'range5': len(inet_spb5),
+                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5, 'range6': len(inet_spb6),
+                    'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtime_spb6, 'logtext_spb6': logtext_spb6,})
+    else:
+        return render(request, 'blog/station_1.html', context={'form': useform})
+
 
 def test(request):
     useform = UserForm()

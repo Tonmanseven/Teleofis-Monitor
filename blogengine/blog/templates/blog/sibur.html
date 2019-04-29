@@ -108,7 +108,6 @@
                                      
             </div>
 
-           
 
     </div>
     {% endblock %}
@@ -239,7 +238,7 @@
                     } 
                 }] 
             }, 
-            responsive: false,
+            responsive: true,
         
         };
     
@@ -247,7 +246,8 @@
         type: 'line',
         data: data_mark10,
         options: chartOptions,
-        
+        maintainAspectRatio: false,
+        responsive: true,
         });
 
         var lineChart = new Chart(spb5, {
@@ -402,5 +402,9 @@
 		}
 		generateTable(4, {{range6}});	
     </script>
+
+    
+
+
 {% endblock %}
 
