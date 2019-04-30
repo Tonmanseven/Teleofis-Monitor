@@ -104,30 +104,12 @@ def station_1(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
-<<<<<<< HEAD
-        log_spb5 = all_routers_log('mark_2', start, end)
-        logtime_spb5 = log_spb5['date_log']
-        loghost_spb5 = log_spb5['host_log']
-        logtext_spb5 = log_spb5['text_log']
-
         ping_spb5 = all_routers_ping('mark_2', start, end)
-=======
-        ping_spb5 = all_routers_ping('mark_002', start, end)
->>>>>>> 8b5ffb40f5477eddb5830b4146b32960ca010dfa
         vpn_spb5 = ping_spb5['vpn_router']
         inet_spb5 = ping_spb5['internet_router']
         date_spb5 = ping_spb5['date_router']
 
-<<<<<<< HEAD
-        log_spb6 = all_routers_log('mark_9', start, end)
-        logtime_spb6 = log_spb6['date_log']
-        loghost_spb6 = log_spb6['host_log']
-        logtext_spb6 = log_spb6['text_log']
-
         ping_spb6 = all_routers_ping('mark_9', start, end)
-=======
-        ping_spb6 = all_routers_ping('mark_009', start, end)
->>>>>>> 8b5ffb40f5477eddb5830b4146b32960ca010dfa
         vpn_spb6 = ping_spb6['vpn_router']
         inet_spb6 = ping_spb6['internet_router']
         date_spb6 = ping_spb6['date_router']
@@ -259,7 +241,7 @@ def fins(request):
 
         log_spb1 = telelog.objects.filter(log_name = 'spb_001', log_time__range =(start_date, end_date)).order_by('log_time') 
         log_spb2 = telelog.objects.filter(log_name = 'spb_002', log_time__range =(start_date, end_date)).order_by('log_time')
-        log_spb3 = telelog.objects.filter(log_name = 'spb_003', log_time__range =(start_date, end_date)).order_by('log_time')
+        log_spb3 = telelog.objects.filter(log_name = 'MRSKSZ_002', log_time__range =(start_date, end_date)).order_by('log_time')
 
         ping_spb1 = all_routers_ping('spb_001', start, end)
         vpn_spb1 = ping_spb1['vpn_router']
@@ -271,7 +253,7 @@ def fins(request):
         inet_spb2 = ping_spb2['internet_router']
         date_spb2 = ping_spb2['date_router']
 
-        ping_spb3 = all_routers_ping('spb_003', start, end)
+        ping_spb3 = all_routers_ping('MRSKSZ_002', start, end)
         vpn_spb3 = ping_spb3['vpn_router']
         inet_spb3 = ping_spb3['internet_router']
         date_spb3 = ping_spb3['date_router']
