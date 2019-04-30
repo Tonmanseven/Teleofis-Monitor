@@ -104,22 +104,22 @@ def station_1(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
-        log_spb5 = all_routers_log('mark_002', start, end)
+        log_spb5 = all_routers_log('mark_2', start, end)
         logtime_spb5 = log_spb5['date_log']
         loghost_spb5 = log_spb5['host_log']
         logtext_spb5 = log_spb5['text_log']
 
-        ping_spb5 = all_routers_ping('mark_002', start, end)
+        ping_spb5 = all_routers_ping('mark_2', start, end)
         vpn_spb5 = ping_spb5['vpn_router']
         inet_spb5 = ping_spb5['internet_router']
         date_spb5 = ping_spb5['date_router']
 
-        log_spb6 = all_routers_log('mark_009', start, end)
+        log_spb6 = all_routers_log('mark_9', start, end)
         logtime_spb6 = log_spb6['date_log']
         loghost_spb6 = log_spb6['host_log']
         logtext_spb6 = log_spb6['text_log']
 
-        ping_spb6 = all_routers_ping('mark_009', start, end)
+        ping_spb6 = all_routers_ping('mark_9', start, end)
         vpn_spb6 = ping_spb6['vpn_router']
         inet_spb6 = ping_spb6['internet_router']
         date_spb6 = ping_spb6['date_router']
