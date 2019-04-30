@@ -49,11 +49,11 @@
             <div class="routerslog">  
                 <div class="row">   
                     <div class="row-10">
-                            <a href="#" onclick="openbox('box'); return false">  Log mark_004 </a>
+                            <a href="#" onclick="openbox('box'); return false">  Log mark_003 </a>
                             <div id="box" style="display: none;">
                                 <div class="supports">
                                     <div class="supports-body">   
-                                        <table id="table">
+                                        <table>
                                                 <thead>
                                                     <tr>
                                                         <th>Log_time</th>
@@ -61,6 +61,13 @@
                                                         <th>Log_data</th>
                                                     </tr>    
                                                 </thead>
+                                                {% for i in table_mark1 %}
+                                                    <tr class='success'>
+                                                        <td>{{ i.log_name }}</td>
+                                                        <td>{{ i.log_text }}</td>
+                                                        <td>{{ i.log_time }}</td>
+                                                    </tr>
+                                                    {% endfor %}
                                         </table>
                                     </div>
                                 </div>
@@ -71,7 +78,7 @@
                             <div id="boxy" style="display: none;">
                                     <div class="supports">
                                         <div class="supports-body">   
-                                            <table id="table5">
+                                            <table>
                                                     <thead>
                                                         <tr>
                                                             <th>Log_time</th>
@@ -79,6 +86,13 @@
                                                             <th>Log_data</th>
                                                         </tr>    
                                                     </thead>
+                                                    {% for i in table_mark2 %}
+                                                    <tr class='success'>
+                                                        <td>{{ i.log_name }}</td>
+                                                        <td>{{ i.log_text }}</td>
+                                                        <td>{{ i.log_time }}</td>
+                                                    </tr>
+                                                    {% endfor %}
                                             </table>
                                         </div>
                                     </div>
@@ -89,7 +103,7 @@
                             <div id="boxs" style="display: none;">
                                     <div class="supports">
                                         <div class="supports-body">   
-                                            <table id="table6">
+                                            <table>
                                                     <thead>
                                                         <tr>
                                                             <th>Log_time</th>
@@ -97,6 +111,13 @@
                                                             <th>Log_data</th>
                                                         </tr>    
                                                     </thead>
+                                                    {% for i in table_mark9 %}
+                                                    <tr class='success'>
+                                                        <td>{{ i.log_name }}</td>
+                                                        <td>{{ i.log_text }}</td>
+                                                        <td>{{ i.log_time }}</td>
+                                                    </tr>
+                                                    {% endfor %}
                                             </table>
                                         </div>
                                     </div>
@@ -274,133 +295,5 @@
         }
     }
 </script>
-
-<!-- Таблица spb004 -->
-<script type="text/javascript">
-
-    function generateTable(row, column){
-        var tbody = '<tbody>';
-        var mycolumn = '{{range4}}';
-        
-        var temp1 = {{ loghost_spb4|safe }};
-        var temp2 = {{ logtext_spb4|safe }};
-
-        var timeNow = {{ logtime_spb4|safe }};
-
-        for( var i = 0; i <= column-1; i++ ){
-            
-            var t = timeNow[i];
-            
-            var t1 = temp1[i];
-            var t2 = temp2[i];
-            
-            tbody += '<tr>';
-            
-            for( var j = 1; j <= column; j++ ){
-                
-                if ( j == 1){
-                    tbody += '<td> ' + t + '</td>';
-                } else if ( j == 2){
-                    tbody += '<td> ' + t1 + '</td>';
-                } else if ( j == 3){
-                    tbody += '<td> ' + t2 + '</td>';
-                } 
-            }
-            
-            tbody += '</tr>';
-
-        }
-        tbody += '</tbody>';
-        document.getElementById('table').innerHTML += tbody;
-        
-    }
-    generateTable(4, {{range4}});	
-</script>
-
-    <!-- Таблица spb005 -->
-<script type="text/javascript">
-
-    function generateTable(row, column){
-        var tbody = '<tbody>';
-        var mycolumn = '{{range5}}';
-
-        var temp3 = {{ loghost_spb5|safe }};
-        var temp4 = {{ logtext_spb5|safe }};
-
-        var timeNow5 = {{ logtime_spb5|safe }};
-
-        for( var i = 0; i <= column-1; i++ ){
-            
-            var tt = timeNow5[i];
-    
-            var t3 = temp3[i];
-            var t4 = temp4[i];
-      
-            tbody += '<tr>';
-            
-            for( var j = 1; j <= column; j++ ){
-                
-                if ( j == 1){
-                    tbody += '<td> ' + tt + '</td>';
-                } else if ( j == 2){
-                    tbody += '<td> ' + t3 + '</td>';
-                } else if ( j == 3){
-                    tbody += '<td> ' + t4 + '</td>';
-                } 
-            }
-            
-            tbody += '</tr>';
-
-        }
-        tbody += '</tbody>';
-        document.getElementById('table5').innerHTML += tbody;
-        
-    }
-    generateTable(4, {{range5}});	
-</script>
-
-<!-- Таблица spb006 -->
-<script type="text/javascript">
-
-    function generateTable(row, column){
-        var tbody = '<tbody>';
-        var mycolumn = '{{range4}}';
-
-        var temp5 = {{ loghost_spb6|safe }};
-        var temp6 = {{ logtext_spb6|safe }};
-
-        var timeNow6 = {{ logtime_spb6|safe }};
-
-        for( var i = 0; i <= column-1; i++ ){
-
-            var tr = timeNow6[i];
-            
-            var t1 = temp5[i];
-            var t2 = temp6[i];
-
-            
-            tbody += '<tr>';
-            
-            for( var j = 1; j <= column; j++ ){
-                
-                if ( j == 1){
-                    tbody += '<td> ' + tr + '</td>';
-                } else if ( j == 2){
-                    tbody += '<td> ' + t1 + '</td>';
-                } else if ( j == 3){
-                    tbody += '<td> ' + t2 + '</td>';
-                } 
-            }
-            
-            tbody += '</tr>';
-
-        }
-        tbody += '</tbody>';
-        document.getElementById('table6').innerHTML += tbody;
-        
-    }
-    generateTable(4, {{range6}});	
-</script>
-
 
 {% endblock %}

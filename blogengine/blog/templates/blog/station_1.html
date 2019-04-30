@@ -53,7 +53,7 @@
                             <div id="box" style="display: none;">
                                 <div class="supports">
                                     <div class="supports-body">   
-                                        <table id="table">
+                                        <table>
                                                 <thead>
                                                     <tr>
                                                         <th>Log_time</th>
@@ -61,6 +61,13 @@
                                                         <th>Log_data</th>
                                                     </tr>    
                                                 </thead>
+                                                {% for i in table_mark1 %}
+                                                    <tr class='success'>
+                                                        <td>{{ i.log_name }}</td>
+                                                        <td>{{ i.log_text }}</td>
+                                                        <td>{{ i.log_time }}</td>
+                                                    </tr>
+                                                    {% endfor %}
                                         </table>
                                     </div>
                                 </div>
@@ -71,7 +78,7 @@
                             <div id="boxy" style="display: none;">
                                     <div class="supports">
                                         <div class="supports-body">   
-                                            <table id="table5">
+                                            <table>
                                                     <thead>
                                                         <tr>
                                                             <th>Log_time</th>
@@ -79,6 +86,13 @@
                                                             <th>Log_data</th>
                                                         </tr>    
                                                     </thead>
+                                                    {% for i in table_mark2 %}
+                                                    <tr class='success'>
+                                                        <td>{{ i.log_name }}</td>
+                                                        <td>{{ i.log_text }}</td>
+                                                        <td>{{ i.log_time }}</td>
+                                                    </tr>
+                                                    {% endfor %}
                                             </table>
                                         </div>
                                     </div>
@@ -89,7 +103,7 @@
                             <div id="boxs" style="display: none;">
                                     <div class="supports">
                                         <div class="supports-body">   
-                                            <table id="table6">
+                                            <table>
                                                     <thead>
                                                         <tr>
                                                             <th>Log_time</th>
@@ -97,6 +111,13 @@
                                                             <th>Log_data</th>
                                                         </tr>    
                                                     </thead>
+                                                    {% for i in table_mark9 %}
+                                                    <tr class='success'>
+                                                        <td>{{ i.log_name }}</td>
+                                                        <td>{{ i.log_text }}</td>
+                                                        <td>{{ i.log_time }}</td>
+                                                    </tr>
+                                                    {% endfor %}
                                             </table>
                                         </div>
                                     </div>

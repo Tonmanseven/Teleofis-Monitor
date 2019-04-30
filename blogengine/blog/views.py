@@ -91,47 +91,53 @@ def station_1(request):
     if request.method == "POST":
         start = request.POST.get("startDate")
         end = request.POST.get("endDate")
-        period = "{} / {}".format(start, end)
 
-        log_spb4 = all_routers_log('mark_001', start, end)
+        start_date = datetime.strptime(start, "%Y-%m-%d")
+        end_date = datetime.strptime(end, "%Y-%m-%d")
 
-        logtime_spb4 = log_spb4['date_log']
-        loghost_spb4 = log_spb4['host_log']
-        logtext_spb4 = log_spb4['text_log']
+        log_mark1 = telelog.objects.filter(log_name = 'mark_1', log_time__range =(start_date, end_date)).order_by('log_time') 
+        log_mark2 = telelog.objects.filter(log_name = 'mark_2', log_time__range =(start_date, end_date)).order_by('log_time')
+        log_mark9 = telelog.objects.filter(log_name = 'mark_9', log_time__range =(start_date, end_date)).order_by('log_time')
 
         ping_spb4 = all_routers_ping('mark_001', start, end)
         vpn_spb4 = ping_spb4['vpn_router']
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
+<<<<<<< HEAD
         log_spb5 = all_routers_log('mark_2', start, end)
         logtime_spb5 = log_spb5['date_log']
         loghost_spb5 = log_spb5['host_log']
         logtext_spb5 = log_spb5['text_log']
 
         ping_spb5 = all_routers_ping('mark_2', start, end)
+=======
+        ping_spb5 = all_routers_ping('mark_002', start, end)
+>>>>>>> 8b5ffb40f5477eddb5830b4146b32960ca010dfa
         vpn_spb5 = ping_spb5['vpn_router']
         inet_spb5 = ping_spb5['internet_router']
         date_spb5 = ping_spb5['date_router']
 
+<<<<<<< HEAD
         log_spb6 = all_routers_log('mark_9', start, end)
         logtime_spb6 = log_spb6['date_log']
         loghost_spb6 = log_spb6['host_log']
         logtext_spb6 = log_spb6['text_log']
 
         ping_spb6 = all_routers_ping('mark_9', start, end)
+=======
+        ping_spb6 = all_routers_ping('mark_009', start, end)
+>>>>>>> 8b5ffb40f5477eddb5830b4146b32960ca010dfa
         vpn_spb6 = ping_spb6['vpn_router']
         inet_spb6 = ping_spb6['internet_router']
         date_spb6 = ping_spb6['date_router']
 
-        return render(request, 'blog/station_3.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 'range4': len(inet_spb4),
-                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4, 'range5': len(inet_spb5),
-                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5, 'range6': len(inet_spb6),
-                    'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtime_spb6, 'logtext_spb6': logtext_spb6,})
+        return render(request, 'blog/station_3.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 
+                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'table_mark1': log_mark1, 'table_mark2': log_mark2, 'table_mark9': log_mark9,
+                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  
+                    'times_spb6': date_spb6,'vpn_spb6': vpn_spb6,})
     else:
         return render(request, 'blog/station_3.html', context={'form': useform})
-
-
 
 def station_2(request):
 
@@ -139,43 +145,32 @@ def station_2(request):
     if request.method == "POST":
         start = request.POST.get("startDate")
         end = request.POST.get("endDate")
-        period = "{} / {}".format(start, end)
+        
+        start_date = datetime.strptime(start, "%Y-%m-%d")
+        end_date = datetime.strptime(end, "%Y-%m-%d")
 
-        log_spb4 = all_routers_log('mark_003', start, end)
-
-        logtime_spb4 = log_spb4['date_log']
-        loghost_spb4 = log_spb4['host_log']
-        logtext_spb4 = log_spb4['text_log']
+        log_mark3 = telelog.objects.filter(log_name = 'mark_3', log_time__range =(start_date, end_date)).order_by('log_time') 
+        log_mark4 = telelog.objects.filter(log_name = 'mark_4', log_time__range =(start_date, end_date)).order_by('log_time')
+        log_mark5 = telelog.objects.filter(log_name = 'mark_5', log_time__range =(start_date, end_date)).order_by('log_time')
 
         ping_spb4 = all_routers_ping('mark_003', start, end)
         vpn_spb4 = ping_spb4['vpn_router']
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
-        log_spb5 = all_routers_log('mark_004', start, end)
-        logtime_spb5 = log_spb5['date_log']
-        loghost_spb5 = log_spb5['host_log']
-        logtext_spb5 = log_spb5['text_log']
-
         ping_spb5 = all_routers_ping('mark_004', start, end)
         vpn_spb5 = ping_spb5['vpn_router']
         inet_spb5 = ping_spb5['internet_router']
         date_spb5 = ping_spb5['date_router']
-
-        log_spb6 = all_routers_log('mark_005', start, end)
-        logtime_spb6 = log_spb6['date_log']
-        loghost_spb6 = log_spb6['host_log']
-        logtext_spb6 = log_spb6['text_log']
 
         ping_spb6 = all_routers_ping('mark_005', start, end)
         vpn_spb6 = ping_spb6['vpn_router']
         inet_spb6 = ping_spb6['internet_router']
         date_spb6 = ping_spb6['date_router']
 
-        return render(request, 'blog/station_2.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 'range4': len(inet_spb4),
-                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4, 'range5': len(inet_spb5),
-                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5, 'range6': len(inet_spb6),
-                    'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtime_spb6, 'logtext_spb6': logtext_spb6,})
+        return render(request, 'blog/station_2.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 
+                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'times_spb5': date_spb5,'vpn_spb5': vpn_spb5, 'times_spb6': date_spb6,'vpn_spb6': vpn_spb6,      
+                    'table_mark1': log_mark3, 'table_mark2': log_mark4, 'table_mark9': log_mark5,})
     else:
         return render(request, 'blog/station_2.html', context={'form': useform})
 
@@ -184,43 +179,32 @@ def station_3(request):
     if request.method == "POST":
         start = request.POST.get("startDate")
         end = request.POST.get("endDate")
-        period = "{} / {}".format(start, end)
+        
+        start_date = datetime.strptime(start, "%Y-%m-%d")
+        end_date = datetime.strptime(end, "%Y-%m-%d")
 
-        log_spb4 = all_routers_log('mark_006', start, end)
-
-        logtime_spb4 = log_spb4['date_log']
-        loghost_spb4 = log_spb4['host_log']
-        logtext_spb4 = log_spb4['text_log']
+        log_mark6 = telelog.objects.filter(log_name = 'mark_6', log_time__range =(start_date, end_date)).order_by('log_time') 
+        log_mark7 = telelog.objects.filter(log_name = 'mark_7', log_time__range =(start_date, end_date)).order_by('log_time')
+        log_mark8 = telelog.objects.filter(log_name = 'mark_8', log_time__range =(start_date, end_date)).order_by('log_time')
 
         ping_spb4 = all_routers_ping('mark_006', start, end)
         vpn_spb4 = ping_spb4['vpn_router']
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
-        log_spb5 = all_routers_log('mark_007', start, end)
-        logtime_spb5 = log_spb5['date_log']
-        loghost_spb5 = log_spb5['host_log']
-        logtext_spb5 = log_spb5['text_log']
-
         ping_spb5 = all_routers_ping('mark_007', start, end)
         vpn_spb5 = ping_spb5['vpn_router']
         inet_spb5 = ping_spb5['internet_router']
         date_spb5 = ping_spb5['date_router']
-
-        log_spb6 = all_routers_log('mark_008', start, end)
-        logtime_spb6 = log_spb6['date_log']
-        loghost_spb6 = log_spb6['host_log']
-        logtext_spb6 = log_spb6['text_log']
 
         ping_spb6 = all_routers_ping('mark_008', start, end)
         vpn_spb6 = ping_spb6['vpn_router']
         inet_spb6 = ping_spb6['internet_router']
         date_spb6 = ping_spb6['date_router']
 
-        return render(request, 'blog/station_1.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 'range4': len(inet_spb4),
-                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4, 'range5': len(inet_spb5),
-                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5, 'range6': len(inet_spb6),
-                    'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtime_spb6, 'logtext_spb6': logtext_spb6,})
+        return render(request, 'blog/station_1.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 
+                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'times_spb5': date_spb5,'vpn_spb5': vpn_spb5, 'times_spb6': date_spb6,'vpn_spb6': vpn_spb6,  
+                    'table_mark1': log_mark6, 'table_mark2': log_mark7, 'table_mark9': log_mark8,})
     else:
         return render(request, 'blog/station_1.html', context={'form': useform})
 
@@ -266,27 +250,21 @@ def test(request):
 def fins(request):
     useform = UserForm()
 
-
     if request.method == "POST":
         start = request.POST.get("startDate")
         end = request.POST.get("endDate")
-        period = "{} / {}".format(start, end)
 
-        log_spb1 = all_routers_log('spb_001', start, end)
+        start_date = datetime.strptime(start, "%Y-%m-%d")
+        end_date = datetime.strptime(end, "%Y-%m-%d")
 
-        logtime_spb1 = log_spb1['date_log']
-        loghost_spb1 = log_spb1['host_log']
-        logtext_spb1 = log_spb1['text_log']
+        log_spb1 = telelog.objects.filter(log_name = 'spb_001', log_time__range =(start_date, end_date)).order_by('log_time') 
+        log_spb2 = telelog.objects.filter(log_name = 'spb_002', log_time__range =(start_date, end_date)).order_by('log_time')
+        log_spb3 = telelog.objects.filter(log_name = 'spb_003', log_time__range =(start_date, end_date)).order_by('log_time')
 
         ping_spb1 = all_routers_ping('spb_001', start, end)
         vpn_spb1 = ping_spb1['vpn_router']
         inet_spb1 = ping_spb1['internet_router']
         date_spb1 = ping_spb1['date_router']
-
-        log_spb2 = all_routers_log('spb_002', start, end)
-        logtime_spb2 = log_spb2['date_log']
-        loghost_spb2 = log_spb2['host_log']
-        logtext_spb2 = log_spb2['text_log']
 
         ping_spb2 = all_routers_ping('spb_002', start, end)
         vpn_spb2 = ping_spb2['vpn_router']
@@ -298,60 +276,44 @@ def fins(request):
         inet_spb3 = ping_spb3['internet_router']
         date_spb3 = ping_spb3['date_router']
 
-        log_spb3 = all_routers_log('spb_003', start, end)
-        logtime_spb3 = log_spb3['date_log']
-        loghost_spb3 = log_spb3['host_log']
-        logtext_spb3 = log_spb3['text_log']
-
-        return render(request, 'blog/fins.html', context= { 'form': useform, 'inet_spb1': inet_spb1, 'inet_spb2': inet_spb2, 'inet_spb3': inet_spb3, 'range1': len(inet_spb1),
-                    'times_spb1': date_spb1, 'vpn_spb1': vpn_spb1, 'loghost_spb1': loghost_spb1, 'logtime_spb1': logtime_spb1, 'logtext_spb1': logtext_spb1, 'range2': len(inet_spb2),
-                    'times_spb2': date_spb2,'vpn_spb2': vpn_spb2,  'loghost_spb2': loghost_spb2, 'logtime_spb2': logtime_spb2, 'logtext_spb2': logtext_spb2, 'range3': len(inet_spb3),
-                    'times_spb3': date_spb3,'vpn_spb3': vpn_spb3, 'loghost_spb3': loghost_spb3, 'logtime_spb3': logtime_spb3, 'logtext_spb3': logtext_spb3,})
+        return render(request, 'blog/fins.html', context= { 'form': useform, 'inet_spb1': inet_spb1, 'inet_spb2': inet_spb2, 'inet_spb3': inet_spb3, 
+            'times_spb1': date_spb1, 'vpn_spb1': vpn_spb1, 'table_spb1': log_spb1, 'table_spb2': log_spb2, 'table_spb3': log_spb3, 'times_spb2': date_spb2,
+            'vpn_spb2': vpn_spb2, 'times_spb3': date_spb3,'vpn_spb3': vpn_spb3,})
     else:
         return render(request, 'blog/fins.html', context={'form': useform})
 
 def sibur(request):
     useform = UserForm()
+    
     if request.method == "POST":
         start = request.POST.get("startDate")
         end = request.POST.get("endDate")
-        period = "{} / {}".format(start, end)
+        
+        start_date = datetime.strptime(start, "%Y-%m-%d")
+        end_date = datetime.strptime(end, "%Y-%m-%d")
 
-        log_spb4 = all_routers_log('spb_004', start, end)
-
-        logtime_spb4 = log_spb4['date_log']
-        loghost_spb4 = log_spb4['host_log']
-        logtext_spb4 = log_spb4['text_log']
+        log_spb6 = telelog.objects.filter(log_name = 'spb_006', log_time__range =(start_date, end_date)).order_by('log_time') 
+        log_spb5 = telelog.objects.filter(log_name = 'spb_005', log_time__range =(start_date, end_date)).order_by('log_time')
+        log_spb4 = telelog.objects.filter(log_name = 'spb_004', log_time__range =(start_date, end_date)).order_by('log_time')
 
         ping_spb4 = all_routers_ping('spb_004', start, end)
         vpn_spb4 = ping_spb4['vpn_router']
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
-        log_spb5 = all_routers_log('spb_005', start, end)
-        logtime_spb5 = log_spb5['date_log']
-        loghost_spb5 = log_spb5['host_log']
-        logtext_spb5 = log_spb5['text_log']
-
         ping_spb5 = all_routers_ping('spb_005', start, end)
         vpn_spb5 = ping_spb5['vpn_router']
         inet_spb5 = ping_spb5['internet_router']
         date_spb5 = ping_spb5['date_router']
-
-        log_spb6 = all_routers_log('spb_006', start, end)
-        logtime_spb6 = log_spb6['date_log']
-        loghost_spb6 = log_spb6['host_log']
-        logtext_spb6 = log_spb6['text_log']
 
         ping_spb6 = all_routers_ping('spb_006', start, end)
         vpn_spb6 = ping_spb6['vpn_router']
         inet_spb6 = ping_spb6['internet_router']
         date_spb6 = ping_spb6['date_router']
 
-        return render(request, 'blog/sibur.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6, 'range4': len(inet_spb4),
-                    'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'loghost_spb4': loghost_spb4, 'logtime_spb4': logtime_spb4, 'logtext_spb4': logtext_spb4, 'range5': len(inet_spb5),
-                    'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,  'loghost_spb5': loghost_spb5, 'logtime_spb5': logtime_spb5, 'logtext_spb5': logtext_spb5, 'range6': len(inet_spb6),
-                    'times_spb6': date_spb6,'vpn_spb6': vpn_spb6, 'loghost_spb6': loghost_spb6, 'logtime_spb6': logtime_spb6, 'logtext_spb6': logtext_spb6,})
+        return render(request, 'blog/sibur.html', context={ 'form': useform, 'inet_spb4': inet_spb4, 'inet_spb5': inet_spb5, 'inet_spb6': inet_spb6,
+                'table_spb6': log_spb6,'times_spb4': date_spb4, 'vpn_spb4': vpn_spb4, 'table_spb4': log_spb4, 'vpn_spb6': vpn_spb6,
+                'times_spb5': date_spb5,'vpn_spb5': vpn_spb5,'table_spb5': log_spb5, 'times_spb6': date_spb6,})
     else:
         return render(request, 'blog/sibur.html', context={'form': useform})                                                            
 
@@ -397,7 +359,8 @@ def tele_robot(request):
 
         print(hostname, ": ", datetime, ": ", internetStatus, ": ", vpnStatus)
           
-    return render(request, 'blog/teleofis_state.html')                                                                      
+    return render(request, 'blog/teleofis_state.html')     
+                                                                           
 
 
 def decript(t_data):
