@@ -2,20 +2,20 @@
 {% load static %}
 
     {% block title  %}
-    <title>Сибур</title>
+    <title>МРСК СЗ</title>
     {% endblock %}
     
     {% block project %}
     <span class="navbar-text">
-        Сибур 
-    </span>
+            МРСК СЗ   
+            </span>
     {% endblock %}
                            
     
     {% block content %} 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2"> Панель 0.4 кВ ТП-55 </h1>    
+            <h1 class="h2"> Пост №1 Опора №108 Линия №129 </h1>    
         </div>
 
             <div class="container" style="max-width: 100%;">   
@@ -23,7 +23,7 @@
             </div>
         
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"> Трафнсформатор ТМЗ  </h1>    
+                <h1 class="h2"> Пост №2 Опора №31 Линия №129 </h1>    
         </div>
 
             <div class="container" style="max-width: 100%;">   
@@ -31,7 +31,7 @@
             </div>
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"> Ячейка КСО </h1>    
+                <h1 class="h2"> Пост №3 Опора №247 </h1>    
         </div>   
             <div class="container" style="max-width: 100%;">   
                     <canvas id="spb6" width="850" height="150"></canvas>
@@ -42,14 +42,14 @@
                     <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseOne" >
-                        Log router: spb_004
+                        Log router: spb_001
                         </button>
                     </h5>
                     </div>
                 
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" >
                     <div class="card-body">
-                        <h2>Log router: spb_004 10.8.0.58</h2>
+                        <h2>Log router: spb_001 10.8.0.46</h2>
                         <div class="table">
                             <table class="table table-bordered">
                                 <thead>
@@ -75,13 +75,13 @@
                     <div class="card-header" id="headingTwo">
                     <h5 class="mb-0">
                         <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" >
-                            Log router: spb_005
+                            Log router: spb_002
                         </button>
                     </h5>
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
                     <div class="card-body">
-                        <h2>Log router: spb_005 10.8.0.62</h2>
+                        <h2>Log router: spb_002 10.8.0.50</h2>
                         <div class="table">
                             <table class="table table-bordered">
                                 <thead>
@@ -107,13 +107,13 @@
                     <div class="card-header" id="headingThree">
                     <h5 class="mb-0">
                         <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Log router: spb_006
+                            Log router: MRSKSZ_002
                         </button>
                     </h5>
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
-                        <h2>Log router: spb_006 10.8.0.66</h2>
+                        <h2>Log router: MRSKSZ_002 10.8.0.86</h2>
                         <div class="table">
                             <table class="table table-bordered">
                                 <thead>
@@ -150,7 +150,7 @@
     
         var faza_10 = {
         
-        label: "VPN - spb_004",
+        label: "VPN - spb_001",
         data: {{ vpn_router1 }},
         lineTension: 0.7,
         borderColor: 'red',
@@ -159,7 +159,7 @@
     
         var inet_10 = {
         
-        label: "internet - spb_004",
+        label: "internet - spb_001",
         data: {{ inet_router1 }},
         lineTension: 0.7,
         borderColor: 'blue',
@@ -170,7 +170,7 @@
         
         var faza_11 = {
         
-        label: "VPN - spb_005",
+        label: "VPN - spb_002",
         data: {{ vpn_router2 }},
         lineTension: 0.7,
         borderColor: 'red',
@@ -179,7 +179,7 @@
         };  
         
         var inet_11 = {
-        label: "internet - spb_005",
+        label: "internet - spb_002",
         data: {{ inet_router2 }},
         lineTension: 0.7,
         borderColor: 'blue',

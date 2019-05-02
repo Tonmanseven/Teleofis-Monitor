@@ -1,63 +1,58 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="ru">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-	<meta charset="utf-8">
-	<!-- <base href="/"> -->
+    <title>Teleofis Monitor</title>
+  </head>
+  <body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #bbbbca;">
+        
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'index'  %}">
+        	<img src="{% static 'img/teleofis.svg'  %}" width="30" height="30" class="d-inline-block align-top" alt="">
+            Teleofis Monitor
+        </a>
+    </nav>
 
-	<title>Teleofis Monitor</title>
-	<meta name="description" content="">
+    <main role="main" class="container" style="max-width: 600px;">
 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<!-- Template Basic Images Start -->
-	<meta property="og:image" content="path/to/image.jpg">
-	<link rel="icon" href="img/favicon/favicon.ico">
-	<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
-	<!-- Template Basic Images End -->
-
-	<!-- Custom Browsers Color Start -->
-	<meta name="theme-color" content="#000">
-	<!-- Custom Browsers Color End -->
-
-	<link rel="stylesheet" href="{% static 'css/main_min.css' %}">
-
-</head>
-
-<body>
-
-	<header>
-		<h1>Teleofis Monitor</h1>
-	</header>
-
-	<div class="container">
-
-		<div class="row row-full-h justify-content-center align-items-center">
-
-			<div class="col-8">
-
-				<div class="supports">
-					<div class="title">Выберите проект</div>
-					<div class="supports-body">
-						<nav class="supp-links">
-							<a href="iesk.html"> ИЭСК </a>
-							<a href="test.html"> Билайн(Москва) </a>
-							<a href="fins.html"> МРСК СЗ </a>
-							<a href="sibur.html"> СИБУР </a>
-						</nav>
+        <div class="my-4 p-3 bg-white rounded shadow-sm ">
+                <div class="alert " role="alert">
+                    <h4 class="alert-heading">Выберите проект:</h4>
+                </div>
+            <div class="list-group " id="list-tab" role="tablist">
+				<div class="btn-group dropright">
+					
+					<a class="list-group-item list-group-item-action" href="post1_iesk.html">ИЭСК</a>
+					
+					<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="sr-only">Toggle Dropright</span>
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="post1_iesk.html">Пост №1 Опора 203/56 кВ</a>
+						<a class="dropdown-item" href="post2_iesk.html">Пост №2 Опора 203/60 кВ</a>
+						<a class="dropdown-item" href="post3_iesk.html">Пост №3 КРУЭ Б 220 кВ</a>
 					</div>
 				</div>
+              <a class="list-group-item list-group-item-action" href="beeline.html">Билайн</a>
+              <a class="list-group-item list-group-item-action" href="mrsk.html">МРСК СЗ</a>
+              <a class="list-group-item list-group-item-action" href="sibur.html">СИБУР</a>
+            </div>
+        </div>
+        
+    </main>
+          
 
-			</div>
-
-		</div>
-
-	</div>
-
-	<script src="{% static 'js/scripts_min.js' %}"></script>
-
-</body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>

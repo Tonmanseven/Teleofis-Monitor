@@ -1,0 +1,128 @@
+{% extends 'blog/new_base.html' %}
+{% load static %}
+
+    {% block title  %}
+    <title>Билайн</title>
+    {% endblock %}
+    
+    {% block project %}
+    <span class="navbar-text">
+            Билайн   
+            </span>
+    {% endblock %}
+                           
+    {% block station %} Билайн (Москва) {% endblock %}
+                
+    {% block content %} 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2"> Билайн </h1>
+        </div>
+
+        <div class="container" style="max-width: 100%;">   
+            <canvas id="spb4" width="850" height="150"></canvas>
+        </div>
+        
+        <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseOne" >
+                        Log router: mark_014
+                        </button>
+                    </h5>
+                    </div>
+                
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" >
+                        <div class="card-body">
+                            <h2>Log router: mark_014</h2>
+                            <div class="table">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                        <th>Log Time</th>
+                                        <th>Log Message</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in table_router1 %}
+                                        <tr class='success'>
+                                            <td>{{ i.log_text }}</td>
+                                            <td>{{ i.log_time }}</td>
+                                        </tr>
+                                        {% endfor %}               
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>         
+        </div>
+    </main>           
+{% endblock %}
+ 
+{% block script %} 
+    <!-- Plot -->
+<script>
+        var spb4 = document.getElementById("spb4").getContext("2d");
+        
+        Chart.defaults.global.defaultFontSize = 18;
+    
+        var faza_10 = {
+        
+        label: "VPN - mark_014",
+        data: {{ vpn_router1 }},
+        lineTension: 0.7,
+        borderColor: 'red',
+        steppedLine: 'before'
+        };
+    
+        var inet_10 = {
+        
+        label: "internet - mark_014",
+        data: {{ inet_router1 }},
+        lineTension: 0.7,
+        borderColor: 'blue',
+        steppedLine: 'before'
+        };
+    
+           
+        var data_mark10 = {
+        labels: {{ times_router1|safe }},
+        datasets: [faza_10, inet_10],
+        };  
+        
+    
+        var chartOptions = {
+        legend: {
+        display: true,
+        position: 'top',
+        labels: {
+            boxWidth: 80,
+            fontColor: 'black'
+        }  
+        },
+        scales: { 
+            yAxes: [{ 
+                ticks: { 
+                    max: 1,
+                    min: 0,
+                    stepSize: 1
+                    } 
+                }] 
+            }, 
+            responsive: true,
+        
+        };
+    
+        var lineChart = new Chart(spb4, {
+        type: 'line',
+        data: data_mark10,
+        options: chartOptions,
+        maintainAspectRatio: false,
+        responsive: true,
+        });
+    
+    
+</script>
+{% endblock %}

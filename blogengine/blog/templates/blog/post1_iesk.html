@@ -2,54 +2,52 @@
 {% load static %}
 
     {% block title  %}
-    <title>Сибур</title>
+    <title>Пост №1</title>
     {% endblock %}
     
     {% block project %}
     <span class="navbar-text">
-        Сибур 
-    </span>
+            ИЭСК   
+            </span>
     {% endblock %}
                            
     
     {% block content %} 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2"> Панель 0.4 кВ ТП-55 </h1>    
-        </div>
-
-            <div class="container" style="max-width: 100%;">   
-                <canvas id="spb4" width="850" height="150"></canvas>
-            </div>
-        
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"> Трафнсформатор ТМЗ  </h1>    
-        </div>
-
-            <div class="container" style="max-width: 100%;">   
-                    <canvas id="spb5" width="850" height="150"></canvas>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2"> Пост №1 Опора типа П 203/56 кВ </h1>
+                <div class=" btn-group btn-toolbar mb-2 mb-md-0" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="right: 10%;" >
+                        Место размещения      
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1"  >
+                        <a class="dropdown-item" href="post1_iesk.html">Пост №1 Опора 203/56 кВ</a>
+                        <a class="dropdown-item" href="post2_iesk.html">Пост №2 Опора 203/60 кВ</a>
+                        <a class="dropdown-item" href="post3_iesk.html">Пост №3 КРУЭ Б 220 кВ </a>
+                    </div>         
+                </div>
             </div>
 
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"> Ячейка КСО </h1>    
-        </div>   
-            <div class="container" style="max-width: 100%;">   
-                    <canvas id="spb6" width="850" height="150"></canvas>
-            </div> 
     
+        <div class="container" style="max-width: 100%;">   
+            <canvas id="spb4" width="850" height="150"></canvas>
+            <canvas id="spb5" width="850" height="150"></canvas>
+            <canvas id="spb6" width="850" height="150"></canvas>
+        </div>
+        
         <div id="accordion">
                 <div class="card">
                     <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseOne" >
-                        Log router: spb_004
+                        Log router: mark_3
                         </button>
                     </h5>
                     </div>
                 
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" >
                     <div class="card-body">
-                        <h2>Log router: spb_004 10.8.0.58</h2>
+                        <h2>Log router: mark_3 10.8.0.22</h2>
                         <div class="table">
                             <table class="table table-bordered">
                                 <thead>
@@ -70,18 +68,17 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="card">
                     <div class="card-header" id="headingTwo">
                     <h5 class="mb-0">
                         <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" >
-                            Log router: spb_005
+                            Log router: mark_4
                         </button>
                     </h5>
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
                     <div class="card-body">
-                        <h2>Log router: spb_005 10.8.0.62</h2>
+                        <h2>Log router: mark_4 10.8.0.34</h2>
                         <div class="table">
                             <table class="table table-bordered">
                                 <thead>
@@ -107,13 +104,13 @@
                     <div class="card-header" id="headingThree">
                     <h5 class="mb-0">
                         <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Log router: spb_006
+                            Log router: mark_5
                         </button>
                     </h5>
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                     <div class="card-body">
-                        <h2>Log router: spb_006 10.8.0.66</h2>
+                        <h2>Log router: mark_5 10.8.0.26</h2>
                         <div class="table">
                             <table class="table table-bordered">
                                 <thead>
@@ -150,7 +147,7 @@
     
         var faza_10 = {
         
-        label: "VPN - spb_004",
+        label: "VPN - mark_003",
         data: {{ vpn_router1 }},
         lineTension: 0.7,
         borderColor: 'red',
@@ -159,7 +156,7 @@
     
         var inet_10 = {
         
-        label: "internet - spb_004",
+        label: "internet - mark_003",
         data: {{ inet_router1 }},
         lineTension: 0.7,
         borderColor: 'blue',
@@ -170,7 +167,7 @@
         
         var faza_11 = {
         
-        label: "VPN - spb_005",
+        label: "VPN - mark_004",
         data: {{ vpn_router2 }},
         lineTension: 0.7,
         borderColor: 'red',
@@ -179,7 +176,7 @@
         };  
         
         var inet_11 = {
-        label: "internet - spb_005",
+        label: "internet - mark_004",
         data: {{ inet_router2 }},
         lineTension: 0.7,
         borderColor: 'blue',
@@ -187,14 +184,14 @@
         };
     
         var faza_12 = {
-        label: "VPN - MRSKSZ_002",
+        label: "VPN - mark_005",
         data: {{ vpn_router3 }},
         lineTension: 0.7,
         borderColor: 'red',
         steppedLine: 'before'
         };
         var inet_12 = {
-        label: "internet - MRSKSZ_002",
+        label: "internet - mark_005",
         data: {{ inet_router3 }},
         lineTension: 0.7,
         borderColor: 'blue',
