@@ -7,5 +7,5 @@ class UserForm(forms.Form):
     endDate = forms.CharField(label=False, widget=forms.TextInput(attrs={'style' : 'width: 80px;'}))
 
 class SensForm(forms.Form):
-    sensor = forms.CharField(label=False, widget=forms.TextInput(attrs={'style': 'width: 80'}))
+    daterange = forms.CharField(label=False, widget=forms.TextInput(attrs={'style': 'width: 80'}))
     
