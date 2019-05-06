@@ -178,8 +178,8 @@ def beeline(request):
         start = daterange[0:10]
         end = daterange[13:]
 
-        start_date = dateone.strptime(start, "%m/%d/%Y")
-        end_date = dateone.strptime(end, "%m/%d/%Y") 
+        start_date = datetime.datetime.strptime(start, "%m/%d/%Y")
+        end_date = datetime.datetime.strptime(end, "%m/%d/%Y") 
 
         log_mark1 = telelog.objects.filter(log_name = 'mark_014', log_time__range =(start_date, end_date)).order_by('id') 
 
