@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <h2>Log router: mark_014</h2>
                             <div class="table">
-                                <table class="table table-bordered">
+                                <table class="table table-bordered" >
                                     <thead>
                                         <tr>
                                         <th>Log Time</th>
@@ -62,6 +62,7 @@
 {% endblock %}
  
 {% block script %} 
+
     <!-- Plot -->
 <script>
         var spb4 = document.getElementById("spb4").getContext("2d");
@@ -125,4 +126,8 @@
     
     
 </script>
+    <!-- table export script-->
+    <script>
+        $("table").tableExport();
+    </script>
 {% endblock %}
