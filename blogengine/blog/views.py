@@ -179,9 +179,9 @@ def beeline(request):
         end = daterange[13:]
 
         start_date = datetime.datetime.strptime(start, "%m/%d/%Y")
-        end_date = datetime.datetime.strptime(end, "%m/%d/%Y") 
+        end_date = datetime.datetime.strptime(end, "%m/%d/%Y") + datetime.timedelta(days=1) 
 
-        log_mark1 = telelog.objects.filter(log_name = 'mark_014', log_time__range =(start_date, end_date)).order_by('id') 
+        log_mark1 = telelog.objects.filter(log_name = 'mark_014', log_time__range =(start_date, end_date)).order_by('log_time') 
 
         ping_spb4 = new_ping('mark_014', daterange)
         vpn_spb4 = ping_spb4['vpn_router']
