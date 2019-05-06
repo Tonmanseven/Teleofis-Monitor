@@ -1,7 +1,7 @@
 import subprocess
 import os
-import datetime, time, json
-from datetime import datetime, date
+import json, datetime, time
+from datetime import datetime as dateone
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, StreamingHttpResponse
 # Импортируем библиотеку, соответствующую типу нашей базы данных
@@ -11,75 +11,13 @@ from .forms import UserForm, SensForm
 
 
 ######## data from server ########
-def all_routers_ping(hname, startD, endD):
-
-    start_date = datetime.strptime(startD, "%Y-%m-%d")
-    end_date = datetime.strptime(endD, "%Y-%m-%d")
-    
-    tele_data = teleping.objects.filter(host = '{}'.format(hname), timestamp__range=(start_date, end_date)).order_by('timestamp')
-
-    j = 0
-    auff = []
-    host = []
-    inet = []
-    vpn = []
-    dt_pub = []
-    for i in tele_data:
-        auff.append(i)
-        host.append(auff[j].host)
-        inet.append(int(auff[j].inet))
-        vpn.append(int(auff[j].vpn))
-        dt_pub.append(auff[j].timestamp.strftime('%d-%m-%Y %H:%M'))  
-        j += 1 
-
-    opora_all = {
-        
-        'host_router': host,
-        'vpn_router': vpn,
-        'internet_router': inet,
-        'date_router': dt_pub,
-            
-    }                
-
-    # частота выполнений 3600
-    return opora_all 
-
-def all_routers_log(hname, startD, endD):
-
-    start_date = datetime.strptime(startD, "%Y-%m-%d")
-    end_date = datetime.strptime(endD, "%Y-%m-%d")
-    
-    tele_data = telelog.objects.filter(log_name = '{}'.format(hname), log_time__range =(start_date, end_date)).order_by('log_time') 
-
-    j = 0
-    auff = []
-    host = []
-    text_log = []
-    dt_pub = []
-    for i in tele_data:
-        auff.append(i)
-        host.append(auff[j].log_name)
-        text_log.append(auff[j].log_text)
-        dt_pub.append(auff[j].log_time.strftime('%d-%m-%Y %H:%M'))  
-        j += 1 
-
-    opora_all = {
-        
-        'host_log': host,
-        'date_log': dt_pub,
-        'text_log': text_log,
-            
-    }                
-
-    # частота выполнений 3600
-    return opora_all     
-
+   
 def new_ping(hname, daterange):
     start = daterange[0:10]
     end = daterange[13:]
 
-    start_date = datetime.strptime(start, "%m/%d/%Y")
-    end_date = datetime.strptime(end, "%m/%d/%Y")
+    start_date =dateone.strptime(start, "%m/%d/%Y")
+    end_date = dateone.strptime(end, "%m/%d/%Y") + datetime.timedelta(days=1)
 
     tele_data = teleping.objects.filter(host = '{}'.format(hname), timestamp__range=(start_date, end_date)).order_by('timestamp')
 
@@ -123,8 +61,8 @@ def post1_iesk(request):
         start = daterange[0:10]
         end = daterange[13:]
 
-        start_date = datetime.strptime(start, "%m/%d/%Y")
-        end_date = datetime.strptime(end, "%m/%d/%Y")
+        start_date = dateone.strptime(start, "%m/%d/%Y")
+        end_date = dateone.strptime(end, "%m/%d/%Y")
 
         log_mark1 = telelog.objects.filter(log_name = 'mark_3', log_time__range =(start_date, end_date)).order_by('log_time') 
         log_mark2 = telelog.objects.filter(log_name = 'mark_4', log_time__range =(start_date, end_date)).order_by('log_time')
@@ -162,8 +100,8 @@ def post2_iesk(request):
         start = daterange[0:10]
         end = daterange[13:]
 
-        start_date = datetime.strptime(start, "%m/%d/%Y")
-        end_date = datetime.strptime(end, "%m/%d/%Y")
+        start_date = dateone.strptime(start, "%m/%d/%Y")
+        end_date = dateone.strptime(end, "%m/%d/%Y")
 
         log_mark1 = telelog.objects.filter(log_name = 'mark_6', log_time__range =(start_date, end_date)).order_by('log_time') 
         log_mark2 = telelog.objects.filter(log_name = 'mark_7', log_time__range =(start_date, end_date)).order_by('log_time')
@@ -201,8 +139,8 @@ def post3_iesk(request):
         start = daterange[0:10]
         end = daterange[13:]
 
-        start_date = datetime.strptime(start, "%m/%d/%Y")
-        end_date = datetime.strptime(end, "%m/%d/%Y")
+        start_date = dateone.strptime(start, "%m/%d/%Y")
+        end_date = dateone.strptime(end, "%m/%d/%Y")
 
         log_mark1 = telelog.objects.filter(log_name = 'mark_1', log_time__range =(start_date, end_date)).order_by('log_time') 
         log_mark2 = telelog.objects.filter(log_name = 'mark_2', log_time__range =(start_date, end_date)).order_by('log_time')
@@ -240,10 +178,10 @@ def beeline(request):
         start = daterange[0:10]
         end = daterange[13:]
 
-        start_date = datetime.strptime(start, "%m/%d/%Y")
-        end_date = datetime.strptime(end, "%m/%d/%Y")
+        start_date = dateone.strptime(start, "%m/%d/%Y")
+        end_date = dateone.strptime(end, "%m/%d/%Y") 
 
-        log_mark1 = telelog.objects.filter(log_name = 'mark_014', log_time__range =(start_date, end_date)).order_by('log_time') 
+        log_mark1 = telelog.objects.filter(log_name = 'mark_014', log_time__range =(start_date, end_date)).order_by('id') 
 
         ping_spb4 = new_ping('mark_014', daterange)
         vpn_spb4 = ping_spb4['vpn_router']
@@ -263,8 +201,8 @@ def mrks(request):
         start = daterange[0:10]
         end = daterange[13:]
 
-        start_date = datetime.strptime(start, "%m/%d/%Y")
-        end_date = datetime.strptime(end, "%m/%d/%Y")
+        start_date = dateone.strptime(start, "%m/%d/%Y")
+        end_date = dateone.strptime(end, "%m/%d/%Y")
 
         log_mark1 = telelog.objects.filter(log_name = 'spb_001', log_time__range =(start_date, end_date)).order_by('log_time') 
         log_mark2 = telelog.objects.filter(log_name = 'spb_002', log_time__range =(start_date, end_date)).order_by('log_time')
@@ -301,8 +239,8 @@ def sibur(request):
         start = daterange[0:10]
         end = daterange[13:]
 
-        start_date = datetime.strptime(start, "%m/%d/%Y")
-        end_date = datetime.strptime(end, "%m/%d/%Y")
+        start_date = dateone.strptime(start, "%m/%d/%Y")
+        end_date = dateone.strptime(end, "%m/%d/%Y")
 
         log_mark1 = telelog.objects.filter(log_name = 'spb_004', log_time__range =(start_date, end_date)).order_by('log_time') 
         log_mark2 = telelog.objects.filter(log_name = 'spb_005', log_time__range =(start_date, end_date)).order_by('log_time')
@@ -372,6 +310,8 @@ def tele_robot(request):
         teleofis_new.save()
 
         print(hostname, ": ", datetime, ": ", internetStatus, ": ", vpnStatus)
+
+        
           
     return render(request, 'blog/teleofis_state.html')     
                                                                            
