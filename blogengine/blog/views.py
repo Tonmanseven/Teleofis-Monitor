@@ -62,7 +62,7 @@ def post1_iesk(request):
         end = daterange[13:]
 
         start_date = dateone.strptime(start, "%m/%d/%Y")
-        end_date = dateone.strptime(end, "%m/%d/%Y")
+        end_date = dateone.strptime(end, "%m/%d/%Y")+ datetime.timedelta(days=1)
 
         log_mark1 = telelog.objects.filter(log_name = 'mark_3', log_time__range =(start_date, end_date)).order_by('log_time') 
         log_mark2 = telelog.objects.filter(log_name = 'mark_4', log_time__range =(start_date, end_date)).order_by('log_time')
@@ -101,7 +101,7 @@ def post2_iesk(request):
         end = daterange[13:]
 
         start_date = dateone.strptime(start, "%m/%d/%Y")
-        end_date = dateone.strptime(end, "%m/%d/%Y")
+        end_date = dateone.strptime(end, "%m/%d/%Y")+ datetime.timedelta(days=1)
 
         log_mark1 = telelog.objects.filter(log_name = 'mark_6', log_time__range =(start_date, end_date)).order_by('log_time') 
         log_mark2 = telelog.objects.filter(log_name = 'mark_7', log_time__range =(start_date, end_date)).order_by('log_time')
@@ -140,7 +140,7 @@ def post3_iesk(request):
         end = daterange[13:]
 
         start_date = dateone.strptime(start, "%m/%d/%Y")
-        end_date = dateone.strptime(end, "%m/%d/%Y")
+        end_date = dateone.strptime(end, "%m/%d/%Y")+ datetime.timedelta(days=1)
 
         log_mark1 = telelog.objects.filter(log_name = 'mark_1', log_time__range =(start_date, end_date)).order_by('log_time') 
         log_mark2 = telelog.objects.filter(log_name = 'mark_2', log_time__range =(start_date, end_date)).order_by('log_time')
@@ -202,7 +202,7 @@ def mrks(request):
         end = daterange[13:]
 
         start_date = dateone.strptime(start, "%m/%d/%Y")
-        end_date = dateone.strptime(end, "%m/%d/%Y")
+        end_date = dateone.strptime(end, "%m/%d/%Y")+ datetime.timedelta(days=1)
 
         log_mark1 = telelog.objects.filter(log_name = 'spb_001', log_time__range =(start_date, end_date)).order_by('log_time') 
         log_mark2 = telelog.objects.filter(log_name = 'spb_002', log_time__range =(start_date, end_date)).order_by('log_time')
@@ -240,7 +240,7 @@ def sibur(request):
         end = daterange[13:]
 
         start_date = dateone.strptime(start, "%m/%d/%Y")
-        end_date = dateone.strptime(end, "%m/%d/%Y")
+        end_date = dateone.strptime(end, "%m/%d/%Y")+ datetime.timedelta(days=1)
 
         log_mark1 = telelog.objects.filter(log_name = 'spb_004', log_time__range =(start_date, end_date)).order_by('log_time') 
         log_mark2 = telelog.objects.filter(log_name = 'spb_005', log_time__range =(start_date, end_date)).order_by('log_time')
