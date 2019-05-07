@@ -317,7 +317,7 @@ def tele_robot(request):
 
 def tele_file(request):
 
-    path_file = '/home/bulat/Git/teleofismonitor/blogengine/blog/static/files/telerobot.py'
+    path_file = '/home/pluto/file/teleofismonitor/blogengine/blog/static/files/telerobot.py'
     md5str = GetHashMd5(path_file)
     print(md5str)
     return render(request, 'blog/teleofis_files.html', context={'md5': md5str})     
