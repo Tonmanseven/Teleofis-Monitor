@@ -3,11 +3,12 @@ import os
 import json, datetime, time, hashlib
 from datetime import datetime as dateone
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, StreamingHttpResponse
+from django.http import HttpResponse, StreamingHttpResponse, HttpResponseRedirect
+from django.core.files import File
 # Импортируем библиотеку, соответствующую типу нашей базы данных
 import sqlite3, base64, zlib
 from blog.models import telelog, teleping
-from .forms import UserForm, SensForm
+from .forms import UserForm, SensForm, FileForm
 
 
 ######## data from server ########
@@ -315,12 +316,25 @@ def tele_robot(request):
           
     return render(request, 'blog/teleofis_state.html')     
 
-def tele_file(request):
+def handle_uploaded_file(f):
+    with open('/home/bulat/Git/teleofismonitor/blogengine/blog/static/files/telerobot.py', 'wb') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
+def tele_file(request):
+    filefome = FileForm()
     path_file = '/home/bulat/Git/teleofismonitor/blogengine/blog/static/files/telerobot.py'
     md5str = GetHashMd5(path_file)
-    print(md5str)
-    return render(request, 'blog/teleofis_files.html', context={'md5': md5str})     
+
+    if request.method == 'POST':
+        form = FileForm(request.POST, request.FILES)
+        if form.is_valid():
+           handle_uploaded_file(request.FILES['fileform'])    
+           return HttpResponseRedirect('teleofis_files.html')
+    else:
+        form = FileForm()    
+
+    return render(request, 'blog/teleofis_files.html', context={'md5': md5str, 'file': filefome})     
 
 def decript(t_data):
     

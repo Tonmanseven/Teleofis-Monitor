@@ -2,7 +2,6 @@ from django.db import models
 from datetime import date
 from django.utils import timezone
 
-
 class teleping(models.Model):
    
     host = models.CharField(max_length= 150, db_index= True, default = None)
@@ -21,4 +20,3 @@ class telelog(models.Model):
    
     def __str__(self):
         return '{} {}'.format(self.log_text, self.log_time)  
-
