@@ -323,7 +323,9 @@ def handle_uploaded_file(f):
 
 def tele_file(request):
     filefome = FileForm()
-    path_file = '/home/bulat/Git/teleofismonitor/blogengine/blog/static/files/telerobot.py'
+    
+    path_file = '/home/pluto/file/teleofismonitor/blogengine/blog/static/files/telerobot.py'
+
     md5str = GetHashMd5(path_file)
 
     if request.method == 'POST':
