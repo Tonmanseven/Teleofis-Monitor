@@ -1,13 +1,14 @@
 import subprocess
 import os
-import json, datetime, time
+import json, datetime, time, hashlib
 from datetime import datetime as dateone
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponse, StreamingHttpResponse
+from django.http import HttpResponse, StreamingHttpResponse, HttpResponseRedirect
+from django.core.files import File
 # Импортируем библиотеку, соответствующую типу нашей базы данных
 import sqlite3, base64, zlib
 from blog.models import telelog, teleping
-from .forms import UserForm, SensForm
+from .forms import UserForm, SensForm, FileForm
 
 
 ######## data from server ########
@@ -344,6 +345,7 @@ def swift(request):
     
     if request.method == "GET":
         
+<<<<<<< HEAD
         hostname = request.GET.get("hostname")
         start = request.GET.get("start")
         #end = request.GET.get("end")
@@ -362,6 +364,33 @@ def swift(request):
 
     return render(request, 'blog/swift.html') 
                                                                            
+=======
+          
+    return render(request, 'blog/teleofis_state.html')     
+
+def handle_uploaded_file(f):
+    with open('/home/bulat/Git/teleofismonitor/blogengine/blog/static/files/telerobot.py', 'wb') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+def tele_file(request):
+    filefome = FileForm()
+    
+    path_file = '/home/pluto/file/teleofismonitor/blogengine/blog/static/files/telerobot.py'
+
+    md5str = GetHashMd5(path_file)
+
+    if request.method == 'POST':
+        form = FileForm(request.POST, request.FILES)
+        if form.is_valid():
+           handle_uploaded_file(request.FILES['fileform'])    
+           return HttpResponseRedirect('teleofis_files.html')
+    else:
+        form = FileForm()    
+
+    return render(request, 'blog/teleofis_files.html', context={'md5': md5str, 'file': filefome})     
+
+>>>>>>> 710dc9b40dc2c2dbf8fd7d5525b72669f1e8f08d
 def decript(t_data):
     
     tel_data = t_data.replace(' ', '+')
@@ -391,4 +420,14 @@ def GetAverage(statusList):
         vpnStatus = True
     data = {"timestamp":timestamp, "internetStatus":internetStatus, "vpnStatus":vpnStatus}
     return data
+#end define
+def GetHashMd5(fileName):
+    BLOCKSIZE = 65536
+    hasher = hashlib.md5()
+    with open(fileName, 'rb') as afile:
+        buf = afile.read(BLOCKSIZE)
+        while len(buf) > 0:
+            hasher.update(buf)
+            buf = afile.read(BLOCKSIZE)
+    return(hasher.hexdigest())
 #end define

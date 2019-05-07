@@ -8,4 +8,8 @@ class UserForm(forms.Form):
 
 class SensForm(forms.Form):
     daterange = forms.CharField(label=False, widget=forms.TextInput(attrs={'style': 'width: 80'}))
+
+class FileForm(forms.Form):
+    fileform = forms.FileField(label=False)
+
     

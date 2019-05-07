@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<header>
+		<h1>teleofis_files</h1>
+</header>
+
+<div class="container">
+
+    <div class="back-to-main">
+            <a href="{% static 'files/telerobot.py' %}">telerobot.py</a>
+
+            <md5>{{ md5 }}</md5>
+            
+            <br>
+            <br>
+           
+           <form enctype="multipart/form-data" class="form-horizontal" method="post" id="form">
+                <div class="form-group">
+                    <div class="col-sm-7">
+                        <br>
+                            {% csrf_token %}
+                            {{file}}        
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-6">
+                        <button type="submit" id="submit" class="btn btn-secondary">Получить</button>
+                        <div></div>
+                    </div>
+                </div>
+            </form>
+    </div>
+
+    
+</div>
+
+{% endblock %}
