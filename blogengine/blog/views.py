@@ -47,6 +47,36 @@ def new_ping(hname, daterange):
     # частота выполнений 3600
     return opora_all 
 
+def swift_log(hname, start, end):
+
+    start_date = dateone.strptime(start, "%Y-%m-%d")
+    end_date = dateone.strptime(end, "%Y-%m-%d")+ datetime.timedelta(days=1)
+
+    log_router = telelog.objects.filter(log_name = '{}'.format(hname), log_time__range =(start_date, end_date)).order_by('log_time')
+
+    j = 0
+    auff = []
+    host = []
+    text = []
+    dt_pub = []
+    for i in log_router:
+        auff.append(i)
+        host.append(auff[j].log_name)
+        text.append(int(auff[j].log_text))
+        dt_pub.append(auff[j].log_time.strftime('%d-%m-%Y'))  
+        j += 1 
+
+    opora_all = {
+        
+        'host_log': host,
+        'text_log': text,
+        'date_log': dt_pub,
+            
+    }                
+
+    # частота выполнений 3600
+    return opora_all     
+
 #####################################################
 
 def posts_list(request):
@@ -282,7 +312,6 @@ def tele_robot(request):
         statusList = data["statusList"]
         logList = data["logList"]
 
-
         if (len(logList) > 0):
             for item in logList:
                 text = item["text"] ## - текст события 
@@ -309,11 +338,29 @@ def tele_robot(request):
 
         teleofis_new.save()
 
-        print(hostname, ": ", datetime, ": ", internetStatus, ": ", vpnStatus)
+    return render(request, 'blog/teleofis_state.html') 
 
+def swift(request):
+    
+    if request.method == "GET":
         
-          
-    return render(request, 'blog/teleofis_state.html')     
+        hostname = request.GET.get("hostname")
+        start = request.GET.get("start")
+        #end = request.GET.get("end")
+
+        new_start = start.replace('$', ' ')
+
+        data =new_ping(hostname, new_start)
+        vpn_router = data['vpn_router']
+        inet_router = data['internet_router']
+        date_router = data['date_router']
+
+        #send_jsn = {"vpn_router":'{}'.format(vpn_router), "inet_router": '{}'.format(inet_router), "date_router":'{}'.format(date_router)}
+        send_jsn = {"vpn_router":str(vpn_router), "inet_router": str(inet_router), "date_router":str(date_router)}
+        datasend = json.loads(send_jsn)
+        print(datasend)
+
+    return render(request, 'blog/swift.html') 
                                                                            
 def decript(t_data):
     
