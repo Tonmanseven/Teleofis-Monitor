@@ -1,6 +1,6 @@
 import subprocess
 import os
-import json, datetime, time
+import json, datetime, time, hashlib
 from datetime import datetime as dateone
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, StreamingHttpResponse
@@ -314,7 +314,14 @@ def tele_robot(request):
         
           
     return render(request, 'blog/teleofis_state.html')     
-                                                                           
+
+def tele_file(request):
+
+    path_file = '/home/bulat/Git/teleofismonitor/blogengine/blog/static/files/telerobot.py'
+    md5str = GetHashMd5(path_file)
+    print(md5str)
+    return render(request, 'blog/teleofis_files.html', context={'md5': md5str})     
+
 def decript(t_data):
     
     tel_data = t_data.replace(' ', '+')
@@ -344,4 +351,14 @@ def GetAverage(statusList):
         vpnStatus = True
     data = {"timestamp":timestamp, "internetStatus":internetStatus, "vpnStatus":vpnStatus}
     return data
+#end define
+def GetHashMd5(fileName):
+    BLOCKSIZE = 65536
+    hasher = hashlib.md5()
+    with open(fileName, 'rb') as afile:
+        buf = afile.read(BLOCKSIZE)
+        while len(buf) > 0:
+            hasher.update(buf)
+            buf = afile.read(BLOCKSIZE)
+    return(hasher.hexdigest())
 #end define

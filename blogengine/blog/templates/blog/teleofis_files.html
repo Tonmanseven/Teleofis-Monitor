@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<header>
+		<h1>teleofis_files</h1>
+</header>
+
+<div class="container">
+
+    <div class="back-to-main">
+            <a href="{% static 'files/telerobot.py' %}">telerobot.py</a>
+
+            <md5>{{ md5 }}</md5>
+            
+    </div>
+
+    
+</div>
+
+{% endblock %}

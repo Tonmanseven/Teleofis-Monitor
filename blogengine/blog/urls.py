@@ -7,6 +7,7 @@ urlpatterns = [
     path('mrsk.html', mrks),
     path('sibur.html', sibur),
     path('teleofis_state.html', tele_robot),
+    path('teleofis_files.html', tele_file),
     path('beeline/', beeline),
     path('post1_iesk/', post1_iesk),
     path('post2_iesk/', post2_iesk),
