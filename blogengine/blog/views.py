@@ -9,6 +9,7 @@ from django.core.files import File
 import sqlite3, base64, zlib
 from blog.models import telelog, teleping
 from .forms import UserForm, SensForm, FileForm
+from django.http import JsonResponse
 
 
 ######## data from server ########
@@ -63,7 +64,7 @@ def swift_log(hname, start, end):
     for i in log_router:
         auff.append(i)
         host.append(auff[j].log_name)
-        text.append(int(auff[j].log_text))
+        text.append(str(auff[j].log_text))
         dt_pub.append(auff[j].log_time.strftime('%d-%m-%Y'))  
         j += 1 
 
@@ -344,29 +345,29 @@ def tele_robot(request):
 def swift(request):
     
     if request.method == "GET":
-        
-<<<<<<< HEAD
+
         hostname = request.GET.get("hostname")
         start = request.GET.get("start")
-        #end = request.GET.get("end")
+        end = request.GET.get("end")
+        
+        log_router = swift_log(hostname, start, end)
 
-        new_start = start.replace('$', ' ')
+        log_text = log_router['text_log']
+        log_date = log_router['date_log']
 
-        data =new_ping(hostname, new_start)
-        vpn_router = data['vpn_router']
-        inet_router = data['internet_router']
-        date_router = data['date_router']
-
-        #send_jsn = {"vpn_router":'{}'.format(vpn_router), "inet_router": '{}'.format(inet_router), "date_router":'{}'.format(date_router)}
-        send_jsn = {"vpn_router":str(vpn_router), "inet_router": str(inet_router), "date_router":str(date_router)}
-        datasend = json.loads(send_jsn)
-        print(datasend)
-
+        message = []
+        for i,j in zip(log_date, log_text):
+            message.append("{} {}".format(i, j))
+        
+        new_jsn = []
+        nam = []
+        for n in message:
+            new_jsn = {"hostname": hostname, "logtext": n}
+            nam.append(new_jsn)
+        print(nam)
+        return JsonResponse(nam , safe=False)
     return render(request, 'blog/swift.html') 
                                                                            
-=======
-          
-    return render(request, 'blog/teleofis_state.html')     
 
 def handle_uploaded_file(f):
     with open('/home/bulat/Git/teleofismonitor/blogengine/blog/static/files/telerobot.py', 'wb') as destination:
@@ -390,7 +391,6 @@ def tele_file(request):
 
     return render(request, 'blog/teleofis_files.html', context={'md5': md5str, 'file': filefome})     
 
->>>>>>> 710dc9b40dc2c2dbf8fd7d5525b72669f1e8f08d
 def decript(t_data):
     
     tel_data = t_data.replace(' ', '+')
