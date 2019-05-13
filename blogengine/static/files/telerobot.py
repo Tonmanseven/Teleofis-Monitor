@@ -161,7 +161,7 @@ class Autostart:
 		autostartText = "python3 /usr/local/bin/" + myFullName
 		if (autostartText in inputText):
 			return
-		outputText = inputText.replace("exit", autostartText + '\n' + "exit")
+		outputText = inputText.replace("exit", autostartText + ' &' + '\n' + "exit")
 		f = open(rcFullPath, 'w')
 		f.write(outputText)
 		f.close()
@@ -471,7 +471,7 @@ def GetInfo():
 
 def SelfUpdating():
 	while True:
-		time.sleep(10) # 600 sec
+		time.sleep(600) # 600 sec
 		threading.Thread(target=SelfUpdate).start()
 #end define
 

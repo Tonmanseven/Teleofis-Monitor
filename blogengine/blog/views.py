@@ -317,14 +317,14 @@ def tele_robot(request):
     return render(request, 'blog/teleofis_state.html')     
 
 def handle_uploaded_file(f):
-    with open('/home/bulat/Git/teleofismonitor/blogengine/blog/static/files/telerobot.py', 'wb') as destination:
+    with open('/home/pluto/file/teleofismonitor/blogengine/static/files/telerobot.py', 'wb') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
 def tele_file(request):
     filefome = FileForm()
     
-    path_file = '/home/pluto/file/teleofismonitor/blogengine/blog/static/files/telerobot.py'
+    path_file = '/home/pluto/file/teleofismonitor/blogengine/static/files/telerobot.py'
 
     md5str = GetHashMd5(path_file)
 
