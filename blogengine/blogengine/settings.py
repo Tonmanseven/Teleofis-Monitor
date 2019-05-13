@@ -25,7 +25,7 @@ SECRET_KEY = '5hniw)wq)3f2(4n#9jy)*8%ov2^=j594ror=3%0x*ew5bpzhbh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['invent-monitor.scorpclub.ru', '91.227.154.50', 'localhost',]
+ALLOWED_HOSTS = ['invent-monitor.scorpclub.ru', '91.227.154.50', 'localhost']
 
 
 # Application definition

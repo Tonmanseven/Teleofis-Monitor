@@ -9,6 +9,7 @@ from django.core.files import File
 import sqlite3, base64, zlib
 from blog.models import telelog, teleping
 from .forms import UserForm, SensForm, FileForm
+from django.http import JsonResponse
 
 
 ######## data from server ########
@@ -47,6 +48,36 @@ def new_ping(hname, daterange):
 
     # частота выполнений 3600
     return opora_all 
+
+def swift_log(hname, start, end):
+
+    start_date = dateone.strptime(start, "%Y-%m-%d")
+    end_date = dateone.strptime(end, "%Y-%m-%d")+ datetime.timedelta(days=1)
+
+    log_router = telelog.objects.filter(log_name = '{}'.format(hname), log_time__range =(start_date, end_date)).order_by('log_time')
+
+    j = 0
+    auff = []
+    host = []
+    text = []
+    dt_pub = []
+    for i in log_router:
+        auff.append(i)
+        host.append(auff[j].log_name)
+        text.append(str(auff[j].log_text))
+        dt_pub.append(auff[j].log_time.strftime('%d-%m-%Y'))  
+        j += 1 
+
+    opora_all = {
+        
+        'host_log': host,
+        'text_log': text,
+        'date_log': dt_pub,
+            
+    }                
+
+    # частота выполнений 3600
+    return opora_all     
 
 #####################################################
 
@@ -283,7 +314,6 @@ def tele_robot(request):
         statusList = data["statusList"]
         logList = data["logList"]
 
-
         if (len(logList) > 0):
             for item in logList:
                 text = item["text"] ## - текст события 
@@ -310,11 +340,34 @@ def tele_robot(request):
 
         teleofis_new.save()
 
-        print(hostname, ": ", datetime, ": ", internetStatus, ": ", vpnStatus)
+    return render(request, 'blog/teleofis_state.html') 
 
+def swift(request):
+    
+    if request.method == "GET":
+
+        hostname = request.GET.get("hostname")
+        start = request.GET.get("start")
+        end = request.GET.get("end")
         
-          
-    return render(request, 'blog/teleofis_state.html')     
+        log_router = swift_log(hostname, start, end)
+
+        log_text = log_router['text_log']
+        log_date = log_router['date_log']
+
+        message = []
+        for i,j in zip(log_date, log_text):
+            message.append("{} {}".format(i, j))
+        
+        new_jsn = []
+        nam = []
+        for n in message:
+            new_jsn = {"hostname": hostname, "logtext": n}
+            nam.append(new_jsn)
+        print(nam)
+        return JsonResponse(nam , safe=False)
+    return render(request, 'blog/swift.html') 
+                                                                           
 
 def handle_uploaded_file(f):
     with open('/home/pluto/file/teleofismonitor/blogengine/static/files/telerobot.py', 'wb') as destination:
