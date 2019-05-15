@@ -6,6 +6,7 @@ urlpatterns = [
     path('', posts_list, name = 'index'),
     path('mrsk.html', mrks),
     path('sibur.html', sibur),
+    path('fromexel.html', work_exel),
     path('teleofis_state.html', tele_robot),
     path('swift.html', swift),
     path('teleofis_files.html', tele_file),

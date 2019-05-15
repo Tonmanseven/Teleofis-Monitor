@@ -1,0 +1,39 @@
+{% extends 'blog/new_base.html' %}
+{% load static %}
+
+    {% block title  %}
+    <title>Экспорт</title>
+    {% endblock %}
+    
+    {% block project %}
+    <span class="navbar-text">
+            Экспорт данных  
+            </span>
+    {% endblock %}
+                           
+    {% block station %} Экспорт данных {% endblock %}
+            
+    {% block dowland %}
+    
+             
+    {% endblock %}
+
+    {% block content %} 
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2"> Экспотр данных с проектов </h1>
+        </div>
+        <p> В получаемом файле содержатся критические сообщения от роутеров. Под критическими подразумевается: пропажа/восстановление питания роутера, подключение к роутеру пользователем и тд... </p>
+        <div class="container" style="max-width: 100%;">   
+            <canvas id="spb4" width="850" height="200"></canvas>
+        </div>
+        <br>
+          
+        
+    </main>          
+{% endblock %}
+ 
+{% block script %} 
+
+ 
+{% endblock %}
