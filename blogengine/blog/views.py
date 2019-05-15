@@ -1,5 +1,6 @@
+
 import subprocess
-import os
+import os, sys
 import json, datetime, time, hashlib
 from datetime import datetime as dateone
 from django.shortcuts import render, render_to_response
@@ -9,8 +10,11 @@ from django.core.files import File
 import sqlite3, base64, zlib
 from blog.models import telelog, teleping
 from .forms import UserForm, SensForm, FileForm
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse
+from static.files.getexel import write_exel
+import getpass
 
+print("JLOX", getpass.getuser())
 
 ######## data from server ########
    
@@ -77,7 +81,36 @@ def swift_log(hname, start, end):
     }                
 
     # частота выполнений 3600
-    return opora_all     
+    return opora_all   
+
+def logexel(hname, start, end):
+
+    start_date = dateone.strptime(start, "%m/%d/%Y")
+    end_date = dateone.strptime(end, "%m/%d/%Y")+ datetime.timedelta(days=1)
+
+    log_router = telelog.objects.filter(log_name = '{}'.format(hname), log_time__range =(start_date, end_date)).order_by('log_time')
+
+    j = 0
+    auff = []
+    host = []
+    text = []
+    dt_pub = []
+    for i in log_router:
+        auff.append(i)
+        host.append(auff[j].log_name)
+        text.append(str(auff[j].log_text))
+        dt_pub.append(auff[j].log_time.strftime('%d-%m-%Y'))  
+        j += 1 
+
+    opora_all = {
+        
+        'host_log': host,
+        'text_log': text,
+        'date_log': dt_pub,
+            
+    }                
+
+    return opora_all   
 
 #####################################################
 
@@ -202,6 +235,7 @@ def post3_iesk(request):
         return render(request, 'blog/post3_iesk.html', context={ 'form': sensform })
 ### BEELINE ###    
 def beeline(request):
+    
     sensform = SensForm()
     
     if request.method == "POST":
@@ -368,11 +402,71 @@ def swift(request):
         return JsonResponse(nam , safe=False)
     return render(request, 'blog/swift.html') 
                                                                            
+def work_exel(request):
+    sensform = SensForm()
+    if request.method == "POST":
+        daterange = request.POST.get("daterange")
+
+        start = daterange[0:10]
+        end = daterange[13:]
+
+        mk1 = logexel("mark_1", start, end)
+        mk2 = logexel("mark_2", start, end)
+        mk3 = logexel("mark_3", start, end)
+        mk4 = logexel("mark_4", start, end)
+        mk5 = logexel("mark_5", start, end)
+        mk6 = logexel("mark_6", start, end)
+        mk7 = logexel("mark_7", start, end)
+        mk8 = logexel("mark_8", start, end)
+        mk9 = logexel("mark_9", start, end)
+
+        mk14 = logexel("mark_014", start, end)
+
+        sp1 = logexel("spb_001", start, end)
+        sp2 = logexel("spb_002",start, end)
+        mrs = logexel("MRSKSZ_002", start, end)
+
+        sp4 = logexel("spb_004", start, end)
+        sp5 = logexel("spb_005", start, end)
+        sp6 = logexel("spb_006", start, end)
+
+        log_mk1 = mk1['text_log']
+        log_mk2 = mk2['text_log']
+        log_mk3 = mk3['text_log']
+        log_mk4 = mk4['text_log']
+        log_mk5 = mk5['text_log']
+        log_mk6 = mk6['text_log']
+        log_mk7 = mk7['text_log']
+        log_mk8 = mk8['text_log']
+        log_mk9 = mk9['text_log']
+        log_bee = mk14['text_log']
+        log_spb1 = sp1['text_log']
+        log_spb2 = sp2['text_log']
+        log_mrs = mrs['text_log']
+        log_spb4 = sp4['text_log']
+        log_spb5 = sp5['text_log']
+        log_spb6 = sp6['text_log']
+
+        log_iesk = [log_mk1, log_mk2, log_mk3, log_mk4, log_mk5, log_mk6, log_mk7, log_mk8, log_mk9]
+        log_mrsk = [log_spb1, log_spb2, log_mrs]
+        log_sibur = [log_spb4, log_spb5, log_spb6]
+        write_exel(log_iesk, log_bee, log_mrsk, log_sibur)
+        
+        response = FileResponse(open('/home/pluto/file/teleofismonitor/blogengine/static/files/telemonitor.xls', 'rb'))
+        response['Content-Disposition'] = 'attachment; filename="telemonitor.xls"'
+        return response
+        
+    return render(request, 'blog/fromexel.html', context={ 'form': sensform}) 
 
 def handle_uploaded_file(f):
     with open('/home/pluto/file/teleofismonitor/blogengine/static/files/telerobot.py', 'wb') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+
+def filexel(f):
+    with open('/home/bulat/Git/teleofismonitor/blogengine/telemonitor.xls', 'wb') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)            
 
 def tele_file(request):
     filefome = FileForm()

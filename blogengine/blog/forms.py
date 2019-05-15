@@ -1,6 +1,5 @@
 from django import forms
 
-
 class UserForm(forms.Form):
 
     startDate = forms.CharField(label=False, widget=forms.TextInput(attrs={'style' : 'width: 80px;'}))
