@@ -10,7 +10,7 @@ import sqlite3, base64, zlib
 from blog.models import telelog, teleping
 from .forms import UserForm, SensForm, FileForm
 from django.http import JsonResponse, FileResponse
-from getexel import write_exel
+from static.files.getexel import write_exel
 
 ######## data from server ########
    
