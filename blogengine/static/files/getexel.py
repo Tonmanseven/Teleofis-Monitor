@@ -182,7 +182,7 @@ def write_exel(iesk, beel, mrsk, sib):
             item = item.replace("Password auth succeeded for 'root' from", "Подключение пользователя как root с ip:")
         if ("authpriv.notice dropbear" in item):
             item = item.replace("authpriv.notice dropbear", "")
-        ws.write(a8, 8, item, style1)
+        ws.write(a8, 9, item, style1)
         a8 += 1
 
     #### beeline
@@ -320,8 +320,9 @@ def write_exel(iesk, beel, mrsk, sib):
             item = item.replace("authpriv.notice dropbear", "")    
         w_sibur.write(n7, 3, item, style1)
         n7 += 1
-        
-    wb.save('telemonitor.xls')    
+    import os
+    print("lox", os.getcwd())
+    wb.save('/home/pluto/file/teleofismonitor/blogengine/static/files/telemonitor.xls')
 
 
 
