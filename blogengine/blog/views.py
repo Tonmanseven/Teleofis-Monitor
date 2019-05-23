@@ -12,12 +12,6 @@ from blog.models import telelog, teleping
 from .forms import UserForm, SensForm, FileForm
 from django.http import JsonResponse, FileResponse
 from static.files.getexel import write_exel
-<<<<<<< HEAD
-=======
-import getpass
-
-print("JLOX", getpass.getuser())
->>>>>>> 2f7bf17eeb85477a0cd9eab44db466fbb9ea700b
 
 ######## data from server ########
    
@@ -157,7 +151,34 @@ def post1_iesk(request):
                     'times_router3': date_spb6,'vpn_router3': vpn_spb6,})
 
     else:
-        return render(request, 'blog/post1_iesk.html', context={ 'form': sensform })
+        start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
+        daterange = '{} - {}'.format(start, start)
+        start_date = dateone.strptime(start, "%m/%d/%Y")
+        end_date = dateone.strptime(start, "%m/%d/%Y")+ datetime.timedelta(days=1)
+
+        log_mark1 = telelog.objects.filter(log_name = 'mark_3', log_time__range =(start_date, end_date)).order_by('log_time') 
+        log_mark2 = telelog.objects.filter(log_name = 'mark_4', log_time__range =(start_date, end_date)).order_by('log_time')
+        log_mark9 = telelog.objects.filter(log_name = 'mark_5', log_time__range =(start_date, end_date)).order_by('log_time')
+
+        ping_spb4 = new_ping('mark_3', daterange)
+        vpn_spb4 = ping_spb4['vpn_router']
+        inet_spb4 = ping_spb4['internet_router']
+        date_spb4 = ping_spb4['date_router']
+
+        ping_spb5 = new_ping('mark_4', daterange)
+        vpn_spb5 = ping_spb5['vpn_router']
+        inet_spb5 = ping_spb5['internet_router']
+        date_spb5 = ping_spb5['date_router']
+
+        ping_spb6 = new_ping('mark_5', daterange)
+        vpn_spb6 = ping_spb6['vpn_router']
+        inet_spb6 = ping_spb6['internet_router']
+        date_spb6 = ping_spb6['date_router']
+
+        return render(request, 'blog/post1_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 'inet_router2': inet_spb5, 'inet_router3': inet_spb6, 
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, 'table_router2': log_mark2, 'table_router3': log_mark9,
+                    'times_router2': date_spb5,'vpn_router2': vpn_spb5,  
+                    'times_router3': date_spb6,'vpn_router3': vpn_spb6,})
 
 def post2_iesk(request):
     sensform = SensForm()
@@ -196,7 +217,33 @@ def post2_iesk(request):
                     'times_router3': date_spb6,'vpn_router3': vpn_spb6,})
 
     else:
-        return render(request, 'blog/post2_iesk.html', context={ 'form': sensform })
+        start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
+        daterange = '{} - {}'.format(start, start)
+        start_date = dateone.strptime(start, "%m/%d/%Y")
+        end_date = dateone.strptime(start, "%m/%d/%Y")+ datetime.timedelta(days=1)
+        log_mark1 = telelog.objects.filter(log_name = 'mark_6', log_time__range =(start_date, end_date)).order_by('log_time') 
+        log_mark2 = telelog.objects.filter(log_name = 'mark_7', log_time__range =(start_date, end_date)).order_by('log_time')
+        log_mark9 = telelog.objects.filter(log_name = 'mark_8', log_time__range =(start_date, end_date)).order_by('log_time')
+
+        ping_spb4 = new_ping('mark_6', daterange)
+        vpn_spb4 = ping_spb4['vpn_router']
+        inet_spb4 = ping_spb4['internet_router']
+        date_spb4 = ping_spb4['date_router']
+
+        ping_spb5 = new_ping('mark_7', daterange)
+        vpn_spb5 = ping_spb5['vpn_router']
+        inet_spb5 = ping_spb5['internet_router']
+        date_spb5 = ping_spb5['date_router']
+
+        ping_spb6 = new_ping('mark_8', daterange)
+        vpn_spb6 = ping_spb6['vpn_router']
+        inet_spb6 = ping_spb6['internet_router']
+        date_spb6 = ping_spb6['date_router']
+
+        return render(request, 'blog/post2_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 'inet_router2': inet_spb5, 'inet_router3': inet_spb6, 
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, 'table_router2': log_mark2, 'table_router3': log_mark9,
+                    'times_router2': date_spb5,'vpn_router2': vpn_spb5,  
+                    'times_router3': date_spb6,'vpn_router3': vpn_spb6,})
 
 def post3_iesk(request):
     sensform = SensForm()
@@ -235,7 +282,34 @@ def post3_iesk(request):
                     'times_router3': date_spb6,'vpn_router3': vpn_spb6,})
 
     else:
-        return render(request, 'blog/post3_iesk.html', context={ 'form': sensform })
+        start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
+        daterange = '{} - {}'.format(start, start)
+        start_date = dateone.strptime(start, "%m/%d/%Y")
+        end_date = dateone.strptime(start, "%m/%d/%Y")+ datetime.timedelta(days=1)
+
+        log_mark1 = telelog.objects.filter(log_name = 'mark_1', log_time__range =(start_date, end_date)).order_by('log_time') 
+        log_mark2 = telelog.objects.filter(log_name = 'mark_2', log_time__range =(start_date, end_date)).order_by('log_time')
+        log_mark9 = telelog.objects.filter(log_name = 'mark_9', log_time__range =(start_date, end_date)).order_by('log_time')
+
+        ping_spb4 = new_ping('mark_1', daterange)
+        vpn_spb4 = ping_spb4['vpn_router']
+        inet_spb4 = ping_spb4['internet_router']
+        date_spb4 = ping_spb4['date_router']
+
+        ping_spb5 = new_ping('mark_2', daterange)
+        vpn_spb5 = ping_spb5['vpn_router']
+        inet_spb5 = ping_spb5['internet_router']
+        date_spb5 = ping_spb5['date_router']
+
+        ping_spb6 = new_ping('mark_9', daterange)
+        vpn_spb6 = ping_spb6['vpn_router']
+        inet_spb6 = ping_spb6['internet_router']
+        date_spb6 = ping_spb6['date_router']
+
+        return render(request, 'blog/post3_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 'inet_router2': inet_spb5, 'inet_router3': inet_spb6, 
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, 'table_router2': log_mark2, 'table_router3': log_mark9,
+                    'times_router2': date_spb5,'vpn_router2': vpn_spb5,  
+                    'times_router3': date_spb6,'vpn_router3': vpn_spb6,})
 ### BEELINE ###    
 def beeline(request):
     
@@ -260,7 +334,20 @@ def beeline(request):
         return render(request, 'blog/beeline.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 
                     'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, })
     else:
-        return render(request, 'blog/beeline.html', context={ 'form': sensform })
+        start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
+        daterange = '{} - {}'.format(start, start)
+        ping_spb4 = new_ping('mark_014', daterange)
+        vpn_spb4 = ping_spb4['vpn_router']
+        inet_spb4 = ping_spb4['internet_router']
+        date_spb4 = ping_spb4['date_router']
+
+        start_date = datetime.datetime.strptime(start, "%m/%d/%Y")
+        end_date = datetime.datetime.strptime(start, "%m/%d/%Y") + datetime.timedelta(days=1) 
+
+        log_mark1 = telelog.objects.filter(log_name = 'mark_014', log_time__range =(start_date, end_date)).order_by('log_time') 
+
+        return render(request, 'blog/beeline.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,})
 ### MRSKSZ ###
 def mrks(request):
     sensform = SensForm()
@@ -298,7 +385,35 @@ def mrks(request):
                     'times_router3': date_spb6,'vpn_router3': vpn_spb6,})
 
     else:
-        return render(request, 'blog/mrsk.html', context={ 'form': sensform })
+        start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
+        daterange = '{} - {}'.format(start, start)
+
+        start_date = dateone.strptime(start, "%m/%d/%Y")
+        end_date = dateone.strptime(start, "%m/%d/%Y")+ datetime.timedelta(days=1)
+
+        log_mark1 = telelog.objects.filter(log_name = 'spb_001', log_time__range =(start_date, end_date)).order_by('log_time') 
+        log_mark2 = telelog.objects.filter(log_name = 'spb_002', log_time__range =(start_date, end_date)).order_by('log_time')
+        log_mark9 = telelog.objects.filter(log_name = 'MRSKSZ_002', log_time__range =(start_date, end_date)).order_by('log_time')
+
+        ping_spb4 = new_ping('spb_001', daterange)
+        vpn_spb4 = ping_spb4['vpn_router']
+        inet_spb4 = ping_spb4['internet_router']
+        date_spb4 = ping_spb4['date_router']
+
+        ping_spb5 = new_ping('spb_002', daterange)
+        vpn_spb5 = ping_spb5['vpn_router']
+        inet_spb5 = ping_spb5['internet_router']
+        date_spb5 = ping_spb5['date_router']
+
+        ping_spb6 = new_ping('MRSKSZ_002', daterange)
+        vpn_spb6 = ping_spb6['vpn_router']
+        inet_spb6 = ping_spb6['internet_router']
+        date_spb6 = ping_spb6['date_router']
+
+        return render(request, 'blog/mrsk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 'inet_router2': inet_spb5, 'inet_router3': inet_spb6, 
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, 'table_router2': log_mark2, 'table_router3': log_mark9,
+                    'times_router2': date_spb5,'vpn_router2': vpn_spb5,  
+                    'times_router3': date_spb6,'vpn_router3': vpn_spb6,})
 ### SIBUR ###
 def sibur(request):
     sensform = SensForm()
@@ -336,7 +451,34 @@ def sibur(request):
                     'times_router3': date_spb6,'vpn_router3': vpn_spb6,})
 
     else:
-        return render(request, 'blog/sibur.html', context={ 'form': sensform })                                                               
+        start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
+        daterange = '{} - {}'.format(start, start)
+
+        start_date = dateone.strptime(start, "%m/%d/%Y")
+        end_date = dateone.strptime(start, "%m/%d/%Y")+ datetime.timedelta(days=1)
+
+        log_mark1 = telelog.objects.filter(log_name = 'spb_004', log_time__range =(start_date, end_date)).order_by('log_time') 
+        log_mark2 = telelog.objects.filter(log_name = 'spb_005', log_time__range =(start_date, end_date)).order_by('log_time')
+        log_mark9 = telelog.objects.filter(log_name = 'spb_006', log_time__range =(start_date, end_date)).order_by('log_time')
+
+        ping_spb4 = new_ping('spb_004', daterange)
+        vpn_spb4 = ping_spb4['vpn_router']
+        inet_spb4 = ping_spb4['internet_router']
+        date_spb4 = ping_spb4['date_router']
+
+        ping_spb5 = new_ping('spb_005', daterange)
+        vpn_spb5 = ping_spb5['vpn_router']
+        inet_spb5 = ping_spb5['internet_router']
+        date_spb5 = ping_spb5['date_router']
+
+        ping_spb6 = new_ping('spb_006', daterange)
+        vpn_spb6 = ping_spb6['vpn_router']
+        inet_spb6 = ping_spb6['internet_router']
+        date_spb6 = ping_spb6['date_router']
+        return render(request, 'blog/sibur.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 'inet_router2': inet_spb5, 'inet_router3': inet_spb6, 
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, 'table_router2': log_mark2, 'table_router3': log_mark9,
+                    'times_router2': date_spb5,'vpn_router2': vpn_spb5,  
+                    'times_router3': date_spb6,'vpn_router3': vpn_spb6,})                                                               
 
 def tele_robot(request):
     
