@@ -4,8 +4,8 @@ from .views import *
 
 urlpatterns = [
     path('', posts_list, name = 'index'),
-    path('mrsk.html', mrks),
-    path('sibur.html', sibur),
+    path('mrsk/', mrks),
+    path('sibur/', sibur),
     path('fromexel.html', work_exel),
     path('teleofis_state.html', tele_robot),
     path('swift.html', swift),
