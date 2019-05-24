@@ -8,6 +8,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/static/libs/Chart.css">
+    <link rel="stylesheet" href="/static/css/min.css">
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/TableExport/4.0.11/css/tableexport.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -80,12 +82,16 @@
                     
             </nav>
     
-    
-    
+            
     {% block content %}
 
     {% endblock %}
     
+    <div class="scrollup">
+        <!-- Иконка fa-chevron-up (Font Awesome) -->
+        <i class="fa fa-chevron-up"></i>
+    </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
@@ -111,6 +117,30 @@
           }, function(start, end, label) {
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
           });
+        });
+    </script>
+
+    <script>
+        $(function() {
+        // при нажатии на кнопку scrollup
+        $('.scrollup').click(function() {
+            // переместиться в верхнюю часть страницы
+            $("html, body").animate({
+            scrollTop:0
+            },300);
+        })
+        })
+        // при прокрутке окна (window)
+        $(window).scroll(function() {
+        // если пользователь прокрутил страницу более чем на 200px
+        if ($(this).scrollTop()>200) {
+            // то сделать кнопку scrollup видимой
+            $('.scrollup').fadeIn();
+        }
+        // иначе скрыть кнопку scrollup
+        else {
+            $('.scrollup').fadeOut();
+        }
         });
     </script>
 
