@@ -128,7 +128,7 @@ def post1_iesk(request):
 
         log_mark1 = telelog.objects.filter(log_name = 'wirenboard-AXGDGLNQ', log_time__range =(start_date, end_date)).order_by('log_time') 
         
-        ping_spb4 = new_ping('AXGDGLNQ', daterange)
+        ping_spb4 = new_ping('wirenboard-AXGDGLNQ', daterange)
         vpn_spb4 = ping_spb4['vpn_router']
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
