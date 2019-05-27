@@ -27,14 +27,14 @@
         </div>
 
             <div class="container" style="max-width: 100%;">   
-                    <canvas id="spb5" width="850" height="200"></canvas>
+                    <canvas id="spb6" width="850" height="200"></canvas>
             </div>
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2"> Пост №3 Опора №247 </h1>    
         </div>   
             <div class="container" style="max-width: 100%;">   
-                    <canvas id="spb6" width="850" height="200"></canvas>
+                    <canvas id="spb5" width="850" height="200"></canvas>
             </div> 
     
         <div id="accordion">
@@ -72,38 +72,6 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" >
-                            Log router: spb_002
-                        </button>
-                    </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
-                    <div class="card-body">
-                        <h2>Log router: spb_002 10.8.0.50</h2>
-                        <div class="table">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                    <th>Log Time</th>
-                                    <th>Log Message</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for i in table_router2 %}
-                                    <tr class='success'>
-                                        <td>{{ i.log_text }}</td>
-                                        <td>{{ i.log_time }}</td>
-                                    </tr>
-                                    {% endfor %}                  
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="card">
                     <div class="card-header" id="headingThree">
                     <h5 class="mb-0">
                         <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -133,6 +101,39 @@
                             </table>
                         </div>
                     </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" >
+                                Log router: spb_002
+                            </button>
+                        </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+                        
+                        <div class="card-body">
+                            <h2>Log router: spb_002 10.8.0.50</h2>
+                            <div class="table">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                        <th>Log Time</th>
+                                        <th>Log Message</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in table_router2 %}
+                                        <tr class='success'>
+                                            <td>{{ i.log_text }}</td>
+                                            <td>{{ i.log_time }}</td>
+                                        </tr>
+                                        {% endfor %}                  
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
                 </div>
