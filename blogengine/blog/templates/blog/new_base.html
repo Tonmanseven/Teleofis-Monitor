@@ -57,11 +57,13 @@
                 <div class="container content">
                         <form class="form-horizontal" method="post" id="form">
                             <div class="form-group">
-                                <div class="col-sm-7">
+                                <div class="col-sm-11">
                                     <br>
-                                        <h5>Дата:</h5>
-                                        {% csrf_token %}
-                                        {{form}}         
+                                        <h5>Дата:</h5>  
+                                        <form class="form-inline">  
+                                              {% csrf_token %}
+                                              {{form}}         
+                                          </form>    
                                 </div>
                             </div>
                             <div class="form-group">

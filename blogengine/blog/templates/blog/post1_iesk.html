@@ -31,8 +31,7 @@
     
         <div class="container" style="max-width: 100%;">   
             <canvas id="spb4" width="850" height="200"></canvas>
-            <canvas id="spb5" width="850" height="200"></canvas>
-            <canvas id="spb6" width="850" height="200"></canvas>
+            
         </div>
         
         <div id="accordion">
@@ -40,14 +39,14 @@
                     <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseOne" >
-                        Log router: mark_3
+                        Log router: wirenboard-AXGDGLNQ
                         </button>
                     </h5>
                     </div>
                 
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" >
                     <div class="card-body">
-                        <h2>Log router: mark_3 10.8.0.22</h2>
+                        <h2>Log router: wirenboard-AXGDGLNQ 10.8.0.154</h2>
                         <div class="table">
                             <table class="table table-bordered">
                                 <thead>
@@ -68,70 +67,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" >
-                            Log router: mark_4
-                        </button>
-                    </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
-                    <div class="card-body">
-                        <h2>Log router: mark_4 10.8.0.34</h2>
-                        <div class="table">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                    <th>Log Time</th>
-                                    <th>Log Message</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for i in table_router2 %}
-                                    <tr class='success'>
-                                        <td>{{ i.log_text }}</td>
-                                        <td>{{ i.log_time }}</td>
-                                    </tr>
-                                    {% endfor %}                  
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-secondary btn-lg btn-block" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Log router: mark_5
-                        </button>
-                    </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div class="card-body">
-                        <h2>Log router: mark_5 10.8.0.26</h2>
-                        <div class="table">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                    <th>Log Time</th>
-                                    <th>Log Message</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for i in table_router3 %}
-                                    <tr class='success'>
-                                        <td>{{ i.log_text }}</td>
-                                        <td>{{ i.log_time }}</td>
-                                    </tr>
-                                    {% endfor %}                 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+
                 </div>
         </div>           
 </main>
@@ -140,14 +76,12 @@
     <!-- Plot -->
 <script>
         var spb4 = document.getElementById("spb4").getContext("2d");
-        var spb5 = document.getElementById("spb5").getContext("2d");
-        var spb6 = document.getElementById("spb6").getContext("2d");
-        
+       
         Chart.defaults.global.defaultFontSize = 18;
     
         var faza_10 = {
         
-        label: "VPN - mark_003",
+        label: "VPN - wirenboard-AXGDGLNQ",
         data: {{ vpn_router1 }},
         lineTension: 0.7,
         borderColor: 'red',
@@ -156,61 +90,18 @@
     
         var inet_10 = {
         
-        label: "internet - mark_003",
+        label: "internet - wirenboard-AXGDGLNQ",
         data: {{ inet_router1 }},
         lineTension: 0.7,
         borderColor: 'blue',
         steppedLine: 'before'
         };
-    
         
-        
-        var faza_11 = {
-        
-        label: "VPN - mark_004",
-        data: {{ vpn_router2 }},
-        lineTension: 0.7,
-        borderColor: 'red',
-        steppedLine: 'before'
-    
-        };  
-        
-        var inet_11 = {
-        label: "internet - mark_004",
-        data: {{ inet_router2 }},
-        lineTension: 0.7,
-        borderColor: 'blue',
-        steppedLine: 'before'
-        };
-    
-        var faza_12 = {
-        label: "VPN - mark_005",
-        data: {{ vpn_router3 }},
-        lineTension: 0.7,
-        borderColor: 'red',
-        steppedLine: 'before'
-        };
-        var inet_12 = {
-        label: "internet - mark_005",
-        data: {{ inet_router3 }},
-        lineTension: 0.7,
-        borderColor: 'blue',
-        steppedLine: 'before'
-        };
-            
         var data_mark10 = {
         labels: {{ times_router1|safe }},
         datasets: [faza_10, inet_10],
         };  
         
-        var data_mark11 = {
-        labels: {{ times_router2|safe }},
-        datasets: [faza_11, inet_11],
-        };  
-        var data_mark12 = {
-        labels: {{ times_router3|safe }},
-        datasets: [faza_12, inet_12],
-        };    
     
         var chartOptions = {
         legend: {
@@ -241,18 +132,7 @@
         maintainAspectRatio: false,
         responsive: true,
         });
-    
-        var lineChart = new Chart(spb5, {
-        type: 'line',
-        data: data_mark11,
-        options: chartOptions
-        });
-        var lineChart = new Chart(spb6, {
-        type: 'line',
-        data: data_mark12,
-        options: chartOptions
-        });
-    
+     
     </script>
 
     <!-- table export script-->
