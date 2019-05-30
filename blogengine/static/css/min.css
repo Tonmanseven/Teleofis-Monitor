@@ -1,0 +1,18 @@
+
+div.scrollup {
+	position: fixed; /* фиксированная позиция */
+	color: #fff; /* цвет текста */
+	background-color: #5f6568; /* цвет заднего фона */
+	left: 30px; /* расстояние от правого края */
+	bottom: 10px; /* расстояние от нижнего края */
+	padding: 7px 30px; /* отступы до содержимого блока */
+	font-size: 20px; /* размер шрифта (иконки) */
+	border-top-left-radius: 4px; /* скругление верхнего левого угла */
+	border-top-right-radius: 4px; /* скругление верхнего правого угла */
+	cursor: pointer; /* форма курсора */
+	display: none; /* не отображать элемент */
+	text-align: center; /*выравнивание содержимого элемента по центру */
+  }
+  div.scrollup:hover {
+	background-color: #000; /* цвет заднего фона при наведении */
+  }
