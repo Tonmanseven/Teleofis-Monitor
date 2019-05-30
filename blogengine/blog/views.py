@@ -13,8 +13,7 @@ from .forms import UserForm, SensForm, FileForm
 from django.http import JsonResponse, FileResponse
 from static.files.getexel import write_exel
 import getpass
-
-print("JLOX", getpass.getuser())
+from static.files.getexel import getdate
 
 ######## data from server ########
    
@@ -53,6 +52,8 @@ def new_ping(hname, daterange):
     # частота выполнений 3600
     return opora_all 
 
+
+#### Небольшой api для iPhone 
 def swift_log(hname, start, end):
 
     start_date = dateone.strptime(start, "%Y-%m-%d")
@@ -409,6 +410,8 @@ def work_exel(request):
 
         start = daterange[0:10]
         end = daterange[13:]
+
+        getdate(start, end)
 
         mk1 = logexel("mark_1", start, end)
         mk2 = logexel("mark_2", start, end)

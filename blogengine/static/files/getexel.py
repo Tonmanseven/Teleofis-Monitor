@@ -2,6 +2,11 @@ from django.db import models
 import xlwt
 import datetime
 from datetime import datetime as dateone
+from blog import views
+
+def getdate(startD, endD):
+    print(startD, endD)
+    views.logexel('mark_1', startD, endD)
 
 
 def write_exel(iesk, beel, mrsk, sib):
