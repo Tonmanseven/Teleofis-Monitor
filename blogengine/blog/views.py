@@ -12,11 +12,6 @@ from blog.models import telelog, teleping
 from .forms import UserForm, SensForm, FileForm
 from django.http import JsonResponse, FileResponse
 from static.files.getexel import write_exel
-<<<<<<< HEAD
-import getpass
-from static.files.getexel import getdate
-=======
->>>>>>> a30987ca0b53956eede0bf28f252ea9ebaf1064e
 
 ######## data from server ########
    
@@ -209,29 +204,15 @@ def post3_iesk(request):
         start_date = dateone.strptime(start, "%m/%d/%Y")
         end_date = dateone.strptime(end, "%m/%d/%Y")+ datetime.timedelta(days=1)
 
-        log_mark1 = telelog.objects.filter(log_name = 'mark_1', log_time__range =(start_date, end_date)).order_by('log_time') 
-        log_mark2 = telelog.objects.filter(log_name = 'mark_2', log_time__range =(start_date, end_date)).order_by('log_time')
-        log_mark9 = telelog.objects.filter(log_name = 'mark_9', log_time__range =(start_date, end_date)).order_by('log_time')
-
-        ping_spb4 = new_ping('mark_1', daterange)
+        log_mark1 = telelog.objects.filter(log_name = 'wirenboard-AO5Y5KPU', log_time__range =(start_date, end_date)).order_by('log_time') 
+        
+        ping_spb4 = new_ping('wirenboard-AO5Y5KPU', daterange)
         vpn_spb4 = ping_spb4['vpn_router']
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
-        ping_spb5 = new_ping('mark_2', daterange)
-        vpn_spb5 = ping_spb5['vpn_router']
-        inet_spb5 = ping_spb5['internet_router']
-        date_spb5 = ping_spb5['date_router']
-
-        ping_spb6 = new_ping('mark_9', daterange)
-        vpn_spb6 = ping_spb6['vpn_router']
-        inet_spb6 = ping_spb6['internet_router']
-        date_spb6 = ping_spb6['date_router']
-
-        return render(request, 'blog/post3_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 'inet_router2': inet_spb5, 'inet_router3': inet_spb6, 
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, 'table_router2': log_mark2, 'table_router3': log_mark9,
-                    'times_router2': date_spb5,'vpn_router2': vpn_spb5,  
-                    'times_router3': date_spb6,'vpn_router3': vpn_spb6,})
+        return render(request, 'blog/post3_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4,  
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,})
 
     else:
         start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
@@ -239,29 +220,15 @@ def post3_iesk(request):
         start_date = dateone.strptime(start, "%m/%d/%Y")
         end_date = dateone.strptime(start, "%m/%d/%Y")+ datetime.timedelta(days=1)
 
-        log_mark1 = telelog.objects.filter(log_name = 'mark_1', log_time__range =(start_date, end_date)).order_by('log_time') 
-        log_mark2 = telelog.objects.filter(log_name = 'mark_2', log_time__range =(start_date, end_date)).order_by('log_time')
-        log_mark9 = telelog.objects.filter(log_name = 'mark_9', log_time__range =(start_date, end_date)).order_by('log_time')
-
-        ping_spb4 = new_ping('mark_1', daterange)
+        log_mark1 = telelog.objects.filter(log_name = 'wirenboard-AO5Y5KPU', log_time__range =(start_date, end_date)).order_by('log_time') 
+        
+        ping_spb4 = new_ping('wirenboard-AO5Y5KPU', daterange)
         vpn_spb4 = ping_spb4['vpn_router']
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
-        ping_spb5 = new_ping('mark_2', daterange)
-        vpn_spb5 = ping_spb5['vpn_router']
-        inet_spb5 = ping_spb5['internet_router']
-        date_spb5 = ping_spb5['date_router']
-
-        ping_spb6 = new_ping('mark_9', daterange)
-        vpn_spb6 = ping_spb6['vpn_router']
-        inet_spb6 = ping_spb6['internet_router']
-        date_spb6 = ping_spb6['date_router']
-
-        return render(request, 'blog/post3_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 'inet_router2': inet_spb5, 'inet_router3': inet_spb6, 
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, 'table_router2': log_mark2, 'table_router3': log_mark9,
-                    'times_router2': date_spb5,'vpn_router2': vpn_spb5,  
-                    'times_router3': date_spb6,'vpn_router3': vpn_spb6,})
+        return render(request, 'blog/post3_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1 })
 ### BEELINE ###    
 def beeline(request):
     
