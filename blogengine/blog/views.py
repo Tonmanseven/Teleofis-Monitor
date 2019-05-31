@@ -493,12 +493,6 @@ def work_exel(request):
         log_mk1 = mk1['text_log']
         log_mk2 = mk2['text_log']
         log_mk3 = mk3['text_log']
-        log_mk4 = mk4['text_log']
-        log_mk5 = mk5['text_log']
-        log_mk6 = mk6['text_log']
-        log_mk7 = mk7['text_log']
-        log_mk8 = mk8['text_log']
-        log_mk9 = mk9['text_log']
         log_bee = mk14['text_log']
         log_spb1 = sp1['text_log']
         log_spb2 = sp2['text_log']
@@ -507,7 +501,7 @@ def work_exel(request):
         log_spb5 = sp5['text_log']
         log_spb6 = sp6['text_log']
 
-        log_iesk = [log_mk1, log_mk2, log_mk3, log_mk4, log_mk5, log_mk6, log_mk7, log_mk8, log_mk9]
+        log_iesk = [log_mk1, log_mk2, log_mk3]
         log_mrsk = [log_spb1, log_spb2, log_mrs]
         log_sibur = [log_spb4, log_spb5, log_spb6]
         write_exel(log_iesk, log_bee, log_mrsk, log_sibur)
