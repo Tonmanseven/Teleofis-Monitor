@@ -4,9 +4,9 @@ import datetime
 from datetime import datetime as dateone
 from blog import views
 
-def getdate(startD, endD):
-    print(startD, endD)
-    views.logexel('mark_1', startD, endD)
+# def getdate(startD, endD):
+#     print(startD, endD)
+#     views.logexel('mark_1', startD, endD)
 
 
 def write_exel(iesk, beel, mrsk, sib):
@@ -30,39 +30,33 @@ def write_exel(iesk, beel, mrsk, sib):
     n = 2
     a1 = 2 
     a2 = 2
-    a3 = 2
-    a4 = 2
-    a5 = 2 
-    a6 = 2
-    a7 = 2
-    a8 = 2
-
+   
     ws.write(0, 1, 'Данные за период: ', style0)
 
     ws.write(0, 0, 'Пост №1 Опора типа П 203/56 кВ', style0)
-    ws.write(1, 0, 'mark_3', style1)
-    ws.write(2, 0, 'mark_4', style1)
-    ws.write(3, 0, 'mark_5', style1)
+    ws.write(1, 0, 'wirenboard-AXGDGLNQ', style1)
+    # ws.write(2, 0, 'mark_4', style1)
+    # ws.write(3, 0, 'mark_5', style1)
 
     ws.write(5, 0, 'Пост №2 Опора типа П 203/60 кВ', style0)
-    ws.write(6, 0, 'mark_6', style1)
-    ws.write(7, 0, 'mark_7', style1)
-    ws.write(8, 0, 'mark_8', style1)
+    ws.write(6, 0, 'wirenboard-AD7R5B2', style1)
+    # ws.write(7, 0, 'mark_7', style1)
+    # ws.write(8, 0, 'mark_8', style1)
 
     ws.write(10, 0, 'Пост №3 Опора КРУЭ Б 220 кВ', style0)
-    ws.write(11, 0, 'mark_1', style1)
-    ws.write(12, 0, 'mark_2', style1)
-    ws.write(13, 0, 'mark_9', style1)
+    ws.write(11, 0, 'wirenboard-AO5Y5KPU', style1)
+    # ws.write(12, 0, 'mark_2', style1)
+    # ws.write(13, 0, 'mark_9', style1)
 
-    ws.write(1, 1, 'mark_1', style1)  
-    ws.write(1, 2, 'mark_2', style1)
-    ws.write(1, 3, 'mark_3', style1)        
-    ws.write(1, 4, 'mark_4', style1)                 
-    ws.write(1, 5, 'mark_5', style1)        
-    ws.write(1, 6, 'mark_6', style1)
-    ws.write(1, 7, 'mark_7', style1)          
-    ws.write(1, 8, 'mark_8', style1)
-    ws.write(1, 9, 'mark_9', style1)
+    ws.write(1, 1, 'wirenboard-AXGDGLNQ', style1)  
+    ws.write(1, 2, 'wirenboard-AD7R5B2', style1)
+    ws.write(1, 3, 'wirenboard-AO5Y5KPU', style1)        
+    # ws.write(1, 4, 'mark_4', style1)                 
+    # ws.write(1, 5, 'mark_5', style1)        
+    # ws.write(1, 6, 'mark_6', style1)
+    # ws.write(1, 7, 'mark_7', style1)          
+    # ws.write(1, 8, 'mark_8', style1)
+    # ws.write(1, 9, 'mark_9', style1)
     
     for item in iesk[0]:
         if ("voltage supply" in item):
@@ -106,90 +100,7 @@ def write_exel(iesk, beel, mrsk, sib):
         ws.write(a2, 3, item, style1)
         a2 += 1  
 
-    for item in iesk[3]:
-        if ("voltage supply" in item):
-            continue
-        if ("switching to backup power" in item):
-            item = item.replace("user.notice root: power supply error: switching to backup power", "Переход на резервное питание")
-        if ("main supply restored" in item):
-            item = item.replace("user.notice root: power supply error: main supply restored", "Переход на основное питание") 
-        if ("Password auth succeeded for 'root' from" in item):
-            item = item.replace("Password auth succeeded for 'root' from", "Подключение пользователя как root с ip:")
-        if ("authpriv.notice dropbear" in item):
-            item = item.replace("authpriv.notice dropbear", "")
-        ws.write(a3, 4, item, style1)
-        a3 += 1  
-
-    for item in iesk[4]:
-        if ("voltage supply" in item):
-            continue
-        if ("switching to backup power" in item):
-            item = item.replace("user.notice root: power supply error: switching to backup power", "Переход на резервное питание")
-        if ("main supply restored" in item):
-            item = item.replace("user.notice root: power supply error: main supply restored", "Переход на основное питание") 
-        if ("Password auth succeeded for 'root' from" in item):
-            item = item.replace("Password auth succeeded for 'root' from", "Подключение пользователя как root с ip:")
-        if ("authpriv.notice dropbear" in item):
-            item = item.replace("authpriv.notice dropbear", "")
-        ws.write(a4, 5, item, style1)
-        a4 += 1 
     
-    for item in iesk[5]:
-        if ("voltage supply" in item):
-            continue
-        if ("switching to backup power" in item):
-            item = item.replace("user.notice root: power supply error: switching to backup power", "Переход на резервное питание")
-        if ("main supply restored" in item):
-            item = item.replace("user.notice root: power supply error: main supply restored", "Переход на основное питание") 
-        if ("Password auth succeeded for 'root' from" in item):
-            item = item.replace("Password auth succeeded for 'root' from", "Подключение пользователя как root с ip:")
-        if ("authpriv.notice dropbear" in item):
-            item = item.replace("authpriv.notice dropbear", "")
-        ws.write(a5, 6, item, style1)
-        a5 += 1 
-
-    for item in iesk[6]:
-        if ("voltage supply" in item):
-            continue
-        if ("switching to backup power" in item):
-            item = item.replace("user.notice root: power supply error: switching to backup power", "Переход на резервное питание")
-        if ("main supply restored" in item):
-            item = item.replace("user.notice root: power supply error: main supply restored", "Переход на основное питание")
-        if ("Password auth succeeded for 'root' from" in item):
-            item = item.replace("Password auth succeeded for 'root' from", "Подключение пользователя как root с ip:")
-        if ("authpriv.notice dropbear" in item):
-            item = item.replace("authpriv.notice dropbear", "")
-        ws.write(a6, 7, item, style1)
-        a6 += 1 
-
-    for item in iesk[7]:
-        if ("voltage supply" in item):
-            continue
-        if ("switching to backup power" in item):
-            item = item.replace("user.notice root: power supply error: switching to backup power", "Переход на резервное питание")
-        if ("main supply restored" in item):
-            item = item.replace("user.notice root: power supply error: main supply restored", "Переход на основное питание") 
-        if ("Password auth succeeded for 'root' from" in item):
-            item = item.replace("Password auth succeeded for 'root' from", "Подключение пользователя как root с ip:")
-        if ("authpriv.notice dropbear" in item):
-            item = item.replace("authpriv.notice dropbear", "")
-        ws.write(a7, 8, item, style1)
-        a7 += 1
-
-    for item in iesk[8]:
-        if ("voltage supply" in item):
-            continue
-        if ("switching to backup power" in item):
-            item = item.replace("user.notice root: power supply error: switching to backup power", "Переход на резервное питание")
-        if ("main supply restored" in item):
-            item = item.replace("user.notice root: power supply error: main supply restored", "Переход на основное питание")
-        if ("Password auth succeeded for 'root' from" in item):
-            item = item.replace("Password auth succeeded for 'root' from", "Подключение пользователя как root с ip:")
-        if ("authpriv.notice dropbear" in item):
-            item = item.replace("authpriv.notice dropbear", "")
-        ws.write(a8, 9, item, style1)
-        a8 += 1
-
     #### beeline
     n1 = 2
     wbee.write(0, 1, 'Роутер', style0)
