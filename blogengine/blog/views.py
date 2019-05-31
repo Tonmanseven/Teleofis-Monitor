@@ -474,18 +474,12 @@ def work_exel(request):
         start = daterange[0:10]
         end = daterange[13:]
 
-        getdate(start, end)
+        #getdate(start, end)
 
-        mk1 = logexel("mark_1", start, end)
-        mk2 = logexel("mark_2", start, end)
-        mk3 = logexel("mark_3", start, end)
-        mk4 = logexel("mark_4", start, end)
-        mk5 = logexel("mark_5", start, end)
-        mk6 = logexel("mark_6", start, end)
-        mk7 = logexel("mark_7", start, end)
-        mk8 = logexel("mark_8", start, end)
-        mk9 = logexel("mark_9", start, end)
-
+        mk1 = logexel("wirenboard-AXGDGLNQ", start, end)
+        mk2 = logexel("wirenboard-AD7R5B2", start, end)
+        mk3 = logexel("wirenboard-AO5Y5KPU", start, end)
+       
         mk14 = logexel("mark_014", start, end)
 
         sp1 = logexel("spb_001", start, end)
