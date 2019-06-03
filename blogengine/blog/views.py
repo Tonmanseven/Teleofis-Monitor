@@ -402,7 +402,7 @@ def sibur(request):
 def tele_robot(request):
     
     teleofis_new = teleping()
-    tele_log = telelog()
+   
     
     if request.method == "GET":
         
@@ -414,6 +414,8 @@ def tele_robot(request):
 
         if (len(logList) > 0):
             for item in logList:
+                tele_log = telelog()
+                
                 text = item["text"] ## - текст события 
                 timestamp_i = item["timestamp"] # - время события
                 print(text, ": ", timestamp_i)
