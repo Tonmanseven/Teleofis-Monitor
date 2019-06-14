@@ -8,7 +8,7 @@ from django.http import HttpResponse, StreamingHttpResponse, HttpResponseRedirec
 from django.core.files import File
 # Импортируем библиотеку, соответствующую типу нашей базы данных
 import sqlite3, base64, zlib
-from blog.models import telelog, teleping
+from blog.models import telelog, teleping, telemetry
 from .forms import UserForm, SensForm, FileForm
 from django.http import JsonResponse, FileResponse
 from static.files.getexel import write_exel
@@ -411,6 +411,7 @@ def tele_robot(request):
         hostname = data["hostname"]
         statusList = data["statusList"]
         logList = data["logList"]
+        telemetryList = data["telemetryList"]
 
         if (len(logList) > 0):
             for item in logList:
@@ -418,7 +419,7 @@ def tele_robot(request):
                 
                 text = item["text"] ## - текст события 
                 timestamp_i = item["timestamp"] # - время события
-                print(text, ": ", timestamp_i)
+                #print(text, ": ", timestamp_i)
                 logtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp_i))
 
                 tele_log.log_name = hostname
@@ -426,6 +427,23 @@ def tele_robot(request):
                 tele_log.log_time = logtime
 
                 tele_log.save()    
+
+        if (len(telemetryList) > 0):
+            for item in telemetryList:
+                metry = telemetry()
+
+                time_i = item["timestamp"]
+                tele_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time_i))
+                v_in = item["vIn"] ## - напр на входе
+                brdTemp = item["boardTemp"] ## - темп на борту 
+                cpuTemp = item["cpuTemp"] ## - темп процессора 
+
+                metry.vin = v_in
+                metry.timetel = time_i
+                metry.cpu_temp = cpuTemp
+                metry.board_temp = brdTemp
+
+                metry.save()
 
         buffer = GetAverage(statusList)
         timestamp = buffer["timestamp"] # - время пингования 
