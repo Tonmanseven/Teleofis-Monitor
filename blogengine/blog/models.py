@@ -20,3 +20,13 @@ class telelog(models.Model):
    
     def __str__(self):
         return '{} {}'.format(self.log_text, self.log_time)  
+
+class telemetry(models.Model):
+
+    vin = models.CharField(max_length= 150, db_index= True, default = None)
+    timetel = models.DateTimeField(default = timezone.now, auto_now_add=False)        
+    cpu_temp = models.CharField(max_length= 150, db_index= True, default = None)
+    board_temp = models.CharField(max_length= 150, db_index= True, default = None)
+
+    def __str__(self):
+        return '{} {}'.format(self.vin, self.timetel)  
