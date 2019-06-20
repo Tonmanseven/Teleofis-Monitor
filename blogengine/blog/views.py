@@ -439,7 +439,7 @@ def tele_robot(request):
                 cpuTemp = item["cpuTemp"] ## - темп процессора 
 
                 metry.vin = v_in
-                metry.timetel = time_i
+                metry.timetel = tele_time
                 metry.cpu_temp = cpuTemp
                 metry.board_temp = brdTemp
 
