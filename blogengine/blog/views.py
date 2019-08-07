@@ -436,15 +436,24 @@ def tele_robot(request):
                 time_i = item["timestamp"]
                 tele_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time_i))
                 v_in = item["vIn"] ## - напр на входе
-                brdTemp = item["boardTemp"] ## - темп на борту 
-                cpuTemp = item["cpuTemp"] ## - темп процессора 
+                
+                
+                if (item["boardTemp"] is not None ):
+                    brdTemp = item["boardTemp"] ## - темп на борту
+                else: 
+                    brdTemp = " "
+
+                if (item["cpuTemp"] is not None):
+                    cpuTemp = item["cpuTemp"] ## - темп процессора 
+                else: 
+                    cpuTemp = " "
 
                 metry.vin = v_in
                 metry.timetel = tele_time
                 metry.cpu_temp = cpuTemp
                 metry.board_temp = brdTemp
                 metry.tele_name = hostname
-                
+
                 metry.save()
 
         buffer = GetAverage(statusList)
