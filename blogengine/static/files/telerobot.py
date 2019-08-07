@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf_8 -*-
+
 import os
 import sys
 import time
@@ -19,6 +22,7 @@ server = "http://91.227.154.50/teleofis_state.html"
 localdb = dict()
 localdb["statusList"] = list()
 localdb["logList"] = list()
+localdb["telemetryList"] = list()
 
 
 class bcolors:
@@ -256,7 +260,7 @@ def CommunicationTest():
 	global localdb
 	timestamp = int(time.time())
 	internetStatus = Ping("google.com") or Ping("yandex.ru") or Ping("8.8.8.8")
-	vpnStatus = Ping("10.8.0.1")
+	vpnStatus = Ping("10.8.0.1") or Ping("10.9.0.1")
 	buffer = {"timestamp":timestamp, "internetStatus":internetStatus, "vpnStatus":vpnStatus}
 	localdb["statusList"].append(buffer)
 #end define
@@ -307,11 +311,12 @@ def GetAverage(statusList):
 
 def DataSend():
 	global localdb
-	while (len(localdb["statusList"]) > 3 or len(localdb["logList"]) > 3):
+	while (len(localdb["statusList"]) > 3 or len(localdb["logList"]) > 3 or len(localdb["telemetryList"]) > 3):
 		hostname = socket.gethostname()
 		statusList = GetItemsFromList(localdb["statusList"])
 		logList = GetItemsFromList(localdb["logList"])
-		buffer = {"hostname":hostname, "statusList": statusList, "logList":logList}
+		telemetryList = GetItemsFromList(localdb["telemetryList"])
+		buffer = {"hostname":hostname, "statusList": statusList, "logList":logList, "telemetryList":telemetryList}
 		data = ItemToBase64WithCompress(buffer)
 		url = server + "?data=" + data
 		Autostart.AddLog("DataSend: " + url, "debug")
@@ -321,6 +326,7 @@ def DataSend():
 			Autostart.AddLog(str(error), "error")
 			RestoreList(localdb["statusList"], statusList)
 			RestoreList(localdb["logList"], logList)
+			RestoreList(localdb["telemetryList"], telemetryList)
 			return
 #end define
 
@@ -463,10 +469,10 @@ def GetInfo():
 	file.close()
 	buffer = buffer.replace('\n', '')
 	buff_voltage = int(buffer) * 22.0245996094 / 1000
-	voltage = round(buff_voltage)
-	text = "voltage supply = " + str(voltage)
-	buffer = {"timestamp":timestamp, "text":text}
-	localdb["logList"].append(buffer)
+	vIn = round(buff_voltage)
+	
+	buffer = {"timestamp":timestamp, "vIn":vIn}
+	localdb["telemetryList"].append(buffer)
 #end define
 
 def SelfUpdating():
