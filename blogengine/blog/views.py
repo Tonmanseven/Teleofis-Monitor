@@ -23,6 +23,7 @@ def new_ping(hname, daterange):
     end_date = dateone.strptime(end, "%m/%d/%Y") + datetime.timedelta(days=1)
 
     tele_data = teleping.objects.filter(host = '{}'.format(hname), timestamp__range=(start_date, end_date)).order_by('timestamp')
+    metry_data = telemetry.objects.filter(tele_name = '{}'.format(hname), timetel__range=(start_date, end_date)).order_by('timetel')
 
     j = 0
     auff = []
@@ -38,18 +39,37 @@ def new_ping(hname, daterange):
         dt_pub.append(auff[j].timestamp.strftime('%d-%m-%Y %H:%M'))  
         j += 1 
 
+    k = 0
+    aumm = []
+    temp_cpu = []
+    board_cpu = []
+    vin_value = []
+    date_metry = []
+    for l in metry_data:
+        aumm.append(l)
+        temp_cpu.append(float(aumm[k].cpu_temp))
+        board_cpu.append(float(aumm[k].board_temp))
+        vin_value.append(float(aumm[k].vin))
+        date_metry.append(aumm[k].timetel.strftime('%d-%m-%Y %H:%M'))  
+        k += 1
+
+
     opora_all = {
         
         'host_router': host,
         'vpn_router': vpn,
         'internet_router': inet,
         'date_router': dt_pub,
+
+        'temp_cpu': temp_cpu,
+        'temp_board': board_cpu,
+        'vin_value': vin_value,
+        'date_metry': date_metry,
             
     }                
 
     # частота выполнений 3600
     return opora_all 
-
 
 #### Небольшой api для iPhone 
 def swift_log(hname, start, end):
@@ -127,17 +147,22 @@ def post1_iesk(request):
 
         start_date = dateone.strptime(start, "%m/%d/%Y")
         end_date = dateone.strptime(end, "%m/%d/%Y")+ datetime.timedelta(days=1)
-
+#wirenboard-AXGDGLNQ
         log_mark1 = telelog.objects.filter(log_name = 'wirenboard-AXGDGLNQ', log_time__range =(start_date, end_date)).order_by('log_time') 
         
         ping_spb4 = new_ping('wirenboard-AXGDGLNQ', daterange)
         vpn_spb4 = ping_spb4['vpn_router']
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
-
+       
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
         
         return render(request, 'blog/post1_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, })
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 
     else:
         start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
@@ -152,8 +177,15 @@ def post1_iesk(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
+        print(cpu_spb4)
+
         return render(request, 'blog/post1_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4,
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, })
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, 
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 
 def post2_iesk(request):
     sensform = SensForm()
@@ -174,8 +206,14 @@ def post2_iesk(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
+
         return render(request, 'blog/post2_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1 })
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 
     else:
         start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
@@ -189,8 +227,14 @@ def post2_iesk(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
+
         return render(request, 'blog/post2_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4,
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1 })
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 
 def post3_iesk(request):
     sensform = SensForm()
@@ -211,8 +255,14 @@ def post3_iesk(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
+
         return render(request, 'blog/post3_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4,  
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,})
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 
     else:
         start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
@@ -227,8 +277,14 @@ def post3_iesk(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
+
         return render(request, 'blog/post3_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1 })
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 ### BEELINE ###    
 def beeline(request):
     

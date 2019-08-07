@@ -29,10 +29,13 @@
             </div>
 
     
-        <div class="container" style="max-width: 100%;">   
-            <canvas id="spb4" width="850" height="200"></canvas>
-            
+        
+
+        <div class="container" style="max-width: 100%; max-height: 100%">   
+            <canvas id="spb4" width="850" height="200" ></canvas>
         </div>
+
+        <div id="container_pluto" style="width:100%; height:300px;"></div>
         
         <div id="accordion">
                 <div class="card">
@@ -74,6 +77,36 @@
 {% endblock %}
 {% block script %} 
     <!-- Plot -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        var myChart = Highcharts.chart('container_pluto', {
+            chart: {
+                type: 'areaspline'
+            },
+            title: {
+                text: 'WirenBoard Telemetry'
+            },
+            xAxis: {
+                categories: {{ teltime|safe }}
+            },
+            yAxis: {
+                title: {
+                    text: ''
+                }
+            },
+            series: [{
+                name: 'CPU Temperature °C',
+                data: {{ cpu|safe }}
+            }, {
+                name: 'Board Temperature °C',
+                data: {{ board|safe }}
+            }, {
+                name: 'Voltage Supply, V',
+                data: {{ vin|safe }}
+            }]
+            });
+        });
+    </script>
 <script>
         var spb4 = document.getElementById("spb4").getContext("2d");
        
