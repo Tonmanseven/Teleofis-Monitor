@@ -8,7 +8,7 @@ from django.http import HttpResponse, StreamingHttpResponse, HttpResponseRedirec
 from django.core.files import File
 # Импортируем библиотеку, соответствующую типу нашей базы данных
 import sqlite3, base64, zlib
-from blog.models import telelog, teleping
+from blog.models import telelog, teleping, telemetry
 from .forms import UserForm, SensForm, FileForm
 from django.http import JsonResponse, FileResponse
 from static.files.getexel import write_exel
@@ -23,6 +23,7 @@ def new_ping(hname, daterange):
     end_date = dateone.strptime(end, "%m/%d/%Y") + datetime.timedelta(days=1)
 
     tele_data = teleping.objects.filter(host = '{}'.format(hname), timestamp__range=(start_date, end_date)).order_by('timestamp')
+    metry_data = telemetry.objects.filter(tele_name = '{}'.format(hname), timetel__range=(start_date, end_date)).order_by('timetel')
 
     j = 0
     auff = []
@@ -38,18 +39,37 @@ def new_ping(hname, daterange):
         dt_pub.append(auff[j].timestamp.strftime('%d-%m-%Y %H:%M'))  
         j += 1 
 
+    k = 0
+    aumm = []
+    temp_cpu = []
+    board_cpu = []
+    vin_value = []
+    date_metry = []
+    for l in metry_data:
+        aumm.append(l)
+        temp_cpu.append(float(aumm[k].cpu_temp))
+        board_cpu.append(float(aumm[k].board_temp))
+        vin_value.append(float(aumm[k].vin))
+        date_metry.append(aumm[k].timetel.strftime('%d-%m-%Y %H:%M'))  
+        k += 1
+
+
     opora_all = {
         
         'host_router': host,
         'vpn_router': vpn,
         'internet_router': inet,
         'date_router': dt_pub,
+
+        'temp_cpu': temp_cpu,
+        'temp_board': board_cpu,
+        'vin_value': vin_value,
+        'date_metry': date_metry,
             
     }                
 
     # частота выполнений 3600
     return opora_all 
-
 
 #### Небольшой api для iPhone 
 def swift_log(hname, start, end):
@@ -127,17 +147,22 @@ def post1_iesk(request):
 
         start_date = dateone.strptime(start, "%m/%d/%Y")
         end_date = dateone.strptime(end, "%m/%d/%Y")+ datetime.timedelta(days=1)
-
+#wirenboard-AXGDGLNQ
         log_mark1 = telelog.objects.filter(log_name = 'wirenboard-AXGDGLNQ', log_time__range =(start_date, end_date)).order_by('log_time') 
         
         ping_spb4 = new_ping('wirenboard-AXGDGLNQ', daterange)
         vpn_spb4 = ping_spb4['vpn_router']
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
-
+       
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
         
         return render(request, 'blog/post1_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, })
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 
     else:
         start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
@@ -152,8 +177,15 @@ def post1_iesk(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
+        print(cpu_spb4)
+
         return render(request, 'blog/post1_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4,
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, })
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1, 
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 
 def post2_iesk(request):
     sensform = SensForm()
@@ -174,8 +206,14 @@ def post2_iesk(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
+
         return render(request, 'blog/post2_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1 })
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 
     else:
         start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
@@ -189,8 +227,14 @@ def post2_iesk(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
+
         return render(request, 'blog/post2_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4,
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1 })
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 
 def post3_iesk(request):
     sensform = SensForm()
@@ -211,8 +255,14 @@ def post3_iesk(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
+
         return render(request, 'blog/post3_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4,  
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,})
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 
     else:
         start = datetime.datetime.strftime( datetime.datetime.now(), "%m/%d/%Y")
@@ -227,8 +277,14 @@ def post3_iesk(request):
         inet_spb4 = ping_spb4['internet_router']
         date_spb4 = ping_spb4['date_router']
 
+        cpu_spb4 = ping_spb4['temp_cpu']
+        board_spb4 = ping_spb4['temp_board']
+        vin_spb4 = ping_spb4['vin_value']
+        tel_spb4 = ping_spb4['date_metry']
+
         return render(request, 'blog/post3_iesk.html', context={ 'form': sensform, 'inet_router1': inet_spb4, 
-                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1 })
+                    'times_router1': date_spb4, 'vpn_router1': vpn_spb4, 'table_router1': log_mark1,
+                    'cpu':cpu_spb4, 'board':board_spb4, 'vin': vin_spb4, 'teltime': tel_spb4 })
 ### BEELINE ###    
 def beeline(request):
     
@@ -402,7 +458,7 @@ def sibur(request):
 def tele_robot(request):
     
     teleofis_new = teleping()
-    tele_log = telelog()
+   
     
     if request.method == "GET":
         
@@ -411,19 +467,50 @@ def tele_robot(request):
         hostname = data["hostname"]
         statusList = data["statusList"]
         logList = data["logList"]
+        telemetryList = data["telemetryList"]
 
         if (len(logList) > 0):
             for item in logList:
+                tele_log = telelog()
+                
                 text = item["text"] ## - текст события 
                 timestamp_i = item["timestamp"] # - время события
-                print(text, ": ", timestamp_i)
+                #print(text, ": ", timestamp_i)
                 logtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(timestamp_i))
 
-            tele_log.log_name = hostname
-            tele_log.log_text = text
-            tele_log.log_time = logtime
+                tele_log.log_name = hostname
+                tele_log.log_text = text
+                tele_log.log_time = logtime
 
-            tele_log.save()    
+                tele_log.save()    
+
+        print(telemetryList)
+        if (len(telemetryList) > 0):
+            for item in telemetryList:
+                metry = telemetry()
+
+                time_i = item["timestamp"]
+                tele_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time_i))
+                v_in = item["vIn"] ## - напр на входе
+                
+                
+                if ("boardTemp" in item):
+                    brdTemp = item["boardTemp"] ## - темп на борту
+                else: 
+                    brdTemp = " "
+
+                if ("cpuTemp" in item):
+                    cpuTemp = item["cpuTemp"] ## - темп процессора 
+                else: 
+                    cpuTemp = " "
+
+                metry.vin = v_in
+                metry.timetel = tele_time
+                metry.cpu_temp = cpuTemp
+                metry.board_temp = brdTemp
+                metry.tele_name = hostname
+
+                metry.save()
 
         buffer = GetAverage(statusList)
         timestamp = buffer["timestamp"] # - время пингования 
@@ -474,18 +561,12 @@ def work_exel(request):
         start = daterange[0:10]
         end = daterange[13:]
 
-        getdate(start, end)
+        #getdate(start, end)
 
-        mk1 = logexel("mark_1", start, end)
-        mk2 = logexel("mark_2", start, end)
-        mk3 = logexel("mark_3", start, end)
-        mk4 = logexel("mark_4", start, end)
-        mk5 = logexel("mark_5", start, end)
-        mk6 = logexel("mark_6", start, end)
-        mk7 = logexel("mark_7", start, end)
-        mk8 = logexel("mark_8", start, end)
-        mk9 = logexel("mark_9", start, end)
-
+        mk1 = logexel("wirenboard-AXGDGLNQ", start, end)
+        mk2 = logexel("wirenboard-AD7R5B2", start, end)
+        mk3 = logexel("wirenboard-AO5Y5KPU", start, end)
+       
         mk14 = logexel("mark_014", start, end)
 
         sp1 = logexel("spb_001", start, end)
@@ -499,12 +580,6 @@ def work_exel(request):
         log_mk1 = mk1['text_log']
         log_mk2 = mk2['text_log']
         log_mk3 = mk3['text_log']
-        log_mk4 = mk4['text_log']
-        log_mk5 = mk5['text_log']
-        log_mk6 = mk6['text_log']
-        log_mk7 = mk7['text_log']
-        log_mk8 = mk8['text_log']
-        log_mk9 = mk9['text_log']
         log_bee = mk14['text_log']
         log_spb1 = sp1['text_log']
         log_spb2 = sp2['text_log']
@@ -513,7 +588,7 @@ def work_exel(request):
         log_spb5 = sp5['text_log']
         log_spb6 = sp6['text_log']
 
-        log_iesk = [log_mk1, log_mk2, log_mk3, log_mk4, log_mk5, log_mk6, log_mk7, log_mk8, log_mk9]
+        log_iesk = [log_mk1, log_mk2, log_mk3]
         log_mrsk = [log_spb1, log_spb2, log_mrs]
         log_sibur = [log_spb4, log_spb5, log_spb6]
         write_exel(log_iesk, log_bee, log_mrsk, log_sibur)
