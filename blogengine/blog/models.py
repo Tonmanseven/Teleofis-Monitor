@@ -23,6 +23,7 @@ class telelog(models.Model):
 
 class telemetry(models.Model):
 
+    tele_name = models.CharField(max_length= 150, db_index= True, default = None )
     vin = models.TextField(db_index= True)
     timetel = models.DateTimeField(default = timezone.now, auto_now_add=False)        
     cpu_temp = models.TextField(db_index= True)
