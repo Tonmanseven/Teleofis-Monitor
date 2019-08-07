@@ -438,12 +438,12 @@ def tele_robot(request):
                 v_in = item["vIn"] ## - напр на входе
                 
                 
-                if (item["boardTemp"] is not None ):
+                if ("boardTemp" in item):
                     brdTemp = item["boardTemp"] ## - темп на борту
                 else: 
                     brdTemp = " "
 
-                if (item["cpuTemp"] is not None):
+                if ("cpuTemp" in item):
                     cpuTemp = item["cpuTemp"] ## - темп процессора 
                 else: 
                     cpuTemp = " "
