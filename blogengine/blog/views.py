@@ -438,12 +438,13 @@ def tele_robot(request):
                 v_in = item["vIn"] ## - напр на входе
                 brdTemp = item["boardTemp"] ## - темп на борту 
                 cpuTemp = item["cpuTemp"] ## - темп процессора 
-                
+
                 metry.vin = v_in
                 metry.timetel = tele_time
                 metry.cpu_temp = cpuTemp
                 metry.board_temp = brdTemp
-
+                metry.tele_name = hostname
+                
                 metry.save()
 
         buffer = GetAverage(statusList)
