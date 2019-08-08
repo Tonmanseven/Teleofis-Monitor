@@ -85,7 +85,7 @@
                 text: 'WirenBoard Telemetry'
             },
             xAxis: {
-                categories: {{ teltime }}
+                categories: {{ teltime|safe }}
             },
             yAxis: {
                 title: {
@@ -94,13 +94,13 @@
             },
             series: [{
                 name: 'CPU Temperature °C',
-                data: {{ cpu }}
+                data: {{ cpu|safe }}
             }, {
                 name: 'Board Temperature °C',
-                data: {{ board }}
+                data: {{ board|safe }}
             }, {
                 name: 'Voltage Supply, V',
-                data: {{ vin }}
+                data: {{ vin|safe }}
             }]
             });
         });
