@@ -47,9 +47,30 @@ def new_ping(hname, daterange):
     date_metry = []
     for l in metry_data:
         aumm.append(l)
-        temp_cpu.append(float(aumm[k].cpu_temp))
-        board_cpu.append(float(aumm[k].board_temp))
-        vin_value.append(float(aumm[k].vin))
+        
+        cp = aumm[k].cpu_temp
+        brd = aumm[k].board_temp
+        vn = aumm[k].vin
+
+        if cp in [' ']:
+            cp = 0   
+        else:
+            cp = float(aumm[k].cpu_temp)
+
+        if brd in [' ']:
+            brd = 0    
+        else:
+           brd = float(aumm[k].board_temp) 
+
+        if vn in [' ']:
+            vn = 0  
+        else:
+            vn = float(aumm[k].vin)        
+
+        temp_cpu.append(cp)
+        board_cpu.append(brd)
+        vin_value.append(vn)
+
         date_metry.append(aumm[k].timetel.strftime('%d-%m-%Y %H:%M'))  
         k += 1
 
